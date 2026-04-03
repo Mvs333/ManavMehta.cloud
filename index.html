@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MANAV | THE CLOUD DEN</title>
+    
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#D4AF37">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -29,6 +36,7 @@
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle, #1e293b 0%, #020617 100%);
             z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: 0.8s ease-in-out;
         }
         .den-photo {
             width: 200px; height: 200px; border-radius: 50%;
@@ -46,7 +54,7 @@
 <body class="p-6 md:p-12 min-h-screen">
 
     <div id="lock-screen">
-        <img src="manavm.jpg" class="den-photo" alt="Manav's Photo">
+        <img src="manavm.jpg" class="den-photo" alt="Manav's Photo" onerror="this.src='https://via.placeholder.com/200?text=Photo+Missing'">
         <h1 class="fiery-text text-center leading-none">This Is<br>Manav's Den</h1>
         <div class="mt-16 flex flex-col items-center">
             <input type="password" id="pass-key" class="bg-black/60 border border-[#D4AF37] px-8 py-4 rounded-full text-center outline-none w-72 mb-6 tracking-[0.5em] text-white" placeholder="ACCESS KEY">
@@ -90,9 +98,7 @@
                     </div>
 
                     <h2 id="title" class="text-5xl font-black mb-12 tracking-tight uppercase italic text-white leading-none">Initializing...</h2>
-                    
-                    <div id="commands" class="space-y-8">
-                        </div>
+                    <div id="commands" class="space-y-8"></div>
 
                     <div class="mt-16 pt-12 border-t border-white/10">
                         <h4 class="text-[#D4AF37] font-black uppercase text-xs mb-8 italic tracking-widest">Integrity Check (Multi-Choice Quiz):</h4>
@@ -106,7 +112,8 @@
 
     <script>
         const PASS = "Manav@730";
-        
+
+        // UNLOCK LOGIC
         function unlock() {
             if(document.getElementById('pass-key').value === PASS) {
                 document.getElementById('lock-screen').style.opacity = "0";
@@ -122,24 +129,25 @@
             }
         }
 
+        // LEVEL DATA
         const database = [
             {
                 lvl: 1, title: "The Security Core (Sudo)",
                 cmds: [
-                    { name: "sudo", def: "SuperUser Do.", usage: "Gain temporary root permissions.", importance: "Amazon engineers use this to modify system files while maintaining an audit trail of who did what." },
-                    { name: "whoami", def: "Checks current active identity.", usage: "Verifies if you are currently running as 'manav' or 'root'.", importance: "Crucial in multi-user cloud environments to ensure you are not running scripts on the wrong account." }
+                    { name: "sudo", def: "SuperUser Do.", usage: "Gain temporary root permissions.", importance: "Amazon engineers use this to maintain an audit trail." },
+                    { name: "whoami", def: "Checks current identity.", usage: "Verify root vs user.", importance: "Prevents accidental production mistakes." }
                 ],
-                quiz: "In a professional AWS environment, why is 'sudo' the golden standard for security?",
-                opts: ["A) It makes the terminal commands run faster", "B) It creates a log entry for every action, ensuring an audit trail", "C) It is the only way to log into a Linux server"],
+                quiz: "In professional AWS cloud environments, why is 'sudo' the golden standard?",
+                opts: ["A) Makes terminal faster", "B) Creates an audit trail for every action", "C) Only way to log in"],
                 correct: 1
             },
             {
                 lvl: 2, title: "Infrastructure Diagnostics",
                 cmds: [
-                    { name: "cd /var/log", def: "Moves to the system log directory.", usage: "Location for all server and application errors.", importance: "The primary destination for an SRE (Site Reliability Engineer) when a production site goes down." },
-                    { name: "pwd", def: "Print Working Directory.", usage: "Identifies your exact location in the file system.", importance: "Essential to prevent 'rm -rf' (delete) commands from wiping the wrong folder." }
+                    { name: "cd /var/log", def: "Moves to system logs.", usage: "Location for errors.", importance: "First place an SRE looks when a site crashes." },
+                    { name: "pwd", def: "Print working directory.", usage: "Identify exact location.", importance: "Essential to prevent wiping the wrong folder." }
                 ],
-                quiz: "You are a Cloud Engineer and the database has stopped responding. Where is the first place you go to find the error code?",
+                quiz: "A database stopped responding. Where is the first place you check for error logs?",
                 opts: ["A) /home/manav", "B) /var/log", "C) /bin/bash"],
                 correct: 1
             }
@@ -158,7 +166,7 @@
                 cmdHtml += `
                     <div class="cmd-unit">
                         <p class="text-[#D4AF37] font-black text-2xl mb-3 font-mono"># ${c.name}</p>
-                        <p class="text-sm opacity-90 mb-2 leading-relaxed"><strong>Definition:</strong> ${c.def}</p>
+                        <p class="text-sm opacity-90 mb-2"><strong>Definition:</strong> ${c.def}</p>
                         <p class="text-sm opacity-90 italic mb-3"><strong>Real-Life Usage:</strong> ${c.usage}</p>
                         <p class="text-[10px] text-blue-400 font-black uppercase tracking-widest border border-blue-900/30 px-3 py-1 inline-block rounded">Importance: ${c.importance}</p>
                     </div>`;
@@ -168,7 +176,7 @@
             document.getElementById('question').innerText = data.quiz;
             let optHtml = '';
             data.opts.forEach((o, i) => {
-                optHtml += `<button onclick="check(${i})" class="quiz-option font-bold uppercase tracking-tight">${o}</button>`;
+                optHtml += `<button onclick="check(${i})" class="quiz-option font-bold uppercase">${o}</button>`;
             });
             document.getElementById('options').innerHTML = optHtml;
 
@@ -179,27 +187,43 @@
 
         function check(i) {
             if(i === database[idx].correct) {
-                alert("✓ SYSTEM AUTHORIZED: Level Synchronized.");
+                alert("✓ LEVEL AUTHORIZED.");
                 idx++;
                 localStorage.setItem('manav_vault_idx', idx);
                 render();
                 window.scrollTo(0,0);
             } else {
-                alert("✘ FAILED: Knowledge Integrity Check Error. Review the lesson.");
+                alert("✘ FAILED: Review lesson and try again.");
             }
         }
 
-        function back() { if(idx > 0) { idx--; localStorage.setItem('manav_level_idx', idx); render(); } }
-        function reset() { if(confirm("Confirm Master Reset?")) { localStorage.setItem('manav_vault_idx', 0); location.reload(); } }
+        function back() { 
+            if(idx > 0) { 
+                idx--; 
+                localStorage.setItem('manav_vault_idx', idx); 
+                render(); 
+            } 
+        }
+
+        function reset() { 
+            if(confirm("Master Reset?")) { 
+                localStorage.setItem('manav_vault_idx', 0); 
+                location.reload(); 
+            } 
+        }
 
         setInterval(() => {
             document.getElementById('clock').innerText = new Date().toLocaleTimeString('en-US', { hour12: false });
         }, 1000);
-    
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js')
-      .then(() => console.log("Service Worker Registered"));
-  }
-</script>
+
+        // SERVICE WORKER REGISTRATION
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(() => console.log("SW Registered"))
+                    .catch(err => console.log("SW Error", err));
+            });
+        }
+    </script>
 </body>
 </html>
