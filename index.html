@@ -7,21 +7,21 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --gold: #D4AF37; --slate: #0F172A; }
+        :root { --gold: #D4AF37; --slate: #0D1117; }
         body { background-color: var(--slate); color: #F8FAFC; font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
-        /* 5D FIREY TEXT EFFECT */
+        /* ADVANCED 5D FIREY TEXT EFFECT */
         .fiery-text {
-            font-size: 4rem; font-weight: 900; text-transform: uppercase;
-            background: linear-gradient(to bottom, #ff4500 20%, #ff8c00 50%, #b22222 80%);
+            font-size: 4.5rem; font-weight: 900; text-transform: uppercase;
+            background: linear-gradient(to bottom, #ff0000 0%, #ff8c00 50%, #8b0000 100%);
             -webkit-background-clip: text; background-clip: text; color: transparent;
-            filter: drop-shadow(0 0 10px #ff4500) drop-shadow(0 15px 15px rgba(0,0,0,0.8));
-            transform: perspective(500px) rotateX(20deg);
-            animation: flicker 2s infinite alternate;
+            filter: drop-shadow(0 0 15px #ff4500) drop-shadow(0 20px 30px rgba(0,0,0,1));
+            transform: perspective(1000px) rotateX(25deg) skew(-5deg);
+            position: relative; animation: flare 3s infinite alternate;
         }
-        @keyframes flicker {
-            0% { opacity: 0.9; filter: drop-shadow(0 0 10px #ff4500); }
-            100% { opacity: 1; filter: drop-shadow(0 0 25px #ff8c00); }
+        @keyframes flare {
+            0% { filter: drop-shadow(0 0 10px #ff4500) brightness(1); }
+            100% { filter: drop-shadow(0 0 40px #ffcc00) brightness(1.3); }
         }
 
         /* SECURITY OVERLAY */
@@ -29,38 +29,37 @@
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle, #1e293b 0%, #020617 100%);
             z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            transition: 0.8s ease-in-out;
         }
         .den-photo {
-            width: 180px; height: 180px; border-radius: 50%;
-            border: 4px solid var(--gold); box-shadow: 0 0 40px rgba(212, 175, 55, 0.4);
-            object-fit: cover; margin-bottom: 20px;
+            width: 200px; height: 200px; border-radius: 50%;
+            border: 5px solid var(--gold); box-shadow: 0 0 50px rgba(212, 175, 55, 0.6);
+            object-fit: cover; margin-bottom: 30px;
         }
 
-        /* MASTERY GRID STYLES */
-        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px; }
-        .cmd-unit { border-left: 4px solid var(--gold); background: rgba(212, 175, 55, 0.05); padding: 20px; margin-bottom: 20px; border-radius: 0 16px 16px 0; }
-        .quiz-option { width: 100%; text-align: left; padding: 18px; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; margin-bottom: 12px; transition: 0.3s; cursor: pointer; font-size: 14px; }
-        .quiz-option:hover { background: rgba(212, 175, 55, 0.15); border-color: var(--gold); }
+        /* VAULT UI STYLES */
+        .glass-card { background: rgba(255, 255, 255, 0.04); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px; }
+        .cmd-unit { border-left: 5px solid var(--gold); background: rgba(212, 175, 55, 0.06); padding: 25px; margin-bottom: 20px; border-radius: 0 20px 20px 0; }
+        .quiz-option { width: 100%; text-align: left; padding: 20px; border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; margin-bottom: 15px; transition: 0.3s; cursor: pointer; }
+        .quiz-option:hover { background: rgba(212, 175, 55, 0.2); border-color: var(--gold); transform: translateX(10px); }
     </style>
 </head>
-<body class="p-4 md:p-12 min-h-screen">
+<body class="p-6 md:p-12 min-h-screen">
 
     <div id="lock-screen">
-        <img src="manavm.jpg" class="den-photo animate-pulse" alt="Manav">
+        <img src="manavm.jpg" class="den-photo" alt="Manav's Photo">
         <h1 class="fiery-text text-center leading-none">This Is<br>Manav's Den</h1>
-        <div class="mt-12 flex flex-col items-center">
-            <input type="password" id="pass-key" class="bg-black/40 border border-[#D4AF37] px-6 py-3 rounded-full text-center outline-none w-64 mb-4 tracking-[0.5em]" placeholder="PASSWORD">
-            <button onclick="unlock()" class="bg-[#D4AF37] text-black font-black px-10 py-3 rounded-full uppercase tracking-widest text-xs hover:scale-105 transition-all">Authorize_Access</button>
-            <p id="err-msg" class="text-red-500 text-[10px] mt-4 font-bold uppercase hidden tracking-widest italic">Intruder Alert: Invalid Key</p>
+        <div class="mt-16 flex flex-col items-center">
+            <input type="password" id="pass-key" class="bg-black/60 border border-[#D4AF37] px-8 py-4 rounded-full text-center outline-none w-72 mb-6 tracking-[0.5em] text-white" placeholder="ACCESS KEY">
+            <button onclick="unlock()" class="bg-[#D4AF37] text-black font-black px-12 py-4 rounded-full uppercase tracking-widest text-sm hover:bg-white hover:scale-110 transition-all shadow-[0_0_20px_rgba(212,175,55,0.5)]">Authorize_Access</button>
+            <p id="err-msg" class="text-red-500 text-xs mt-6 font-bold uppercase hidden tracking-widest italic animate-bounce">Access Denied: Entry Logged</p>
         </div>
     </div>
 
     <div id="vault-content" class="invisible opacity-0 transition-opacity duration-1000">
         <header class="max-w-6xl mx-auto flex justify-between items-end mb-12 border-b border-white/10 pb-8">
             <div>
-                <h1 class="text-3xl font-black uppercase italic tracking-tighter">Vault <span class="text-[#D4AF37]">730</span></h1>
-                <p class="text-[10px] font-bold opacity-40 uppercase tracking-[0.4em] mt-1">Status: Level <span id="lvl-stat">1</span> / 730 | Mode: Cloud Support Associate</p>
+                <h1 class="text-3xl font-black uppercase italic tracking-tighter">Vault_Engine <span class="text-[#D4AF37]">730</span></h1>
+                <p class="text-[10px] font-bold opacity-50 uppercase tracking-[0.4em] mt-2 italic">Target Role: Cloud Support Associate (₹10 LPA)</p>
             </div>
             <div class="text-right">
                 <p id="clock" class="text-4xl font-mono font-bold tracking-tighter text-white">00:00:00</p>
@@ -69,34 +68,36 @@
 
         <main class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10">
             <aside class="lg:col-span-4 space-y-6">
-                <div class="glass-card p-6 border-t-4 border-[#D4AF37]">
-                    <h3 class="text-xs font-black uppercase text-[#D4AF37] mb-4">Mastery_Level</h3>
-                    <div class="h-1.5 bg-white/10 rounded-full overflow-hidden mb-2"><div id="p-bar" class="h-full bg-[#D4AF37] transition-all duration-1000" style="width: 0%"></div></div>
-                    <p class="text-[10px] font-bold opacity-60 uppercase">Completion: <span id="p-text">0</span>%</p>
+                <div class="glass-card p-8 border-t-4 border-[#D4AF37]">
+                    <h3 class="text-xs font-black uppercase text-[#D4AF37] mb-6 italic">Mastery_Level</h3>
+                    <div class="h-2 bg-white/10 rounded-full overflow-hidden mb-3"><div id="p-bar" class="h-full bg-[#D4AF37] transition-all duration-1000" style="width: 0%"></div></div>
+                    <div class="flex justify-between text-[11px] font-black uppercase">
+                        <span>Lvl <span id="lvl-stat">1</span></span>
+                        <span><span id="p-text">0</span>% Complete</span>
+                    </div>
                 </div>
                 <div class="flex gap-4">
-                    <button onclick="back()" class="flex-1 py-3 glass-card text-[10px] font-black uppercase hover:border-[#D4AF37]">Back</button>
-                    <button onclick="reset()" class="flex-1 py-3 border border-red-900/30 text-red-500 text-[10px] font-black uppercase rounded-2xl hover:bg-red-500/10">Reset</button>
+                    <button onclick="back()" class="flex-1 py-4 glass-card text-[11px] font-black uppercase hover:border-[#D4AF37]">Prev_Step</button>
+                    <button onclick="reset()" class="flex-1 py-4 border border-red-900/30 text-red-500 text-[11px] font-black uppercase rounded-2xl">Reset_Data</button>
                 </div>
             </aside>
 
             <section class="lg:col-span-8">
-                <div class="glass-card p-8 md:p-12 min-h-[800px] relative overflow-hidden">
-                    <div class="flex justify-between items-center mb-10 pb-4 border-b border-white/5">
-                        <span id="step-tag" class="text-[#D4AF37] text-xs font-black uppercase tracking-[0.5em]">STEP_001</span>
-                        <span class="text-[10px] font-bold opacity-30 italic uppercase">Module: Core_Infrastructure</span>
+                <div class="glass-card p-10 min-h-[850px] relative border-t-4 border-white/5">
+                    <div class="flex justify-between items-center mb-12 border-b border-white/5 pb-6">
+                        <span id="step-tag" class="text-[#D4AF37] text-xs font-black uppercase tracking-[0.6em]">STEP_001</span>
+                        <span class="text-[10px] font-bold opacity-30 italic uppercase">System_Engineering_Track</span>
                     </div>
 
-                    <h2 id="title" class="text-4xl font-black mb-10 tracking-tight uppercase italic text-white leading-none">Initializing...</h2>
+                    <h2 id="title" class="text-5xl font-black mb-12 tracking-tight uppercase italic text-white leading-none">Initializing...</h2>
                     
-                    <div id="commands" class="space-y-6">
+                    <div id="commands" class="space-y-8">
                         </div>
 
-                    <div class="mt-12 pt-10 border-t border-white/10">
-                        <h4 class="text-[#D4AF37] font-black uppercase text-xs mb-6 italic tracking-widest">Integrity Check (Quiz):</h4>
-                        <p id="question" class="text-lg font-bold mb-8 italic leading-snug"></p>
-                        <div id="options" class="space-y-4">
-                            </div>
+                    <div class="mt-16 pt-12 border-t border-white/10">
+                        <h4 class="text-[#D4AF37] font-black uppercase text-xs mb-8 italic tracking-widest">Integrity Check (Multi-Choice Quiz):</h4>
+                        <p id="question" class="text-xl font-bold mb-10 italic leading-snug"></p>
+                        <div id="options" class="space-y-4"></div>
                     </div>
                 </div>
             </section>
@@ -106,7 +107,6 @@
     <script>
         const PASS = "Manav@730";
         
-        // UNLOCK FUNCTION
         function unlock() {
             if(document.getElementById('pass-key').value === PASS) {
                 document.getElementById('lock-screen').style.opacity = "0";
@@ -122,26 +122,25 @@
             }
         }
 
-        // 730-LEVEL DATABASE (Starts with Day 1)
         const database = [
             {
-                lvl: 1, title: "The Power of Root (Sudo)",
+                lvl: 1, title: "The Security Core (Sudo)",
                 cmds: [
-                    { name: "sudo", def: "SuperUser Do.", usage: "Gain temporary administrator power.", importance: "Amazon AWS engineers use this to maintain security while performing maintenance." },
-                    { name: "whoami", def: "Check active user identity.", usage: "Confirms if you are 'root' or 'manav'.", importance: "Essential for audit logs; prevents running risky commands on the wrong account." }
+                    { name: "sudo", def: "SuperUser Do.", usage: "Gain temporary root permissions.", importance: "Amazon engineers use this to modify system files while maintaining an audit trail of who did what." },
+                    { name: "whoami", def: "Checks current active identity.", usage: "Verifies if you are currently running as 'manav' or 'root'.", importance: "Crucial in multi-user cloud environments to ensure you are not running scripts on the wrong account." }
                 ],
-                quiz: "Why is 'sudo' safer for a Cloud Engineer than using 'root' directly?",
-                opts: ["A) Root is slower", "B) Sudo logs every command, creating a professional audit trail", "C) Sudo is cheaper for AWS bills"],
+                quiz: "In a professional AWS environment, why is 'sudo' the golden standard for security?",
+                opts: ["A) It makes the terminal commands run faster", "B) It creates a log entry for every action, ensuring an audit trail", "C) It is the only way to log into a Linux server"],
                 correct: 1
             },
             {
-                lvl: 2, title: "System Diagnostics (Navigation)",
+                lvl: 2, title: "Infrastructure Diagnostics",
                 cmds: [
-                    { name: "cd /var/log", def: "Move to system log folder.", usage: "Where all error messages are stored.", importance: "The first destination for a Site Reliability Engineer (SRE) when a server crashes." },
-                    { name: "pwd", def: "Print Working Directory.", usage: "Shows full absolute path.", importance: "Critical to ensure you don't delete files in the wrong location." }
+                    { name: "cd /var/log", def: "Moves to the system log directory.", usage: "Location for all server and application errors.", importance: "The primary destination for an SRE (Site Reliability Engineer) when a production site goes down." },
+                    { name: "pwd", def: "Print Working Directory.", usage: "Identifies your exact location in the file system.", importance: "Essential to prevent 'rm -rf' (delete) commands from wiping the wrong folder." }
                 ],
-                quiz: "If a company website goes down, where should you go FIRST to find the error?",
-                opts: ["A) /home/manav", "B) /var/log", "C) /root"],
+                quiz: "You are a Cloud Engineer and the database has stopped responding. Where is the first place you go to find the error code?",
+                opts: ["A) /home/manav", "B) /var/log", "C) /bin/bash"],
                 correct: 1
             }
         ];
@@ -149,7 +148,7 @@
         let idx = parseInt(localStorage.getItem('manav_vault_idx')) || 0;
 
         function render() {
-            const data = database[idx] || database[database.length -1];
+            const data = database[idx] || database[database.length - 1];
             document.getElementById('lvl-stat').innerText = idx + 1;
             document.getElementById('step-tag').innerText = `STEP_${String(data.lvl).padStart(3, '0')}`;
             document.getElementById('title').innerText = data.title;
@@ -158,10 +157,10 @@
             data.cmds.forEach(c => {
                 cmdHtml += `
                     <div class="cmd-unit">
-                        <p class="text-[#D4AF37] font-black text-xl mb-2 font-mono"># ${c.name}</p>
-                        <p class="text-sm opacity-90 mb-1"><strong>Definition:</strong> ${c.def}</p>
-                        <p class="text-sm opacity-90 italic mb-2"><strong>Practical Usage:</strong> ${c.usage}</p>
-                        <p class="text-[10px] text-blue-400 font-black uppercase tracking-widest">Importance: ${c.importance}</p>
+                        <p class="text-[#D4AF37] font-black text-2xl mb-3 font-mono"># ${c.name}</p>
+                        <p class="text-sm opacity-90 mb-2 leading-relaxed"><strong>Definition:</strong> ${c.def}</p>
+                        <p class="text-sm opacity-90 italic mb-3"><strong>Real-Life Usage:</strong> ${c.usage}</p>
+                        <p class="text-[10px] text-blue-400 font-black uppercase tracking-widest border border-blue-900/30 px-3 py-1 inline-block rounded">Importance: ${c.importance}</p>
                     </div>`;
             });
             document.getElementById('commands').innerHTML = cmdHtml;
@@ -169,7 +168,7 @@
             document.getElementById('question').innerText = data.quiz;
             let optHtml = '';
             data.opts.forEach((o, i) => {
-                optHtml += `<button onclick="check(${i})" class="quiz-option">${o}</button>`;
+                optHtml += `<button onclick="check(${i})" class="quiz-option font-bold uppercase tracking-tight">${o}</button>`;
             });
             document.getElementById('options').innerHTML = optHtml;
 
@@ -180,17 +179,17 @@
 
         function check(i) {
             if(i === database[idx].correct) {
-                alert("✓ CORRECT: Knowledge Verified. Syncing Level " + (idx + 2));
+                alert("✓ SYSTEM AUTHORIZED: Level Synchronized.");
                 idx++;
                 localStorage.setItem('manav_vault_idx', idx);
                 render();
                 window.scrollTo(0,0);
             } else {
-                alert("✘ FAILED: Review the Command Importance and try again.");
+                alert("✘ FAILED: Knowledge Integrity Check Error. Review the lesson.");
             }
         }
 
-        function back() { if(idx > 0) { idx--; localStorage.setItem('manav_vault_idx', idx); render(); } }
+        function back() { if(idx > 0) { idx--; localStorage.setItem('manav_level_idx', idx); render(); } }
         function reset() { if(confirm("Confirm Master Reset?")) { localStorage.setItem('manav_vault_idx', 0); location.reload(); } }
 
         setInterval(() => {
