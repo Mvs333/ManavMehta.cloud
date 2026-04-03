@@ -3,80 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MANAV | CLOUD VAULT 730</title>
+    <title>MANAV | CLOUD ARCHITECT VAULT</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --aws-orange: #FF9900; --bg: #0D1117; }
         body { background: var(--bg); color: #C9D1D9; font-family: 'JetBrains Mono', monospace; }
-        .vault-card { background: #161B22; border: 1px solid #30363D; border-radius: 16px; }
-        .progress-bar { height: 6px; background: #21262D; border-radius: 10px; overflow: hidden; }
+        .vault-card { background: #161B22; border: 1px solid #30363D; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .btn-nav { border: 1px solid #30363D; padding: 10px 20px; border-radius: 8px; font-size: 10px; font-weight: 900; transition: 0.3s; }
+        .btn-nav:hover { border-color: var(--aws-orange); color: var(--aws-orange); }
+        .quiz-box { background: #010409; border: 2px dashed #30363D; padding: 20px; border-radius: 12px; margin-top: 20px; }
         .progress-fill { height: 100%; background: var(--aws-orange); transition: 1s ease-in-out; }
-        .complete-btn { background: var(--aws-orange); color: black; font-weight: 900; transition: 0.2s; }
-        .complete-btn:hover { background: white; transform: translateY(-2px); }
     </style>
 </head>
 <body class="p-6 md:p-12">
 
-    <header class="max-w-6xl mx-auto flex justify-between items-center mb-12 border-b border-gray-800 pb-8">
+    <header class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center mb-10 border-b border-gray-800 pb-8">
         <div>
-            <h1 class="text-3xl font-black italic uppercase">Cloud_Vault <span class="text-[#FF9900]">730</span></h1>
-            <p class="text-[10px] font-bold opacity-40 uppercase tracking-[0.4em] mt-1">Operator: Manav Mehta | Entry Role: Cloud Support Associate</p>
+            <h1 class="text-4xl font-black italic uppercase tracking-tighter">Mastery_Vault <span class="text-[#FF9900]">730</span></h1>
+            <p class="text-[10px] font-bold opacity-40 uppercase tracking-[0.4em] mt-2">Candidate: Manav Mehta | Role: Senior Cloud Ops Engineer Track</p>
         </div>
         <div class="text-right">
-            <p id="live-clock" class="text-3xl font-bold tracking-tighter text-white">00:00:00</p>
+            <p id="live-clock" class="text-4xl font-bold tracking-tighter text-white">00:00:00</p>
+            <p class="text-[10px] text-[#FF9900] font-black uppercase italic mt-1">Deep-Dive Learning Active</p>
         </div>
     </header>
 
-    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
         
         <div class="lg:col-span-4 space-y-6">
             <div class="vault-card p-6 border-t-4 border-[#FF9900]">
-                <h3 class="text-xs font-black uppercase text-[#FF9900] mb-4 italic">Overall_Progress</h3>
-                <div class="progress-bar mb-2"><div id="main-progress" class="progress-fill" style="width: 0%"></div></div>
-                <div class="flex justify-between text-[10px] font-bold uppercase opacity-60">
+                <h3 class="text-xs font-black uppercase text-[#FF9900] mb-4 italic">Overall_Completion</h3>
+                <div class="h-2 bg-gray-800 rounded-full overflow-hidden mb-2">
+                    <div id="progress-bar" class="progress-fill" style="width: 0%"></div>
+                </div>
+                <div class="flex justify-between text-[10px] font-bold uppercase">
                     <span>Level: <span id="lvl-num">1</span>/730</span>
                     <span><span id="perc-num">0</span>%</span>
                 </div>
             </div>
 
-            <div class="vault-card p-6">
-                <h3 class="text-xs font-black uppercase text-blue-400 mb-4 italic">High_Level_Certs</h3>
-                <ul class="text-[11px] space-y-3 font-bold opacity-80">
-                    <li id="cert-1" class="flex items-center gap-2 text-gray-500 italic"><i class="fa-solid fa-circle-notch"></i> AWS Cloud Practitioner</li>
-                    <li id="cert-2" class="flex items-center gap-2 text-gray-500 italic"><i class="fa-solid fa-lock"></i> Azure Administrator</li>
-                    <li id="cert-3" class="flex items-center gap-2 text-gray-500 italic"><i class="fa-solid fa-lock"></i> HashiCorp Terraform</li>
-                    <li id="cert-4" class="flex items-center gap-2 text-gray-500 italic"><i class="fa-solid fa-lock"></i> AWS SysOps Associate</li>
-                </ul>
+            <div class="flex gap-4">
+                <button onclick="prevLevel()" class="btn-nav flex-1 uppercase tracking-widest"><i class="fa-solid fa-arrow-left mr-2"></i> Back</button>
+                <button onclick="resetSystem()" class="btn-nav flex-1 uppercase tracking-widest text-red-500 border-red-900/30 hover:bg-red-500/10">Reset All</button>
+            </div>
+
+            <div class="vault-card p-6 bg-[#010409]">
+                <h3 class="text-xs font-black uppercase text-blue-400 mb-4 italic">Practical_Utility</h3>
+                <p id="utility-text" class="text-[11px] leading-relaxed opacity-70 italic">
+                    Loading real-world cloud usage case...
+                </p>
             </div>
         </div>
 
         <div class="lg:col-span-8">
-            <div class="vault-card p-10 min-h-[600px] flex flex-col border-t-4 border-white/10">
-                <div class="flex justify-between items-center mb-10 border-b border-gray-800 pb-4">
+            <div class="vault-card p-10 min-h-[750px] flex flex-col border-t-4 border-white/10 relative overflow-hidden">
+                <div class="flex justify-between items-center mb-8 border-b border-gray-800 pb-4">
                     <span id="lvl-tag" class="bg-[#FF9900] text-black px-4 py-1 text-[11px] font-black italic">LEVEL_001</span>
-                    <span id="module-tag" class="text-[10px] font-bold uppercase text-gray-500 tracking-widest italic">LINUX_FUNDAMENTALS</span>
+                    <span id="mod-tag" class="text-[10px] font-bold uppercase text-gray-500 tracking-widest italic tracking-widest">LINUX_INFRASTRUCTURE</span>
                 </div>
 
                 <div class="flex-grow">
-                    <h2 id="lvl-title" class="text-4xl font-black uppercase mb-8 tracking-tighter italic text-white underline decoration-[#FF9900]">Loading_Module...</h2>
+                    <h2 id="lvl-title" class="text-4xl font-black uppercase mb-8 tracking-tighter italic text-white">Loading...</h2>
                     
-                    <div class="bg-gray-900/30 p-6 rounded-xl border-l-4 border-[#FF9900] mb-8">
-                        <h4 class="text-[#FF9900] font-black mb-3 uppercase text-[10px] tracking-[0.2em]">30-Min Mastery Lesson</h4>
-                        <p id="lvl-lesson" class="text-sm leading-relaxed text-gray-300 italic"></p>
+                    <div class="mb-8">
+                        <h4 class="text-[#FF9900] font-black mb-3 uppercase text-[10px] tracking-[0.2em] italic">1. The 30-Minute Master Class</h4>
+                        <div id="lvl-lesson" class="text-sm leading-relaxed text-gray-300 space-y-4"></div>
                     </div>
 
-                    <div class="bg-black/50 p-6 rounded-xl border border-gray-800">
-                        <h4 class="text-blue-400 font-black mb-3 uppercase text-[10px] tracking-[0.2em]">Practical Hands-On Task</h4>
+                    <div class="bg-black/50 p-6 rounded-2xl border border-gray-800 mb-8">
+                        <h4 class="text-blue-400 font-black mb-3 uppercase text-[10px] tracking-[0.2em] italic">2. ThinkBook Lab (Hands-On)</h4>
                         <div id="lvl-task" class="font-mono text-xs text-green-400 leading-loose whitespace-pre-wrap"></div>
+                    </div>
+
+                    <div class="quiz-box">
+                        <h4 class="text-purple-400 font-black mb-3 uppercase text-[10px] tracking-[0.2em] italic">3. Integrity Check (Quiz)</h4>
+                        <p id="quiz-question" class="text-xs font-bold mb-4 italic text-white"></p>
+                        <input type="text" id="quiz-answer" class="w-full bg-slate-900 border border-gray-700 p-3 rounded text-sm text-white outline-none focus:border-purple-500" placeholder="Type answer here...">
                     </div>
                 </div>
 
                 <div class="mt-12">
-                    <button onclick="completeLevel()" class="complete-btn w-full py-5 rounded-xl text-xs uppercase tracking-[0.5em] shadow-xl">
-                        Complete Level & Tick Off
+                    <button onclick="verifyLevel()" class="w-full bg-[#FF9900] text-black py-5 rounded-xl font-black text-xs uppercase tracking-[0.6em] shadow-xl hover:bg-white transition-all">
+                        Validate & Level Up
                     </button>
-                    <p class="text-center text-[9px] mt-4 opacity-30 uppercase italic">Progress saves automatically to browser memory.</p>
                 </div>
             </div>
         </div>
@@ -84,36 +94,71 @@
 
     <script>
         const syllabus = [
-            { lvl: 1, mod: "Linux_Core", title: "Root & Sudo", lesson: "Mastering 'sudo'. In a Cloud Support role (₹10 LPA), you never log in as root for security. You use 'sudo' to manage servers. This is Level 1 of Cloud Security.", task: "1. Open WSL2 Ubuntu\n2. Run 'whoami'\n3. Run 'sudo whoami'\n4. Verify the user changes from 'manav' to 'root'." },
-            { lvl: 2, mod: "Linux_Core", title: "File Navigation", lesson: "Mastering 'cd' and 'pwd'. Speed in the terminal is what separates a Junior from a Senior. You must know exactly where you are in the system at all times.", task: "1. Navigate to logs: 'cd /var/log'\n2. Check full path: 'pwd'\n3. Return home: 'cd ~'\n4. Verify home path: 'pwd'." },
-            { lvl: 3, mod: "Linux_Core", title: "File Operations", lesson: "Using 'touch', 'mkdir', and 'mv'. You will build scripts to move data across cloud servers. Manual mouse clicking does not exist in Cloud Ops.", task: "1. Create a file: 'touch mission.txt'\n2. Create a folder: 'mkdir cloud_labs'\n3. Move file: 'mv mission.txt cloud_labs/'\n4. Rename: 'mv cloud_labs/mission.txt cloud_labs/completed.txt'." }
+            {
+                lvl: 1, mod: "Kernel_Security", title: "Sudo & Root Logic",
+                lesson: "In a real-world AWS environment, the 'root' user is the ultimate God account. If you stay logged in as root, one mistake can delete an entire company's database. This is why we use 'sudo' (SuperUser Do). It provides temporary high-level access while logging every move you make. Amazon engineers use this for 'Audit Trails'—knowing who changed what at 3 AM.",
+                utility: "Usage: Cloud Support Associates use 'sudo' to update security patches on EC2 servers without exposing the main root password to the network.",
+                task: "1. Open WSL2 Ubuntu\n2. Run 'whoami' (Shows your identity)\n3. Run 'sudo whoami' (Shows the power you borrowed)\n4. Run 'ls /root' (Permission Denied)\n5. Run 'sudo ls /root' (Success - You bypassed the lock).",
+                question: "What command lets a normal user act as a root user temporarily?",
+                answer: "sudo"
+            },
+            {
+                lvl: 2, mod: "System_Diagnostics", title: "Path Mastering",
+                lesson: "The '/' (Root Directory) is the heart of Linux. As a Junior Ops Engineer, your 30-minute goal is to navigate from '/home' to '/var/log' (where errors are kept) in under 2 seconds. In Cloud support, if a server crashes, you don't use a mouse. You fly through directories using Absolute Paths (/etc/nginx) and Relative Paths (../logs).",
+                utility: "Usage: SREs (Site Reliability Engineers) use 'cd /var/log' instantly when a website goes down to find the specific error code causing the crash.",
+                task: "1. Type 'pwd' to see your current location.\n2. Navigate to system settings: 'cd /etc'.\n3. Navigate back to home: 'cd ~'.\n4. Challenge: Move to '/var/log' using one single command.",
+                question: "Which command shows you the 'Full Absolute Path' of your current location?",
+                answer: "pwd"
+            }
         ];
 
-        let currentIdx = parseInt(localStorage.getItem('manav_level_idx')) || 0;
+        let currentIdx = parseInt(localStorage.getItem('manav_vault_idx')) || 0;
 
         function updateUI() {
             const data = syllabus[currentIdx] || syllabus[syllabus.length - 1];
             document.getElementById('lvl-tag').innerText = `LEVEL_${String(data.lvl).padStart(3, '0')}`;
-            document.getElementById('module-tag').innerText = data.mod;
+            document.getElementById('mod-tag').innerText = data.mod;
             document.getElementById('lvl-title').innerText = data.title;
             document.getElementById('lvl-lesson').innerText = data.lesson;
             document.getElementById('lvl-task').innerText = data.task;
+            document.getElementById('utility-text').innerText = data.utility;
+            document.getElementById('quiz-question').innerText = data.question;
+            document.getElementById('quiz-answer').value = "";
             
-            // Stats Update
+            // Progress
             document.getElementById('lvl-num').innerText = currentIdx + 1;
             const progress = (((currentIdx + 1) / 730) * 100).toFixed(2);
-            document.getElementById('main-progress').style.width = progress + "%";
+            document.getElementById('progress-bar').style.width = progress + "%";
             document.getElementById('perc-num').innerText = progress;
-
-            // Cert Highlight
-            if(currentIdx > 60) document.getElementById('cert-1').className = "flex items-center gap-2 text-green-400 italic";
-            if(currentIdx > 120) document.getElementById('cert-2').className = "flex items-center gap-2 text-green-400 italic";
         }
 
-        function completeLevel() {
-            currentIdx++;
-            localStorage.setItem('manav_level_idx', currentIdx);
-            updateUI();
+        function verifyLevel() {
+            const data = syllabus[currentIdx];
+            const userAns = document.getElementById('quiz-answer').value.toLowerCase().trim();
+            
+            if(userAns === data.answer.toLowerCase()) {
+                currentIdx++;
+                localStorage.setItem('manav_vault_idx', currentIdx);
+                alert("Correct! Level Synchronized. Opening Level " + (currentIdx + 1));
+                updateUI();
+            } else {
+                alert("Incorrect Answer. Study the lesson again on your ThinkBook!");
+            }
+        }
+
+        function prevLevel() {
+            if(currentIdx > 0) {
+                currentIdx--;
+                localStorage.setItem('manav_vault_idx', currentIdx);
+                updateUI();
+            }
+        }
+
+        function resetSystem() {
+            if(confirm("Are you sure? This will delete all your hard-earned progress!")) {
+                localStorage.setItem('manav_vault_idx', 0);
+                location.reload();
+            }
         }
 
         setInterval(() => {
