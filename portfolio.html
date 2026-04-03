@@ -3,103 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manav Mehta | Cloud Operations Engineer</title>
+    <title>Manav Mehta | Cloud Ops Architect</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { background: #010409; color: #c9d1d9; font-family: sans-serif; }
+        .border-glow { border: 1px solid #30363d; transition: 0.3s; }
+        .border-glow:hover { border-color: #FF9900; }
+    </style>
 </head>
-<body class="bg-gray-50 font-sans text-gray-900">
-
-    <header class="bg-slate-900 text-white py-16 px-6 shadow-xl">
-        <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center">
+<body class="p-8">
+    <div class="max-w-4xl mx-auto">
+        <header class="mb-12 border-b border-gray-800 pb-8 flex justify-between items-center">
             <div>
-                <h1 class="text-4xl font-bold tracking-tight">Manav Mehta</h1>
-                <p class="text-cyan-400 font-mono mt-2">Cloud Operations Engineer | BCA @ Atmiya University</p>
-                <div class="flex gap-4 mt-4 text-sm opacity-80">
-                    <span><i class="fa-solid fa-location-dot"></i> Rajkot, India</span>
-                    <span><i class="fa-solid fa-envelope"></i> manavmehta.cloud</span>
-                </div>
+                <h1 class="text-4xl font-black text-white italic">MANAV MEHTA</h1>
+                <p class="text-[#FF9900] font-mono font-bold tracking-widest mt-2 uppercase">Cloud Operations Engineer (In-Training)</p>
             </div>
-            <div class="mt-8 md:mt-0 text-center border-l-4 border-cyan-500 pl-6">
-                <p class="text-xs uppercase tracking-widest text-gray-400">Live Training Rank</p>
-                <p id="p-streak" class="text-4xl font-black text-white">🔥 0 Days</p>
+            <div class="text-right">
+                <p class="text-[10px] opacity-50 uppercase">Training Track:</p>
+                <p class="text-xl font-bold italic text-white uppercase">730-Day Mastery</p>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <main class="max-w-4xl mx-auto py-12 px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
-        
-        <div class="md:col-span-1 space-y-8">
-            <section>
-                <h3 class="text-lg font-bold border-b-2 border-cyan-500 mb-4 pb-1">LIVE SKILLS</h3>
-                <div class="space-y-4">
-                    <div>
-                        <div class="flex justify-between text-xs mb-1"><span>LINUX_OPS</span><span id="p-linux-val">5%</span></div>
-                        <div class="w-full bg-gray-200 h-2 rounded-full"><div id="p-linux-bar" class="bg-slate-800 h-2 rounded-full transition-all duration-1000" style="width: 5%"></div></div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between text-xs mb-1"><span>AWS_INFRA</span><span id="p-aws-val">2%</span></div>
-                        <div class="w-full bg-gray-200 h-2 rounded-full"><div id="p-aws-bar" class="bg-slate-800 h-2 rounded-full transition-all duration-1000" style="width: 2%"></div></div>
-                    </div>
-                </div>
-                <p class="text-[10px] mt-4 italic text-gray-500">*Values update in real-time based on Lab completions.</p>
-            </section>
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <div class="border-glow p-6 rounded-xl bg-[#0d1117]">
+                <h3 class="text-xs font-black uppercase text-[#FF9900] mb-4">Core Track: Elite 4 Certs</h3>
+                <ul class="text-sm space-y-2 opacity-80">
+                    <li>● AWS Certified Cloud Practitioner</li>
+                    <li>● Azure Administrator Associate (AZ-104)</li>
+                    <li>● HashiCorp Certified: Terraform Associate</li>
+                    <li>● AWS SysOps Administrator</li>
+                </ul>
+            </div>
+            <div class="border-glow p-6 rounded-xl bg-[#0d1117]">
+                <h3 class="text-xs font-black uppercase text-blue-400 mb-4">Master Project Fleet</h3>
+                <ul class="text-sm space-y-2 opacity-80">
+                    <li>1. Bash Automation Script (Linux Mastery)</li>
+                    <li>2. The Cloud Resume (AWS S3/CloudFront)</li>
+                    <li>3. High-Availability Web Fleet</li>
+                    <li>4. One-Click Data Center (IaC)</li>
+                    <li>5. Manav.Cloud OS (AI Dashboard)</li>
+                </ul>
+            </div>
+        </section>
 
-            <section>
-                <h3 class="text-lg font-bold border-b-2 border-cyan-500 mb-4 pb-1">TECH STACK</h3>
-                <div class="flex flex-wrap gap-2">
-                    <span class="bg-gray-200 px-2 py-1 text-xs rounded">WSL2</span>
-                    <span class="bg-gray-200 px-2 py-1 text-xs rounded">Ubuntu</span>
-                    <span class="bg-gray-200 px-2 py-1 text-xs rounded">MySQL</span>
-                    <span class="bg-gray-200 px-2 py-1 text-xs rounded">PHP</span>
-                </div>
-            </section>
-        </div>
-
-        <div class="md:col-span-2 space-y-10">
-            <section>
-                <h3 class="text-xl font-bold text-slate-800 mb-4">PROFESSIONAL OBJECTIVE</h3>
-                <p class="text-gray-600 leading-relaxed">
-                    Final-semester BCA student at Atmiya University specializing in **Cloud Governance, Risk, and Compliance (GRC)**. Actively building a 730-day practical roadmap to master AWS Support and Cloud Security operations.
-                </p>
-            </section>
-
-            <section>
-                <h3 class="text-xl font-bold text-slate-800 mb-4">PROJECTS</h3>
-                <div class="space-y-6">
-                    <div class="border-l-4 border-gray-200 pl-4">
-                        <h4 class="font-bold text-slate-900">NextGen LMS</h4>
-                        <p class="text-sm text-gray-600 italic">PHP, MySQL, YouTube API</p>
-                        <p class="text-sm mt-1 text-gray-700">A global course recommendation system with automated certificate generation.</p>
-                    </div>
-                    <div class="border-l-4 border-gray-200 pl-4">
-                        <h4 class="font-bold text-slate-900">Cloud-OS Command Center</h4>
-                        <p class="text-sm text-gray-600 italic">JavaScript, Gemini AI API, Tailwind</p>
-                        <p class="text-sm mt-1 text-gray-700">A private infrastructure dashboard for daily AWS lab simulations and AI-driven code audits.</p>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <script>
-        // THE AUTOMATION LOGIC
-        function syncPortfolio() {
-            // Pull data from the Command Center's memory
-            const linuxXP = localStorage.getItem('manav_linux_xp') || 5;
-            const awsXP = localStorage.getItem('manav_aws_xp') || 2;
-            const streak = localStorage.getItem('manav_streak') || 0;
-
-            // Update UI
-            document.getElementById('p-linux-val').innerText = linuxXP + "%";
-            document.getElementById('p-linux-bar').style.width = linuxXP + "%";
-            document.getElementById('p-aws-val').innerText = awsXP + "%";
-            document.getElementById('p-aws-bar').style.width = awsXP + "%";
-            document.getElementById('p-streak').innerText = "🔥 " + streak + " Days";
-        }
-
-        window.onload = syncPortfolio;
-        // Check for updates every 5 seconds
-        setInterval(syncPortfolio, 5000);
-    </script>
+        <section class="border-glow p-8 rounded-2xl bg-[#161b22]">
+            <h3 class="text-xl font-bold text-white mb-4 italic uppercase">Professional Summary</h3>
+            <p class="text-sm leading-relaxed opacity-70">
+                BCA student at Atmiya University specializing in high-uptime Cloud Infrastructure. Currently executing a 730-day mastery roadmap focusing on AWS, Azure, and Infrastructure as Code. Daily focus on Linux administration and automated resource deployment to meet enterprise-grade scalability standards.
+            </p>
+        </section>
+    </div>
 </body>
 </html>
