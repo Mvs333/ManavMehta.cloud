@@ -3,165 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MANAV | 730 LEVELS TO CLOUD MASTER</title>
+    <title>MANAV | CLOUD VAULT 730</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --aws-orange: #FF9900; --level-up: #22c55e; }
-        body { background: #010409; color: #c9d1d9; font-family: 'JetBrains Mono', monospace; }
-        .level-card { background: #0d1117; border: 1px solid #30363d; border-radius: 20px; transition: 0.4s; }
-        .level-card:hover { border-color: var(--aws-orange); transform: translateY(-5px); }
-        .step-indicator { background: linear-gradient(90deg, #FF9900, #ffcc00); color: black; font-weight: 900; px-4; py-1; border-radius: 4px; }
-        .progress-container { height: 8px; background: #21262d; border-radius: 10px; overflow: hidden; }
-        .progress-bar { height: 100%; background: var(--aws-orange); transition: 1s ease-in-out; width: 0%; }
-        .role-badge { font-size: 10px; padding: 2px 8px; border-radius: 4px; border: 1px solid #30363d; }
+        :root { --aws-orange: #FF9900; --bg: #0D1117; }
+        body { background: var(--bg); color: #C9D1D9; font-family: 'JetBrains Mono', monospace; }
+        .vault-card { background: #161B22; border: 1px solid #30363D; border-radius: 16px; }
+        .progress-bar { height: 6px; background: #21262D; border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--aws-orange); transition: 1s ease-in-out; }
+        .complete-btn { background: var(--aws-orange); color: black; font-weight: 900; transition: 0.2s; }
+        .complete-btn:hover { background: white; transform: translateY(-2px); }
     </style>
 </head>
 <body class="p-6 md:p-12">
 
-    <header class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center mb-12 border-b border-gray-800 pb-10">
+    <header class="max-w-6xl mx-auto flex justify-between items-center mb-12 border-b border-gray-800 pb-8">
         <div>
-            <h1 class="text-4xl font-black italic tracking-tighter uppercase">Cloud_Mastery <span class="text-[#FF9900]">730</span></h1>
-            <div class="flex gap-3 mt-3">
-                <span class="role-badge text-green-400 border-green-900/30 font-bold uppercase tracking-widest">Level: <span id="lvl-display">1</span>/730</span>
-                <span class="role-badge text-blue-400 border-blue-900/30 font-bold uppercase tracking-widest">Path: Cloud_Ops_Engineer</span>
-            </div>
+            <h1 class="text-3xl font-black italic uppercase">Cloud_Vault <span class="text-[#FF9900]">730</span></h1>
+            <p class="text-[10px] font-bold opacity-40 uppercase tracking-[0.4em] mt-1">Operator: Manav Mehta | Entry Role: Cloud Support Associate</p>
         </div>
         <div class="text-right">
-            <p id="live-clock" class="text-5xl font-black text-[#FF9900] tracking-tighter">00:00:00</p>
-            <p class="text-[10px] opacity-40 uppercase mt-1 tracking-[0.5em]">Target: ₹12 LPA Entry Role</p>
+            <p id="live-clock" class="text-3xl font-bold tracking-tighter text-white">00:00:00</p>
         </div>
     </header>
 
     <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10">
         
         <div class="lg:col-span-4 space-y-6">
-            <div class="level-card p-6 border-t-4 border-[#FF9900]">
-                <h3 class="text-xs font-black uppercase text-[#FF9900] mb-4 italic">Mastery_Progress</h3>
-                <div class="progress-container mb-2"><div id="main-progress" class="progress-bar"></div></div>
-                <p class="text-[10px] opacity-50 uppercase font-bold tracking-widest">Total Course Completion: <span id="perc-text">0</span>%</p>
-                <div class="mt-8 space-y-3">
-                    <button onclick="bootSystem()" id="boot-btn" class="w-full bg-white text-black py-2 text-[10px] font-black rounded uppercase hover:bg-[#FF9900] transition-all">Arm_6PM_Work_Alarm</button>
-                    <a href="portfolio.html" class="block w-full border border-gray-700 text-center py-2 text-[10px] font-black rounded uppercase hover:border-white">View_Live_Cloud_Portfolio</a>
+            <div class="vault-card p-6 border-t-4 border-[#FF9900]">
+                <h3 class="text-xs font-black uppercase text-[#FF9900] mb-4 italic">Overall_Progress</h3>
+                <div class="progress-bar mb-2"><div id="main-progress" class="progress-fill" style="width: 0%"></div></div>
+                <div class="flex justify-between text-[10px] font-bold uppercase opacity-60">
+                    <span>Level: <span id="lvl-num">1</span>/730</span>
+                    <span><span id="perc-num">0</span>%</span>
                 </div>
             </div>
 
-            <div class="level-card p-6">
-                <h3 class="text-xs font-black uppercase text-blue-400 mb-4 italic">Unlocked_Job_Ready_Roles</h3>
-                <div class="space-y-4 opacity-70 grayscale" id="role-list">
-                    <div class="border-b border-gray-800 pb-2">
-                        <p class="text-[11px] font-black text-white">Cloud Support Associate</p>
-                        <p class="text-[9px] italic">Unlock at Level 180</p>
-                    </div>
-                    <div class="border-b border-gray-800 pb-2">
-                        <p class="text-[11px] font-black text-white">Junior Ops Engineer</p>
-                        <p class="text-[9px] italic">Unlock at Level 360</p>
-                    </div>
-                    <div class="border-b border-gray-800 pb-2">
-                        <p class="text-[11px] font-black text-white">Associate SRE</p>
-                        <p class="text-[9px] italic">Unlock at Level 540</p>
-                    </div>
-                    <div>
-                        <p class="text-[11px] font-black text-white">Master Cloud Architect</p>
-                        <p class="text-[9px] italic text-[#FF9900]">Unlock at Level 730</p>
-                    </div>
-                </div>
+            <div class="vault-card p-6">
+                <h3 class="text-xs font-black uppercase text-blue-400 mb-4 italic">High_Level_Certs</h3>
+                <ul class="text-[11px] space-y-3 font-bold opacity-80">
+                    <li id="cert-1" class="flex items-center gap-2 text-gray-500 italic"><i class="fa-solid fa-circle-notch"></i> AWS Cloud Practitioner</li>
+                    <li id="cert-2" class="flex items-center gap-2 text-gray-500 italic"><i class="fa-solid fa-lock"></i> Azure Administrator</li>
+                    <li id="cert-3" class="flex items-center gap-2 text-gray-500 italic"><i class="fa-solid fa-lock"></i> HashiCorp Terraform</li>
+                    <li id="cert-4" class="flex items-center gap-2 text-gray-500 italic"><i class="fa-solid fa-lock"></i> AWS SysOps Associate</li>
+                </ul>
             </div>
         </div>
 
         <div class="lg:col-span-8">
-            <div id="level-container" class="level-card p-10 min-h-[650px] flex flex-col border-t-4 border-white/10">
-                <div class="flex justify-between items-center mb-10">
-                    <span id="level-tag" class="step-indicator uppercase text-[11px]">Level_001</span>
-                    <i id="check-icon" class="fa-solid fa-circle-check text-2xl text-gray-800"></i>
+            <div class="vault-card p-10 min-h-[600px] flex flex-col border-t-4 border-white/10">
+                <div class="flex justify-between items-center mb-10 border-b border-gray-800 pb-4">
+                    <span id="lvl-tag" class="bg-[#FF9900] text-black px-4 py-1 text-[11px] font-black italic">LEVEL_001</span>
+                    <span id="module-tag" class="text-[10px] font-bold uppercase text-gray-500 tracking-widest italic">LINUX_FUNDAMENTALS</span>
                 </div>
 
                 <div class="flex-grow">
-                    <h2 id="level-title" class="text-5xl font-black uppercase mb-6 tracking-tighter italic">Initializing...</h2>
+                    <h2 id="lvl-title" class="text-4xl font-black uppercase mb-8 tracking-tighter italic text-white underline decoration-[#FF9900]">Loading_Module...</h2>
                     
-                    <div class="bg-gray-900/50 p-8 rounded-2xl border-l-4 border-[#FF9900] mb-8">
-                        <h4 class="text-[#FF9900] font-black mb-3 uppercase text-[10px] tracking-widest">30-Min Mastery Lesson</h4>
-                        <p id="level-lesson" class="text-sm leading-relaxed text-gray-300"></p>
+                    <div class="bg-gray-900/30 p-6 rounded-xl border-l-4 border-[#FF9900] mb-8">
+                        <h4 class="text-[#FF9900] font-black mb-3 uppercase text-[10px] tracking-[0.2em]">30-Min Mastery Lesson</h4>
+                        <p id="lvl-lesson" class="text-sm leading-relaxed text-gray-300 italic"></p>
                     </div>
 
-                    <div class="bg-black p-8 rounded-2xl border border-gray-800">
-                        <h4 class="text-blue-400 font-black mb-3 uppercase text-[10px] tracking-widest">Practical Hands-On Task</h4>
-                        <div id="level-task" class="font-mono text-xs text-green-400 leading-loose whitespace-pre-wrap"></div>
+                    <div class="bg-black/50 p-6 rounded-xl border border-gray-800">
+                        <h4 class="text-blue-400 font-black mb-3 uppercase text-[10px] tracking-[0.2em]">Practical Hands-On Task</h4>
+                        <div id="lvl-task" class="font-mono text-xs text-green-400 leading-loose whitespace-pre-wrap"></div>
                     </div>
                 </div>
 
-                <div class="mt-12 pt-8 border-t border-gray-800">
-                    <button id="finish-btn" onclick="completeLevel()" class="w-full bg-[#FF9900] text-black py-5 rounded-xl font-black text-xs uppercase tracking-[0.5em] hover:bg-white hover:scale-[1.02] transition-all shadow-xl">
-                        Complete Level & Sync to Portfolio
+                <div class="mt-12">
+                    <button onclick="completeLevel()" class="complete-btn w-full py-5 rounded-xl text-xs uppercase tracking-[0.5em] shadow-xl">
+                        Complete Level & Tick Off
                     </button>
+                    <p class="text-center text-[9px] mt-4 opacity-30 uppercase italic">Progress saves automatically to browser memory.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <audio id="alarm-buzzer" src="https://assets.mixkit.co/sfx/preview/mixkit-digital-clock-digital-alarm-buzzer-992.mp3" loop></audio>
-
     <script>
         const syllabus = [
-            { level: 1, title: "Linux Root Auth", lesson: "Understanding the 'root' user and the power of 'sudo'. In a Cloud Support role at Amazon, you will rarely log in as root. You use 'sudo' to perform specific tasks safely. This is Level 1 of Cloud Security.", task: "1. Open WSL2 Ubuntu\n2. Run 'whoami' (It should say manav)\n3. Run 'sudo whoami' (It should say root after password)\n4. Explore the /root directory using 'sudo ls /root'." },
-            { level: 2, title: "Directory Navigation", lesson: "Mastering 'cd', 'pwd', and absolute vs relative paths. When a Cloud server crashes, you must navigate to /var/log/ instantly. Speed is money in Cloud Ops.", task: "1. Go to your home: 'cd ~'\n2. Find where you are: 'pwd'\n3. Go to system logs: 'cd /var/log'\n4. List only folders: 'ls -d */'." },
-            { level: 3, title: "File Operations", lesson: "Creating, moving, and deleting files via terminal. You will never use a mouse in a real AWS Support job. You must be 100% fluent with 'touch', 'mv', and 'rm'.", task: "1. Create 'test.txt'\n2. Move it to a new folder 'lab': 'mkdir lab && mv test.txt lab/'\n3. Rename it: 'mv lab/test.txt lab/done.txt'\n4. Delete the folder: 'rm -rf lab/'." }
-            // More levels will be unlocked as you finish these.
+            { lvl: 1, mod: "Linux_Core", title: "Root & Sudo", lesson: "Mastering 'sudo'. In a Cloud Support role (₹10 LPA), you never log in as root for security. You use 'sudo' to manage servers. This is Level 1 of Cloud Security.", task: "1. Open WSL2 Ubuntu\n2. Run 'whoami'\n3. Run 'sudo whoami'\n4. Verify the user changes from 'manav' to 'root'." },
+            { lvl: 2, mod: "Linux_Core", title: "File Navigation", lesson: "Mastering 'cd' and 'pwd'. Speed in the terminal is what separates a Junior from a Senior. You must know exactly where you are in the system at all times.", task: "1. Navigate to logs: 'cd /var/log'\n2. Check full path: 'pwd'\n3. Return home: 'cd ~'\n4. Verify home path: 'pwd'." },
+            { lvl: 3, mod: "Linux_Core", title: "File Operations", lesson: "Using 'touch', 'mkdir', and 'mv'. You will build scripts to move data across cloud servers. Manual mouse clicking does not exist in Cloud Ops.", task: "1. Create a file: 'touch mission.txt'\n2. Create a folder: 'mkdir cloud_labs'\n3. Move file: 'mv mission.txt cloud_labs/'\n4. Rename: 'mv cloud_labs/mission.txt cloud_labs/completed.txt'." }
         ];
 
-        let currentLvlIdx = parseInt(localStorage.getItem('manav_level')) || 0;
+        let currentIdx = parseInt(localStorage.getItem('manav_level_idx')) || 0;
 
         function updateUI() {
-            const data = syllabus[currentLvlIdx] || syllabus[syllabus.length - 1];
-            document.getElementById('level-tag').innerText = `Level_${String(data.level).padStart(3, '0')}`;
-            document.getElementById('level-title').innerText = data.title;
-            document.getElementById('level-lesson').innerText = data.lesson;
-            document.getElementById('level-task').innerText = data.task;
+            const data = syllabus[currentIdx] || syllabus[syllabus.length - 1];
+            document.getElementById('lvl-tag').innerText = `LEVEL_${String(data.lvl).padStart(3, '0')}`;
+            document.getElementById('module-tag').innerText = data.mod;
+            document.getElementById('lvl-title').innerText = data.title;
+            document.getElementById('lvl-lesson').innerText = data.lesson;
+            document.getElementById('lvl-task').innerText = data.task;
             
-            // Stats
-            document.getElementById('lvl-display').innerText = currentLvlIdx + 1;
-            const progress = (((currentLvlIdx + 1) / 730) * 100).toFixed(2);
+            // Stats Update
+            document.getElementById('lvl-num').innerText = currentIdx + 1;
+            const progress = (((currentIdx + 1) / 730) * 100).toFixed(2);
             document.getElementById('main-progress').style.width = progress + "%";
-            document.getElementById('perc-text').innerText = progress;
+            document.getElementById('perc-num').innerText = progress;
 
-            // Role Unlocking Visuals
-            const roles = document.getElementById('role-list').children;
-            if(currentLvlIdx >= 180) roles[0].classList.remove('grayscale', 'opacity-70');
-            if(currentLvlIdx >= 360) roles[1].classList.remove('grayscale', 'opacity-70');
-            if(currentLvlIdx >= 540) roles[2].classList.remove('grayscale', 'opacity-70');
+            // Cert Highlight
+            if(currentIdx > 60) document.getElementById('cert-1').className = "flex items-center gap-2 text-green-400 italic";
+            if(currentIdx > 120) document.getElementById('cert-2').className = "flex items-center gap-2 text-green-400 italic";
         }
 
         function completeLevel() {
-            currentLvlIdx++;
-            localStorage.setItem('manav_level', currentLvlIdx);
-            
-            document.getElementById('check-icon').classList.replace('text-gray-800', 'text-green-500');
-            document.getElementById('level-container').style.borderColor = "#22c55e";
-            
-            setTimeout(() => {
-                document.getElementById('level-container').style.borderColor = "rgba(255,255,255,0.1)";
-                document.getElementById('check-icon').classList.replace('text-green-500', 'text-gray-800');
-                updateUI();
-            }, 8000); // 8 seconds of "Victory" feel
+            currentIdx++;
+            localStorage.setItem('manav_level_idx', currentIdx);
+            updateUI();
         }
 
-        // CLOCK & 6PM ALARM
         setInterval(() => {
-            const now = new Date();
-            const time = now.toLocaleTimeString('en-GB', { hour12: false });
-            document.getElementById('live-clock').innerText = time;
-            if(time === "18:00:00") {
-                const b = document.getElementById('alarm-buzzer');
-                b.play();
-                alert("🦁 6:00 PM AUDIT: Have you completed your today's work?");
-                window.open("https://wa.me/918849544704?text=Daily%20Level%20Completed.", "_blank");
-            }
+            document.getElementById('live-clock').innerText = new Date().toLocaleTimeString('en-GB', { hour12: false });
         }, 1000);
-
-        function bootSystem() {
-            const b = document.getElementById('alarm-buzzer');
-            b.play().then(() => { b.pause(); alert("ALARM_ARMED_6PM"); document.getElementById('boot-btn').innerText = "ARMED ✓"; });
-        }
 
         window.onload = updateUI;
     </script>
