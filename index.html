@@ -3,169 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MANAV | CLOUD ARCHITECT VAULT</title>
+    <title>MANAV | CLOUD-OS MASTERY</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --aws-orange: #FF9900; --bg: #0D1117; }
-        body { background: var(--bg); color: #C9D1D9; font-family: 'JetBrains Mono', monospace; }
-        .vault-card { background: #161B22; border: 1px solid #30363D; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .btn-nav { border: 1px solid #30363D; padding: 10px 20px; border-radius: 8px; font-size: 10px; font-weight: 900; transition: 0.3s; }
-        .btn-nav:hover { border-color: var(--aws-orange); color: var(--aws-orange); }
-        .quiz-box { background: #010409; border: 2px dashed #30363D; padding: 20px; border-radius: 12px; margin-top: 20px; }
-        .progress-fill { height: 100%; background: var(--aws-orange); transition: 1s ease-in-out; }
+        :root { --gold: #D4AF37; --slate: #0F172A; --white: #F8FAFC; }
+        body { background-color: var(--slate); color: var(--white); font-family: 'Inter', sans-serif; }
+        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px; }
+        .cmd-box { border-left: 4px solid var(--gold); background: rgba(212, 175, 55, 0.05); padding: 15px; margin-bottom: 15px; border-radius: 0 12px 12px 0; }
+        .quiz-btn { width: 100%; text-align: left; padding: 15px; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; margin-bottom: 10px; transition: 0.3s; }
+        .quiz-btn:hover { background: rgba(212, 175, 55, 0.2); border-color: var(--gold); }
+        .progress-line { height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; }
+        .progress-inner { height: 100%; background: var(--gold); transition: 1s ease-in-out; }
     </style>
 </head>
-<body class="p-6 md:p-12">
+<body class="p-4 md:p-12 min-h-screen">
 
-    <header class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center mb-10 border-b border-gray-800 pb-8">
+    <header class="max-w-6xl mx-auto flex justify-between items-end mb-12">
         <div>
-            <h1 class="text-4xl font-black italic uppercase tracking-tighter">Mastery_Vault <span class="text-[#FF9900]">730</span></h1>
-            <p class="text-[10px] font-bold opacity-40 uppercase tracking-[0.4em] mt-2">Candidate: Manav Mehta | Role: Senior Cloud Ops Engineer Track</p>
+            <h1 class="text-4xl font-black tracking-tighter uppercase italic">Mastery <span class="text-[#D4AF37]">730</span></h1>
+            <div class="flex gap-4 mt-2">
+                <span class="text-[10px] font-bold uppercase tracking-widest opacity-60">Step: <span id="lvl-curr">1</span> / 730</span>
+                <span class="text-[10px] font-bold uppercase tracking-widest text-[#D4AF37]">Candidate: Manav Mehta</span>
+            </div>
         </div>
         <div class="text-right">
-            <p id="live-clock" class="text-4xl font-bold tracking-tighter text-white">00:00:00</p>
-            <p class="text-[10px] text-[#FF9900] font-black uppercase italic mt-1">Deep-Dive Learning Active</p>
+            <p id="live-clock" class="text-4xl font-mono font-bold tracking-tighter">00:00:00</p>
         </div>
     </header>
 
     <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
         
         <div class="lg:col-span-4 space-y-6">
-            <div class="vault-card p-6 border-t-4 border-[#FF9900]">
-                <h3 class="text-xs font-black uppercase text-[#FF9900] mb-4 italic">Overall_Completion</h3>
-                <div class="h-2 bg-gray-800 rounded-full overflow-hidden mb-2">
-                    <div id="progress-bar" class="progress-fill" style="width: 0%"></div>
-                </div>
-                <div class="flex justify-between text-[10px] font-bold uppercase">
-                    <span>Level: <span id="lvl-num">1</span>/730</span>
-                    <span><span id="perc-num">0</span>%</span>
-                </div>
+            <div class="glass-card p-6">
+                <h3 class="text-xs font-black uppercase tracking-widest mb-4 opacity-50">Career_Velocity</h3>
+                <div class="progress-line mb-2"><div id="prog-bar" class="progress-inner" style="width: 0.1%"></div></div>
+                <p class="text-[10px] font-bold uppercase text-[#D4AF37]">Certification Readiness: 1%</p>
             </div>
 
             <div class="flex gap-4">
-                <button onclick="prevLevel()" class="btn-nav flex-1 uppercase tracking-widest"><i class="fa-solid fa-arrow-left mr-2"></i> Back</button>
-                <button onclick="resetSystem()" class="btn-nav flex-1 uppercase tracking-widest text-red-500 border-red-900/30 hover:bg-red-500/10">Reset All</button>
-            </div>
-
-            <div class="vault-card p-6 bg-[#010409]">
-                <h3 class="text-xs font-black uppercase text-blue-400 mb-4 italic">Practical_Utility</h3>
-                <p id="utility-text" class="text-[11px] leading-relaxed opacity-70 italic">
-                    Loading real-world cloud usage case...
-                </p>
+                <button onclick="prevStep()" class="flex-1 py-3 border border-white/10 rounded-xl text-[10px] font-black uppercase hover:border-[#D4AF37] transition-all">Back</button>
+                <button onclick="resetData()" class="flex-1 py-3 border border-red-900/30 text-red-500 rounded-xl text-[10px] font-black uppercase hover:bg-red-500/10">Reset</button>
             </div>
         </div>
 
         <div class="lg:col-span-8">
-            <div class="vault-card p-10 min-h-[750px] flex flex-col border-t-4 border-white/10 relative overflow-hidden">
-                <div class="flex justify-between items-center mb-8 border-b border-gray-800 pb-4">
-                    <span id="lvl-tag" class="bg-[#FF9900] text-black px-4 py-1 text-[11px] font-black italic">LEVEL_001</span>
-                    <span id="mod-tag" class="text-[10px] font-bold uppercase text-gray-500 tracking-widest italic tracking-widest">LINUX_INFRASTRUCTURE</span>
+            <div class="glass-card p-8 md:p-12 min-h-[800px] flex flex-col">
+                <div class="flex justify-between items-center mb-10 border-b border-white/10 pb-6">
+                    <span id="step-id" class="text-[#D4AF37] text-xs font-black uppercase tracking-[0.4em]">Step_001</span>
+                    <span id="mod-name" class="text-[10px] font-bold uppercase opacity-40 italic">Module: Linux_Core_Architect</span>
                 </div>
 
                 <div class="flex-grow">
-                    <h2 id="lvl-title" class="text-4xl font-black uppercase mb-8 tracking-tighter italic text-white">Loading...</h2>
+                    <h2 id="step-title" class="text-4xl font-black mb-10 tracking-tight uppercase italic">Loading_Sequence...</h2>
                     
-                    <div class="mb-8">
-                        <h4 class="text-[#FF9900] font-black mb-3 uppercase text-[10px] tracking-[0.2em] italic">1. The 30-Minute Master Class</h4>
-                        <div id="lvl-lesson" class="text-sm leading-relaxed text-gray-300 space-y-4"></div>
-                    </div>
+                    <div id="command-container" class="space-y-6">
+                        </div>
 
-                    <div class="bg-black/50 p-6 rounded-2xl border border-gray-800 mb-8">
-                        <h4 class="text-blue-400 font-black mb-3 uppercase text-[10px] tracking-[0.2em] italic">2. ThinkBook Lab (Hands-On)</h4>
-                        <div id="lvl-task" class="font-mono text-xs text-green-400 leading-loose whitespace-pre-wrap"></div>
-                    </div>
-
-                    <div class="quiz-box">
-                        <h4 class="text-purple-400 font-black mb-3 uppercase text-[10px] tracking-[0.2em] italic">3. Integrity Check (Quiz)</h4>
-                        <p id="quiz-question" class="text-xs font-bold mb-4 italic text-white"></p>
-                        <input type="text" id="quiz-answer" class="w-full bg-slate-900 border border-gray-700 p-3 rounded text-sm text-white outline-none focus:border-purple-500" placeholder="Type answer here...">
+                    <div id="quiz-section" class="mt-12 pt-10 border-t border-white/10">
+                        <h4 class="text-[#D4AF37] font-black uppercase text-xs mb-6 italic">Validation: Knowledge Check</h4>
+                        <p id="quiz-q" class="text-lg font-bold mb-6 italic leading-snug"></p>
+                        <div id="quiz-options" class="space-y-3 text-sm">
+                            </div>
                     </div>
                 </div>
 
-                <div class="mt-12">
-                    <button onclick="verifyLevel()" class="w-full bg-[#FF9900] text-black py-5 rounded-xl font-black text-xs uppercase tracking-[0.6em] shadow-xl hover:bg-white transition-all">
-                        Validate & Level Up
-                    </button>
+                <div class="mt-12 text-center">
+                    <p class="text-[10px] opacity-30 uppercase tracking-widest font-bold">Pick the correct answer to unlock the next level</p>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        const syllabus = [
+        const database = [
             {
-                lvl: 1, mod: "Kernel_Security", title: "Sudo & Root Logic",
-                lesson: "In a real-world AWS environment, the 'root' user is the ultimate God account. If you stay logged in as root, one mistake can delete an entire company's database. This is why we use 'sudo' (SuperUser Do). It provides temporary high-level access while logging every move you make. Amazon engineers use this for 'Audit Trails'—knowing who changed what at 3 AM.",
-                utility: "Usage: Cloud Support Associates use 'sudo' to update security patches on EC2 servers without exposing the main root password to the network.",
-                task: "1. Open WSL2 Ubuntu\n2. Run 'whoami' (Shows your identity)\n3. Run 'sudo whoami' (Shows the power you borrowed)\n4. Run 'ls /root' (Permission Denied)\n5. Run 'sudo ls /root' (Success - You bypassed the lock).",
-                question: "What command lets a normal user act as a root user temporarily?",
-                answer: "sudo"
+                id: 1, mod: "Kernel_Fundamentals", title: "The Security Guard (Sudo)",
+                commands: [
+                    { name: "whoami", def: "Displays the current active username.", usage: "Used to verify if you are accidentally running commands as root.", importance: "Critical for audit logs in AWS." },
+                    { name: "sudo", def: "SuperUser Do - Executes commands with root privileges.", usage: "Used to install software or change system files.", importance: "Amazon's security rule #1: Only use sudo when absolutely needed." },
+                    { name: "sudo -i", def: "Enters an interactive root shell.", usage: "Used for massive system overhauls.", importance: "High risk. Avoid this in production environments." }
+                ],
+                quiz: "Why does an AWS Cloud Engineer prefer 'sudo' over logging in as 'root'?",
+                options: ["A) Root is slower than sudo", "B) Sudo provides an audit trail of who did what", "C) Sudo is cheaper for cloud bills"],
+                correct: 1 // Option B
             },
             {
-                lvl: 2, mod: "System_Diagnostics", title: "Path Mastering",
-                lesson: "The '/' (Root Directory) is the heart of Linux. As a Junior Ops Engineer, your 30-minute goal is to navigate from '/home' to '/var/log' (where errors are kept) in under 2 seconds. In Cloud support, if a server crashes, you don't use a mouse. You fly through directories using Absolute Paths (/etc/nginx) and Relative Paths (../logs).",
-                utility: "Usage: SREs (Site Reliability Engineers) use 'cd /var/log' instantly when a website goes down to find the specific error code causing the crash.",
-                task: "1. Type 'pwd' to see your current location.\n2. Navigate to system settings: 'cd /etc'.\n3. Navigate back to home: 'cd ~'.\n4. Challenge: Move to '/var/log' using one single command.",
-                question: "Which command shows you the 'Full Absolute Path' of your current location?",
-                answer: "pwd"
+                id: 2, mod: "System_Diagnostics", title: "Navigation & Paths",
+                commands: [
+                    { name: "pwd", def: "Print Working Directory.", usage: "Shows exactly where you are in the system.", importance: "Prevents accidental file deletion in the wrong folder." },
+                    { name: "ls -la", def: "List All files (including hidden).", usage: "Shows system configuration files like .bashrc.", importance: "Essential for debugging hidden cloud configs." },
+                    { name: "cd /var/log", def: "Moves to the system log directory.", usage: "Where AWS Linux stores all error messages.", importance: "The first place you go when a server crashes." }
+                ],
+                quiz: "Which command would you use to find the error logs on an AWS server?",
+                options: ["A) whoami", "B) ls -la /root", "C) cd /var/log"],
+                correct: 2 // Option C
             }
         ];
 
-        let currentIdx = parseInt(localStorage.getItem('manav_vault_idx')) || 0;
+        let currIdx = parseInt(localStorage.getItem('manav_step_idx')) || 0;
 
-        function updateUI() {
-            const data = syllabus[currentIdx] || syllabus[syllabus.length - 1];
-            document.getElementById('lvl-tag').innerText = `LEVEL_${String(data.lvl).padStart(3, '0')}`;
-            document.getElementById('mod-tag').innerText = data.mod;
-            document.getElementById('lvl-title').innerText = data.title;
-            document.getElementById('lvl-lesson').innerText = data.lesson;
-            document.getElementById('lvl-task').innerText = data.task;
-            document.getElementById('utility-text').innerText = data.utility;
-            document.getElementById('quiz-question').innerText = data.question;
-            document.getElementById('quiz-answer').value = "";
+        function render() {
+            const data = database[currIdx] || database[database.length - 1];
+            document.getElementById('lvl-curr').innerText = currIdx + 1;
+            document.getElementById('step-id').innerText = `Step_${String(data.id).padStart(3, '0')}`;
+            document.getElementById('mod-name').innerText = `Module: ${data.mod}`;
+            document.getElementById('step-title').innerText = data.title;
             
+            // Render Commands
+            let cmdHtml = '';
+            data.commands.forEach(c => {
+                cmdHtml += `
+                    <div class="cmd-box">
+                        <p class="text-[#D4AF37] font-black text-lg font-mono mb-2"># ${c.name}</p>
+                        <p class="text-sm opacity-90 mb-1"><strong>Definition:</strong> ${c.def}</p>
+                        <p class="text-sm opacity-90 mb-1 font-italic italic"><strong>Real-Life Usage:</strong> ${c.usage}</p>
+                        <p class="text-[11px] text-blue-400 font-bold uppercase tracking-widest mt-2"><strong>Importance:</strong> ${c.importance}</p>
+                    </div>`;
+            });
+            document.getElementById('command-container').innerHTML = cmdHtml;
+
+            // Render Quiz
+            document.getElementById('quiz-q').innerText = data.quiz;
+            let optHtml = '';
+            data.options.forEach((opt, index) => {
+                optHtml += `<button onclick="checkAns(${index})" class="quiz-btn">${opt}</button>`;
+            });
+            document.getElementById('quiz-options').innerHTML = optHtml;
+
             // Progress
-            document.getElementById('lvl-num').innerText = currentIdx + 1;
-            const progress = (((currentIdx + 1) / 730) * 100).toFixed(2);
-            document.getElementById('progress-bar').style.width = progress + "%";
-            document.getElementById('perc-num').innerText = progress;
+            const perc = (((currIdx + 1) / 730) * 100).toFixed(2);
+            document.getElementById('prog-bar').style.width = perc + "%";
         }
 
-        function verifyLevel() {
-            const data = syllabus[currentIdx];
-            const userAns = document.getElementById('quiz-answer').value.toLowerCase().trim();
-            
-            if(userAns === data.answer.toLowerCase()) {
-                currentIdx++;
-                localStorage.setItem('manav_vault_idx', currentIdx);
-                alert("Correct! Level Synchronized. Opening Level " + (currentIdx + 1));
-                updateUI();
+        function checkAns(idx) {
+            if(idx === database[currIdx].correct) {
+                alert("✓ CORRECT: Knowledge Verified. Proceeding to Next Step.");
+                currIdx++;
+                localStorage.setItem('manav_step_idx', currIdx);
+                render();
+                window.scrollTo(0,0);
             } else {
-                alert("Incorrect Answer. Study the lesson again on your ThinkBook!");
+                alert("✘ INCORRECT: Re-read the Command Importance and try again.");
             }
         }
 
-        function prevLevel() {
-            if(currentIdx > 0) {
-                currentIdx--;
-                localStorage.setItem('manav_vault_idx', currentIdx);
-                updateUI();
+        function prevStep() {
+            if(currIdx > 0) {
+                currIdx--;
+                localStorage.setItem('manav_step_idx', currIdx);
+                render();
             }
         }
 
-        function resetSystem() {
-            if(confirm("Are you sure? This will delete all your hard-earned progress!")) {
-                localStorage.setItem('manav_vault_idx', 0);
+        function resetData() {
+            if(confirm("Confirm Master Reset? All progress will be lost.")) {
+                localStorage.setItem('manav_step_idx', 0);
                 location.reload();
             }
         }
 
         setInterval(() => {
-            document.getElementById('live-clock').innerText = new Date().toLocaleTimeString('en-GB', { hour12: false });
+            document.getElementById('live-clock').innerText = new Date().toLocaleTimeString('en-US', { hour12: false });
         }, 1000);
 
-        window.onload = updateUI;
+        window.onload = render;
     </script>
 </body>
 </html>
