@@ -2,59 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manav Mehta | Cloud Mastery Profile</title>
+    <title>Manav Mehta | Cloud Operator</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body { background: #010409; color: #c9d1d9; font-family: sans-serif; }
-        .cert-card { background: #0d1117; border: 1px solid #30363d; border-radius: 12px; }
-    </style>
 </head>
-<body class="p-10">
-    <div class="max-w-4xl mx-auto">
-        <header class="mb-12 border-b border-gray-800 pb-10 flex justify-between items-center">
+<body class="bg-[#0D1117] text-[#C9D1D9] p-12 font-sans">
+    <div class="max-w-4xl mx-auto border border-gray-800 p-10 rounded-2xl bg-[#161B22]">
+        <header class="border-b border-gray-800 pb-8 mb-8 flex justify-between items-center">
             <div>
-                <h1 class="text-5xl font-black text-white italic">MANAV MEHTA</h1>
-                <p class="text-[#FF9900] font-mono font-bold uppercase tracking-widest mt-2">Future Cloud Ops Architect</p>
+                <h1 class="text-4xl font-black text-white italic">MANAV MEHTA</h1>
+                <p class="text-[#FF9900] font-mono font-bold uppercase tracking-widest mt-2">Cloud Operations Engineer (730-Day Mastery Track)</p>
             </div>
             <div class="text-right">
-                <p class="text-[10px] opacity-50 uppercase mb-1">Mastery Status:</p>
-                <p id="lvl-status" class="text-4xl font-black text-white italic uppercase tracking-tighter">LEVEL 1</p>
+                <p id="lvl-status" class="text-4xl font-black text-white italic">LEVEL 1</p>
             </div>
         </header>
 
-        <section class="mb-12">
-            <h3 class="text-xs font-black uppercase text-[#FF9900] mb-6">Target_Employment_Roles</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="cert-card p-6">
-                    <h4 class="font-bold text-white mb-2 italic">1. Cloud Support Associate</h4>
-                    <p class="text-[11px] opacity-70">Focus: Troubleshooting, AWS Core, Customer Success. Target: ₹7-12 LPA.</p>
-                </div>
-                <div class="cert-card p-6">
-                    <h4 class="font-bold text-white mb-2 italic">2. Site Reliability Engineer</h4>
-                    <p class="text-[11px] opacity-70">Focus: Uptime, Monitoring, Automation (Terraform). Target: ₹10 LPA+.</p>
-                </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+            <div class="p-6 bg-black/40 rounded-xl border border-gray-800">
+                <h3 class="text-xs font-black text-[#FF9900] mb-4 uppercase">Target Skills</h3>
+                <p class="text-sm opacity-80 leading-relaxed italic">Mastery in Linux Administration, AWS Architecture, Infrastructure as Code (Terraform), and Site Reliability Engineering.</p>
             </div>
-        </section>
+            <div class="p-6 bg-black/40 rounded-xl border border-gray-800">
+                <h3 class="text-xs font-black text-blue-400 mb-4 uppercase">Elite Certifications</h3>
+                <p class="text-xs font-bold opacity-60 italic">AWS Cloud Practitioner • Azure Administrator Associate • Terraform Associate • AWS SysOps Administrator.</p>
+            </div>
+        </div>
 
-        <section class="cert-card p-8 bg-[#161b22] border-t-4 border-white">
-            <h3 class="text-2xl font-black text-white italic mb-4 uppercase">Elite Certifications & Projects</h3>
-            <div class="grid grid-cols-2 gap-4 text-sm font-bold opacity-80 italic">
-                <p>● AWS Cloud Practitioner</p>
-                <p>● Bash Automation Project</p>
-                <p>● Azure Admin (AZ-104)</p>
-                <p>● The Cloud Resume Project</p>
-                <p>● HashiCorp Terraform</p>
-                <p>● HA Web Fleet Project</p>
-                <p>● AWS SysOps Associate</p>
-                <p>● One-Click Infrastructure</p>
+        <div class="p-8 bg-[#0D1117] rounded-xl border-t-4 border-white">
+            <h4 class="text-xl font-bold text-white italic mb-2">5 Major Practical Projects</h4>
+            <div class="text-sm space-y-1 opacity-70 italic">
+                <p>1. Bash Automation Script</p>
+                <p>2. The Cloud Resume (S3/CloudFront)</p>
+                <p>3. High-Availability Web Fleet</p>
+                <p>4. One-Click Infrastructure (Terraform)</p>
+                <p>5. Manav.Cloud Mastery OS</p>
             </div>
-        </section>
+        </div>
     </div>
-
     <script>
-        // Automatic sync with main OS
-        document.getElementById('lvl-status').innerText = "LEVEL " + (parseInt(localStorage.getItem('manav_level')) + 1 || 1);
+        document.getElementById('lvl-status').innerText = "LEVEL " + (parseInt(localStorage.getItem('manav_level_idx')) + 1 || 1);
     </script>
 </body>
 </html>
