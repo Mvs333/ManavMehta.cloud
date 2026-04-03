@@ -9,187 +9,134 @@
     <style>
         :root { --aws-orange: #FF9900; --deep-navy: #0F172A; }
         body { 
-            background: var(--deep-navy); color: #E2E8F0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--deep-navy); color: #E2E8F0; font-family: 'Segoe UI', sans-serif;
             background-image: radial-gradient(#1e293b 1px, transparent 1px); background-size: 20px 20px;
         }
-        .app-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(255, 153, 0, 0.2); border-radius: 24px; transition: 0.3s; }
-        .app-card:hover { border-color: var(--aws-orange); box-shadow: 0 0 20px rgba(255, 153, 0, 0.1); }
-        .status-badge { background: #FF9900; color: black; font-weight: 900; font-size: 10px; padding: 2px 10px; border-radius: 50px; }
-        .custom-scroll::-webkit-scrollbar { width: 0px; }
-        iframe { border-radius: 16px; opacity: 0.9; }
+        .app-card { background: rgba(30, 41, 59, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255, 153, 0, 0.1); border-radius: 24px; }
+        .neon-glow { box-shadow: 0 0 20px rgba(255, 153, 0, 0.2); border-color: var(--aws-orange); }
+        iframe { border-radius: 16px; filter: invert(1) hue-rotate(180deg) brightness(0.8) contrast(1.2); }
     </style>
 </head>
 <body class="p-4 md:p-10 min-h-screen">
 
     <header class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center mb-10 gap-6">
         <div class="flex items-center gap-6">
-            <div class="h-16 w-16 bg-[#FF9900] rounded-2xl flex items-center justify-center shadow-[0_0_30px_rgba(255,153,0,0.3)]">
-                <i class="fa-solid fa-cloud-bolt text-3xl text-black"></i>
+            <div class="h-16 w-16 bg-[#FF9900] rounded-2xl flex items-center justify-center shadow-lg animate-pulse">
+                <i class="fa-solid fa-bolt text-3xl text-black"></i>
             </div>
             <div>
-                <h1 class="text-4xl font-black tracking-tighter italic">MANAV.CLOUD <span class="text-[#FF9900]">OS</span></h1>
-                <p class="text-[11px] font-bold opacity-50 uppercase tracking-[0.4em]">Personal Infrastructure v3.0 | Node: 8849544704</p>
+                <h1 class="text-4xl font-black italic tracking-tighter uppercase">Manav.Cloud <span class="text-[#FF9900]">OS</span></h1>
+                <p class="text-[11px] font-bold opacity-40 uppercase tracking-[0.4em]">Personal Node: 8849544704 | 12:51 TEST MODE</p>
             </div>
         </div>
-        <div class="flex items-center gap-8">
-            <div class="text-right">
-                <p id="live-clock" class="text-4xl font-mono font-bold tracking-tighter">00:00:00</p>
-                <div class="flex gap-3 justify-end mt-1">
-                    <span id="ai-status" class="status-badge">AI: OFFLINE</span>
-                    <span class="status-badge bg-blue-500">WSL2: LINKED</span>
-                </div>
-            </div>
+        <div class="text-right">
+            <p id="live-clock" class="text-4xl font-mono font-bold tracking-tighter text-[#FF9900]">00:00:00</p>
+            <button onclick="activateAI()" class="mt-2 px-6 py-1 bg-white/10 border border-white/20 text-[10px] font-bold rounded-full hover:bg-[#FF9900] hover:text-black transition-all uppercase">Link Gemini Brain</button>
         </div>
     </header>
 
     <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
-        
-        <div class="lg:col-span-4 space-y-8">
+        <div class="lg:col-span-4 space-y-6">
             <div class="app-card overflow-hidden h-[450px] flex flex-col border-b-4 border-[#FF9900]">
-                <div class="p-5 flex justify-between items-center bg-slate-800/50">
-                    <h3 class="text-xs font-black uppercase italic tracking-widest text-[#FF9900]">World_Cricket_Monitor</h3>
-                    <span class="flex h-2 w-2 rounded-full bg-red-500 animate-pulse"></span>
+                <div class="p-4 bg-slate-800/50 flex justify-between items-center italic">
+                    <span class="text-[10px] font-black uppercase tracking-widest text-[#FF9900]">Live_Match_Monitor</span>
+                    <span class="h-2 w-2 bg-red-500 rounded-full animate-ping"></span>
                 </div>
-                <div class="flex-grow p-2">
-                    <iframe src="https://www.cricbuzz.com/cricket-match/live-scores" class="w-full h-full border-none filter invert contrast-125 brightness-75"></iframe>
-                </div>
+                <iframe src="https://www.cricbuzz.com/cricket-match/live-scores" class="w-full h-full border-none"></iframe>
             </div>
-
             <div class="app-card p-6 border-l-4 border-blue-500">
-                <h3 class="text-xs font-black mb-4 uppercase text-blue-400">System_Automation</h3>
-                <div class="space-y-4">
-                    <div class="flex justify-between items-center text-xs">
-                        <span class="opacity-50 uppercase font-bold">WhatsApp Trigger</span>
-                        <span class="text-green-400 font-bold">18:00 DAILY</span>
-                    </div>
-                    <div class="flex justify-between items-center text-xs">
-                        <span class="opacity-50 uppercase font-bold">Mobile Alarm</span>
-                        <span class="text-green-400 font-bold">SYNCED</span>
-                    </div>
-                    <button onclick="activateAI()" class="w-full mt-2 py-3 bg-[#FF9900] text-black font-black text-[11px] rounded-xl uppercase tracking-widest hover:scale-105 transition-all">Link Gemini Brain</button>
-                </div>
+                <p class="text-[10px] font-bold opacity-50 uppercase mb-2 italic tracking-widest">Automation_Triggers</p>
+                <div class="flex justify-between text-xs font-bold mb-1"><span>WHATSAPP_AUTO</span><span class="text-green-400">12:51 ACTIVE</span></div>
+                <div class="flex justify-between text-xs font-bold"><span>MOBILE_ALARM</span><span class="text-green-400">12:51 ACTIVE</span></div>
             </div>
         </div>
 
-        <div class="lg:col-span-8 space-y-8">
-            <div class="app-card p-10 min-h-[650px] flex flex-col border-t-4 border-[#FF9900] relative">
-                <div class="absolute top-6 right-10 text-[10px] font-mono opacity-30 italic uppercase tracking-widest" id="current-date-display"></div>
-                
-                <div class="mb-10">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="h-1 w-12 bg-[#FF9900]"></div>
-                        <span id="mission-id" class="text-xs font-black uppercase italic tracking-[0.3em] text-[#FF9900]">Mission_Idle</span>
-                    </div>
-                    <h2 id="task-title" class="text-6xl font-black italic uppercase text-white mb-6 tracking-tighter leading-none">Awaiting_Launch</h2>
-                    <div id="mission-body-text" class="text-lg text-slate-300 leading-relaxed italic p-8 bg-slate-800/40 rounded-3xl border border-white/5">
-                        System launch scheduled for **April 4, 2026**. Ensure your Gemini API Key is linked.
+        <div class="lg:col-span-8 space-y-6">
+            <div class="app-card p-10 min-h-[600px] flex flex-col border-t-4 border-[#FF9900] relative overflow-hidden">
+                <div class="mb-8">
+                    <div class="text-[10px] font-bold text-[#FF9900] uppercase mb-2 tracking-widest italic" id="mission-id">System_Status: Standby</div>
+                    <h2 id="task-title" class="text-5xl font-black italic uppercase text-white tracking-tighter leading-none mb-4">Awaiting_April_4</h2>
+                    <div id="mission-body-text" class="text-sm text-slate-400 leading-relaxed italic p-6 bg-slate-900/50 rounded-2xl border border-white/5">
+                        [TEST MODE] The system is tracking your "12:51:00" trigger. Launch scheduled for April 4, 2026.
                     </div>
                 </div>
 
                 <div class="mt-auto">
-                    <div class="flex justify-between items-end mb-4 px-2">
-                        <p class="text-[10px] font-black uppercase text-[#FF9900] tracking-widest">WSL2 Command Review</p>
-                        <p class="text-[9px] opacity-30 italic">Target: Amazon SysOps</p>
-                    </div>
-                    <textarea id="lab-input" class="w-full bg-slate-900/80 border border-white/10 p-8 text-lg text-cyan-400 focus:border-[#FF9900] outline-none rounded-3xl h-32 mb-6 font-mono transition-all custom-scroll" placeholder="ubuntu@thinkbook:~$"></textarea>
-                    <button onclick="submitToGemini()" class="w-full bg-[#FF9900] hover:bg-white text-black py-6 rounded-3xl font-black text-xs uppercase tracking-[0.6em] shadow-[0_10px_40px_rgba(255,153,0,0.2)] transition-all">Execute_Audit</button>
-                    
-                    <div id="ai-response-box" class="hidden mt-8 p-8 bg-slate-800/60 border border-[#FF9900]/30 rounded-3xl text-sm italic leading-relaxed">
-                        <strong class="text-[#FF9900] uppercase tracking-tighter">Architect_Intelligence:</strong> <span id="ai-msg">...</span>
+                    <textarea id="lab-input" class="w-full bg-black/40 border border-white/10 p-6 text-sm text-cyan-400 focus:border-[#FF9900] outline-none rounded-2xl h-28 mb-4 font-mono transition-all" placeholder="Paste command logs here..."></textarea>
+                    <button onclick="submitToGemini()" class="w-full bg-[#FF9900] hover:bg-white text-black py-5 rounded-2xl font-black text-xs uppercase tracking-[0.5em] transition-all shadow-xl">Analyze_Infrastructure</button>
+                    <div id="ai-response-box" class="hidden mt-6 p-6 bg-slate-900 border border-[#FF9900]/30 rounded-2xl text-xs italic leading-relaxed">
+                        <span id="ai-msg">...</span>
                     </div>
                 </div>
-            </div>
-
-            <div class="app-card p-8 border-t-2 border-blue-400">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-xs font-black uppercase italic text-blue-400">Global_Cloud_Intel</h3>
-                    <span class="text-[9px] opacity-30 uppercase font-bold">Refreshed: 10m</span>
-                </div>
-                <div id="cloud-news-feed" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    </div>
             </div>
         </div>
     </div>
 
-    <audio id="alarm-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-digital-clock-digital-alarm-buzzer-992.mp3" loop></audio>
+    <div class="max-w-7xl mx-auto mt-8 app-card p-6 border-t-2 border-blue-500">
+        <h3 class="text-[10px] font-black uppercase text-blue-400 mb-4 tracking-widest italic">Live_Cloud_Intel (10m Refresh)</h3>
+        <div id="news-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+    </div>
+
+    <audio id="test-buzzer" src="https://assets.mixkit.co/sfx/preview/mixkit-digital-clock-digital-alarm-buzzer-992.mp3" loop></audio>
 
     <script>
         let GEMINI_API_KEY = localStorage.getItem('manav_ai_key') || "";
-        const START_DATE = new Date("2026-04-04"); // SET TO TOMORROW
+        const START_DATE = new Date("2026-04-04");
 
-        // 1. REAL-TIME ENGINE
+        // 1. THE 12:51 TRIGGER
         setInterval(() => {
             const now = new Date();
-            const time = now.toLocaleTimeString('en-US', { hour12: false });
+            const time = now.toLocaleTimeString('en-GB', { hour12: false });
             document.getElementById('live-clock').innerText = time;
-            document.getElementById('current-date-display').innerText = now.toDateString().toUpperCase();
 
-            // 6:00 PM ALARM
-            if(time === "18:00:00") {
-                document.getElementById('alarm-sound').play();
-                alert("🔔 WORK COMPLETION AUDIT: Message sent to 8849544704.");
-                window.open("https://wa.me/918849544704?text=🦁%20Work%20check:%20Have%20you%20completed%20your%20today's%20work?", "_blank");
+            // --- TRIGGER CHECK ---
+            if(time === "12:52:00") {
+                const buzzer = document.getElementById('test-buzzer');
+                buzzer.play();
+                alert("🔔 12:51 TEST SUCCESSFUL: WORK AUDIT ALERT!");
+                window.open("https://wa.me/918849544704?text=🦁%20Manav.Cloud_OS:%20Have%20you%20completed%20your%20today's%20work?", "_blank");
+                setTimeout(() => buzzer.pause(), 10000); // Stop after 10s
             }
         }, 1000);
 
-        // 2. NEWS ENGINE
+        // 2. NEWS
         async function fetchNews() {
-            const feed = document.getElementById('cloud-news-feed');
             try {
                 const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=https://aws.amazon.com/about-aws/whats-new/recent/feed/`);
                 const data = await res.json();
-                feed.innerHTML = data.items.slice(0, 4).map(item => `
-                    <div class="p-4 bg-slate-800/30 rounded-2xl border border-white/5">
-                        <p class="text-[10px] font-bold text-blue-400 mb-1 uppercase">${new Date(item.pubDate).toLocaleDateString()}</p>
-                        <p class="text-[12px] font-black text-white leading-tight mb-2">${item.title}</p>
-                        <a href="${item.link}" target="_blank" class="text-[9px] text-[#FF9900] font-black uppercase hover:underline italic">Analyze Intelligence</a>
+                document.getElementById('news-grid').innerHTML = data.items.slice(0, 3).map(item => `
+                    <div class="p-4 bg-slate-800/50 rounded-xl">
+                        <p class="text-[10px] font-black text-blue-400 uppercase mb-1">${new Date(item.pubDate).toLocaleDateString()}</p>
+                        <p class="text-[11px] font-bold text-white leading-tight mb-2">${item.title}</p>
+                        <a href="${item.link}" target="_blank" class="text-[8px] text-[#FF9900] font-black uppercase italic hover:underline">Read Intel</a>
                     </div>
                 `).join('');
-            } catch (e) { feed.innerHTML = "Syncing Intel..."; }
+            } catch (e) { document.getElementById('news-grid').innerText = "Syncing..."; }
         }
         fetchNews();
         setInterval(fetchNews, 600000);
 
-        // 3. MISSION CONTROL
-        function loadMission() {
-            const today = new Date();
-            const diff = Math.floor((today - START_DATE) / (1000 * 60 * 60 * 24)) + 1;
-            
-            if (diff <= 0) {
-                document.getElementById('mission-id').innerText = "STATUS: STANDBY";
-                document.getElementById('task-title').innerText = "T-Minus 24h";
-                document.getElementById('mission-body-text').innerText = "Launch Sequence starts April 4, 2026. Prepare your AWS Lab Environment.";
-            } else {
-                document.getElementById('mission-id').innerText = `AWS_DAY_${diff}`;
-                document.getElementById('task-title').innerText = "LIVE_OPS_ACTIVE";
+        // 3. MISSION
+        window.onload = () => {
+            const diff = Math.floor((new Date() - START_DATE) / (1000 * 60 * 60 * 24)) + 1;
+            if (diff > 0) {
+                document.getElementById('mission-id').innerText = `AWS_OPS_DAY_${diff}`;
+                document.getElementById('task-title').innerText = "Live_Mission_Active";
                 if(GEMINI_API_KEY) getAiMission(diff);
             }
-        }
-
-        async function getAiMission(day) {
-            const body = document.getElementById('mission-body-text');
-            try {
-                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ contents: [{ parts: [{ text: `Day ${day} AWS CloudOps task. 2 Linux commands.` }] }] })
-                });
-                const data = await res.json();
-                body.innerText = data.candidates[0].content.parts[0].text;
-            } catch (e) { body.innerText = "Error linking to Gemini."; }
-        }
+        };
 
         async function submitToGemini() {
             const input = document.getElementById('lab-input').value;
             const msg = document.getElementById('ai-msg');
-            if(!input || !GEMINI_API_KEY) return alert("Architecture Failure: Input/Key Required.");
+            if(!input || !GEMINI_API_KEY) return alert("System Failure: Check Input/Key.");
             document.getElementById('ai-response-box').classList.remove('hidden');
-            msg.innerHTML = "Auditing Cloud Integrity... <i class='fa-solid fa-spinner fa-spin ml-2'></i>";
+            msg.innerHTML = "Auditing logs... <i class='fa-solid fa-spinner fa-spin ml-2'></i>";
             try {
                 const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ contents: [{ parts: [{ text: `Analyze this: "${input}". Be accurate.` }] }] })
+                    body: JSON.stringify({ contents: [{ parts: [{ text: `Review this: "${input}". Provide Senior Architect feedback.` }] }] })
                 });
                 const data = await res.json();
                 msg.innerText = data.candidates[0].content.parts[0].text;
@@ -197,11 +144,9 @@
         }
 
         function activateAI() {
-            const key = prompt("ENTER MASTER BRAIN KEY:");
+            const key = prompt("PASTE GEMINI MASTER KEY:");
             if(key) { localStorage.setItem('manav_ai_key', key); location.reload(); }
         }
-
-        window.onload = loadMission;
     </script>
 </body>
 </html>
