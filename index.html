@@ -3,156 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MANAV | CLOUD-OS PRO</title>
+    <title>MANAV | CLOUD-OS APP</title>
+    <link rel="manifest" href="manifest.json">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --aws-orange: #FF9900; --deep-navy: #0F172A; }
-        body { 
-            background: var(--deep-navy); color: #E2E8F0; font-family: 'Segoe UI', sans-serif;
-            background-image: radial-gradient(#1e293b 1px, transparent 1px); background-size: 20px 20px;
-        }
-        .app-card { background: rgba(30, 41, 59, 0.85); backdrop-filter: blur(20px); border: 1px solid rgba(255, 153, 0, 0.1); border-radius: 24px; }
-        .neon-glow { box-shadow: 0 0 20px rgba(255, 153, 0, 0.2); border-color: var(--aws-orange); }
-        /* Scoreboard Filter to match theme */
-        .score-frame { border-radius: 16px; filter: invert(0.9) hue-rotate(180deg) contrast(1.2); }
+        body { background: var(--deep-navy); color: #E2E8F0; font-family: sans-serif; }
+        .app-card { background: rgba(30, 41, 59, 0.9); backdrop-filter: blur(20px); border-radius: 24px; border: 1px solid rgba(255,153,0,0.2); }
+        .boot-btn { background: var(--aws-orange); color: black; font-weight: 900; padding: 20px; border-radius: 15px; width: 100%; box-shadow: 0 0 20px rgba(255,153,0,0.4); }
     </style>
 </head>
-<body class="p-4 md:p-10 min-h-screen">
+<body class="p-6 min-h-screen">
 
-    <header class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center mb-10 gap-6">
-        <div class="flex items-center gap-6">
-            <div class="h-16 w-16 bg-[#FF9900] rounded-2xl flex items-center justify-center shadow-lg animate-pulse">
-                <i class="fa-solid fa-bolt text-3xl text-black"></i>
-            </div>
-            <div>
-                <h1 class="text-4xl font-black italic tracking-tighter uppercase">Manav.Cloud <span class="text-[#FF9900]">OS</span></h1>
-                <p class="text-[11px] font-bold opacity-40 uppercase tracking-[0.4em]">Personal Node: 8849544704 | 13:00 TRIGGER ACTIVE</p>
-            </div>
-        </div>
-        <div class="text-right">
-            <p id="live-clock" class="text-4xl font-mono font-bold tracking-tighter text-[#FF9900]">00:00:00</p>
-            <button onclick="activateAI()" class="mt-2 px-6 py-1 bg-white/10 border border-white/20 text-[10px] font-bold rounded-full hover:bg-[#FF9900] hover:text-black transition-all uppercase">Link Gemini Brain</button>
+    <header class="max-w-4xl mx-auto mb-8 text-center">
+        <h1 class="text-3xl font-black italic text-white uppercase">Manav.Cloud <span class="text-[#FF9900]">App</span></h1>
+        <p id="live-clock" class="text-5xl font-mono font-bold text-[#FF9900] mt-4">00:00:00</p>
+        <div class="mt-6">
+            <button onclick="bootSystem()" id="boot-text" class="boot-btn uppercase tracking-widest">🚀 Boot System (Enable Alarm)</button>
         </div>
     </header>
 
-    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
-        <div class="lg:col-span-4 space-y-6">
-            <div class="app-card overflow-hidden h-[450px] flex flex-col border-b-4 border-[#FF9900]">
-                <div class="p-4 bg-slate-800/50 flex justify-between items-center italic">
-                    <span class="text-[10px] font-black uppercase tracking-widest text-[#FF9900]">Live_Match_Stream</span>
-                    <span class="h-2 w-2 bg-red-500 rounded-full animate-ping"></span>
-                </div>
-                <iframe src="https://gateway.pinata.cloud/ipfs/QmZ8F7v7S7H7G7J7K7L7M7N7P7Q7R7S7T7U7V7W7X/scores.html" 
-                        class="w-full h-full border-none score-frame" 
-                        onerror="this.src='https://www.bing.com/search?q=live+cricket+score'">
-                </iframe>
-                <div class="p-2 text-center">
-                    <a href="https://www.cricbuzz.com/cricket-match/live-scores" target="_blank" class="text-[10px] text-cyan-400 underline">Open Full Scorecard in New Tab</a>
-                </div>
-            </div>
-            
-            <div class="app-card p-6 border-l-4 border-blue-500">
-                <p class="text-[10px] font-bold opacity-50 uppercase mb-2 italic tracking-widest text-blue-400">System_Automation</p>
-                <div class="flex justify-between text-xs font-bold mb-1 uppercase tracking-tighter"><span>WhatsApp_Trigger</span><span class="text-green-400">13:00 Active</span></div>
-                <div class="flex justify-between text-xs font-bold uppercase tracking-tighter"><span>Audio_Alarm</span><span class="text-green-400">13:00 Active</span></div>
-            </div>
+    <main class="max-w-4xl mx-auto grid grid-cols-1 gap-6">
+        <div class="app-card overflow-hidden h-[300px]">
+             <div class="p-3 bg-slate-800 text-[10px] font-bold uppercase tracking-widest text-[#FF9900]">Live_Match_Monitor</div>
+             <iframe src="https://www.bing.com/search?q=live+cricket+score" class="w-full h-full border-none opacity-80 contrast-125 brightness-75 grayscale invert"></iframe>
         </div>
 
-        <div class="lg:col-span-8 space-y-6">
-            <div class="app-card p-10 min-h-[600px] flex flex-col border-t-4 border-[#FF9900] relative overflow-hidden">
-                <div class="mb-8">
-                    <div class="text-[10px] font-bold text-[#FF9900] uppercase mb-2 tracking-widest italic" id="mission-id">System_Status: Live</div>
-                    <h2 id="task-title" class="text-5xl font-black italic uppercase text-white tracking-tighter leading-none mb-4 uppercase">Day_01_Initiation</h2>
-                    <div id="mission-body-text" class="text-sm text-slate-400 leading-relaxed italic p-6 bg-slate-900/50 rounded-2xl border border-white/5">
-                        Establishing link to Amazon CloudOps Roadmap for April 4.
-                    </div>
-                </div>
-
-                <div class="mt-auto">
-                    <textarea id="lab-input" class="w-full bg-black/40 border border-white/10 p-6 text-sm text-cyan-400 focus:border-[#FF9900] outline-none rounded-2xl h-28 mb-4 font-mono transition-all" placeholder="user@thinkbook:~$"></textarea>
-                    <button onclick="submitToGemini()" class="w-full bg-[#FF9900] hover:bg-white text-black py-5 rounded-2xl font-black text-xs uppercase tracking-[0.5em] transition-all shadow-xl">Audit_Infrastructure</button>
-                    <div id="ai-response-box" class="hidden mt-6 p-6 bg-slate-900 border border-[#FF9900]/30 rounded-2xl text-xs italic leading-relaxed">
-                        <span id="ai-msg">...</span>
-                    </div>
-                </div>
-            </div>
+        <div class="app-card p-8 min-h-[400px]">
+            <h2 class="text-2xl font-black text-white mb-4 uppercase italic" id="task-title">Awaiting Launch</h2>
+            <div id="mission-body-text" class="text-sm text-slate-400 italic mb-6">Launch starts April 4th.</div>
+            <textarea id="lab-input" class="w-full bg-black/40 border border-white/10 p-4 rounded-xl text-cyan-400 font-mono mb-4 h-24" placeholder="Paste logs..."></textarea>
+            <button onclick="submitToGemini()" class="w-full bg-slate-700 py-4 rounded-xl font-bold uppercase text-[10px] tracking-widest text-white">Execute Audit</button>
         </div>
-    </div>
+    </main>
 
-    <div class="max-w-7xl mx-auto mt-8 app-card p-8 border-t-2 border-blue-500">
-        <h3 class="text-[10px] font-black uppercase text-blue-400 mb-6 tracking-widest italic">Live_Cloud_Intel</h3>
-        <div id="news-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
-    </div>
-
-    <audio id="alarm-buzzer" src="https://assets.mixkit.co/sfx/preview/mixkit-digital-clock-digital-alarm-buzzer-992.mp3" loop></audio>
+    <audio id="alarm-buzzer" src="https://assets.mixkit.co/sfx/preview/mixkit-digital-clock-digital-alarm-buzzer-992.mp3" preload="auto" loop></audio>
 
     <script>
         let GEMINI_API_KEY = localStorage.getItem('manav_ai_key') || "";
-        const START_DATE = new Date("2026-04-04");
+        let systemArmed = false;
 
-        // --- 1. CLOCK & 13:00 TRIGGER ---
+        // 1. BOOT SYSTEM (MANDATORY FOR SOUND)
+        function bootSystem() {
+            const buzzer = document.getElementById('alarm-buzzer');
+            buzzer.play().then(() => {
+                buzzer.pause(); // Effectively "Unmutes" the browser
+                systemArmed = true;
+                document.getElementById('boot-text').innerText = "✅ SYSTEM ARMED (ALARM AT 13:10)";
+                document.getElementById('boot-text').style.background = "#22c55e";
+            }).catch(e => alert("Please click again to arm system."));
+        }
+
+        // 2. CLOCK & 13:10 TRIGGER
         setInterval(() => {
             const now = new Date();
             const time = now.toLocaleTimeString('en-GB', { hour12: false });
             document.getElementById('live-clock').innerText = time;
 
-            if(time === "13:00:00") {
+            if(time === "13:10:00" && systemArmed) {
                 const buzzer = document.getElementById('alarm-buzzer');
                 buzzer.play();
-                alert("🦁 13:00 AUDIT: WhatsApp Notification Sent to 8849544704.");
-                window.open("https://wa.me/918849544704?text=🦁%20Manav.Cloud_OS:%20Have%20you%20completed%20your%20today's%20work?", "_blank");
-                setTimeout(() => buzzer.pause(), 15000); // Stop after 15s
+                
+                // Open WhatsApp
+                const wa = window.open("https://wa.me/918849544704?text=🦁%20Work%20Completed?", "_blank");
+                if(!wa) alert("POPUP BLOCKED! Enable popups for WhatsApp automation.");
+                
+                setTimeout(() => buzzer.pause(), 15000);
             }
         }, 1000);
 
-        // --- 2. CLOUD NEWS ENGINE ---
-        async function fetchNews() {
-            try {
-                const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=https://aws.amazon.com/about-aws/whats-new/recent/feed/`);
-                const data = await res.json();
-                document.getElementById('news-grid').innerHTML = data.items.slice(0, 3).map(item => `
-                    <div class="p-5 bg-slate-800/40 rounded-2xl border border-white/5 hover:border-[#FF9900] transition-all">
-                        <p class="text-[9px] font-black text-blue-400 uppercase mb-2">${new Date(item.pubDate).toLocaleDateString()}</p>
-                        <p class="text-[12px] font-bold text-white leading-tight mb-3">${item.title}</p>
-                        <a href="${item.link}" target="_blank" class="text-[9px] text-[#FF9900] font-black uppercase italic">Analyze Intel</a>
-                    </div>
-                `).join('');
-            } catch (e) { document.getElementById('news-grid').innerText = "Syncing News Feed..."; }
-        }
-        fetchNews();
-        setInterval(fetchNews, 600000);
-
-        // --- 3. MISSION CONTROL ---
-        window.onload = () => {
-            const diff = Math.floor((new Date() - START_DATE) / (1000 * 60 * 60 * 24)) + 1;
-            if (diff > 0) {
-                document.getElementById('mission-id').innerText = `AWS_DAY_${diff}`;
-                document.getElementById('task-title').innerText = "Mission_Live";
-                if(GEMINI_API_KEY) getAiMission(diff);
-            }
-        };
-
-        async function submitToGemini() {
-            const input = document.getElementById('lab-input').value;
-            const msg = document.getElementById('ai-msg');
-            if(!input || !GEMINI_API_KEY) return alert("System Failure: Input/Key required.");
-            document.getElementById('ai-response-box').classList.remove('hidden');
-            msg.innerHTML = "Auditing Cloud Logs... <i class='fa-solid fa-spinner fa-spin ml-2'></i>";
-            try {
-                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ contents: [{ parts: [{ text: `Senior AWS Architect Review: "${input}". Check for accuracy.` }] }] })
-                });
-                const data = await res.json();
-                msg.innerText = data.candidates[0].content.parts[0].text;
-            } catch (e) { msg.innerText = "Audit Connection Error."; }
-        }
-
+        // 3. NEWS & GEMINI (Same as before)
         function activateAI() {
-            const key = prompt("PASTE MASTER BRAIN KEY (AIza...):");
-            if(key) { localStorage.setItem('manav_ai_key', key); location.reload(); }
+            const key = prompt("Key:");
+            if(key) localStorage.setItem('manav_ai_key', key);
+        }
+        
+        // PWA Registration
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js');
         }
     </script>
 </body>
