@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MANAV | AWS CLOUD OPS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { background-color: #05070a; color: #00ffff; font-family: 'Courier New', monospace; overflow-x: hidden; }
+        .terminal-box { border: 1px solid #008b8b; background: rgba(0, 20, 20, 0.9); box-shadow: 0 0 20px rgba(0, 255, 255, 0.1); }
+        .glow-text { text-shadow: 0 0 10px rgba(0, 255, 255, 0.7); }
+        .progress-fill { transition: width 1.5s ease-in-out; }
+        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+        .scanner { height: 2px; background: rgba(0, 255, 255, 0.1); position: absolute; width: 100%; animation: scan 4s linear infinite; pointer-events: none; }
+    </style>
+</head>
+<body class="p-4 lg:p-6 min-h-screen border-4 border-cyan-900">
+
+    <header class="flex flex-col md:flex-row justify-between items-center border-b border-cyan-800 pb-4 mb-8">
+        <div>
+            <h1 class="text-3xl font-extrabold glow-text tracking-tighter italic">🦁 MANAVMEHTA.CLOUD</h1>
+            <div class="flex gap-4 mt-2">
+                <button onclick="activateAI()" class="text-[10px] border border-cyan-400 px-2 py-1 hover:bg-cyan-900 transition-all uppercase font-bold tracking-widest">🔑 LINK_AWS_BRAIN</button>
+                <span id="ai-status" class="text-[10px] text-red-500 font-bold uppercase mt-1 tracking-widest italic">Node: Offline</span>
+            </div>
+        </div>
+        <div class="text-center md:text-right mt-4 md:mt-0">
+            <p id="live-clock" class="text-2xl font-mono text-white tracking-widest">00:00:00</p>
+            <p class="text-[10px] text-orange-500 font-bold uppercase tracking-widest">Target: AWS CloudOps Engineer (₹10+ LPA)</p>
+        </div>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <div class="space-y-6">
+            <div class="terminal-box p-6 rounded relative overflow-hidden text-center">
+                <div class="scanner"></div>
+                <h3 class="text-xs font-bold mb-2 uppercase italic tracking-widest text-cyan-400">AWS_Career_Streak</h3>
+                <p id="streak-display" class="text-5xl font-black glow-text italic">🔥 0</p>
+                <div class="mt-8 space-y-4 text-left">
+                    <div class="flex justify-between text-[10px] uppercase font-bold"><span>SysOps_Mastery</span><span id="xp-val">5%</span></div>
+                    <div class="w-full bg-gray-900 h-1.5"><div id="xp-bar" class="bg-orange-500 h-1.5 progress-fill" style="width: 5%"></div></div>
+                </div>
+            </div>
+
+            <div class="terminal-box p-4 rounded h-64 overflow-hidden border-cyan-700">
+                <h3 class="text-xs font-bold mb-3 uppercase italic"><i class="fa-brands fa-aws animate-pulse text-orange-500"></i> Cloud_Intel_Feed</h3>
+                <div id="news-feed" class="text-[9px] space-y-3 opacity-90 overflow-y-auto h-full pr-2 font-bold"></div>
+            </div>
+        </div>
+
+        <div class="lg:col-span-2 space-y-6">
+            <div class="terminal-box p-8 rounded min-h-[580px] flex flex-col justify-between relative">
+                <div>
+                    <div class="flex justify-between items-center mb-6 border-b border-cyan-900 pb-2">
+                        <span id="mission-id" class="text-xs bg-orange-600 px-3 py-1 text-white italic font-bold tracking-widest uppercase">AWS_ROADMAP_INIT</span>
+                        <span id="current-date-display" class="text-[10px] opacity-60 font-bold tracking-tighter uppercase text-white"></span>
+                    </div>
+                    
+                    <div id="mission-area">
+                        <h2 id="task-title" class="text-2xl text-white font-black mb-4 italic underline uppercase tracking-tight">Infrastructure_Sync</h2>
+                        <div id="mission-body-text" class="text-sm text-cyan-300 leading-relaxed italic mb-6">
+                            Waiting for April 21, 2026. Prepare your WSL2 environment for Day 1 of the AWS CloudOps transition.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-auto pt-6 border-t border-cyan-950">
+                    <label class="text-[10px] block mb-2 opacity-70 tracking-widest uppercase italic font-bold text-orange-400">WSL2 Command Log Audit:</label>
+                    <textarea id="lab-input" class="w-full bg-black border border-cyan-800 p-4 text-xs text-white focus:border-orange-500 outline-none h-32 mb-4 font-mono" placeholder="ubuntu@thinkbook:~$ uptime..."></textarea>
+                    <button onclick="submitToGemini()" class="w-full bg-orange-600 hover:bg-orange-700 text-white py-4 text-xs font-black tracking-widest transition-all border border-orange-400 uppercase">Request_AWS_Architect_Audit</button>
+                    
+                    <div id="ai-response-box" class="hidden mt-4 p-4 bg-slate-900 border border-orange-500 text-[11px] italic leading-relaxed">
+                        <strong class="text-orange-500 uppercase tracking-tighter">Senior_AWS_Architect:</strong> <span id="ai-msg">Analyzing...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="space-y-6">
+            <div class="terminal-box p-4 rounded border-orange-900 bg-orange-950 bg-opacity-10">
+                <h3 class="text-xs font-bold mb-3 text-orange-500 uppercase italic">Next_AWS_Alarm</h3>
+                <div class="flex justify-between items-center bg-black p-3 border border-orange-900 text-[10px]">
+                    <span>DAILY_LAB_TIME</span>
+                    <span class="font-bold text-white tracking-widest">20:00 IST</span>
+                </div>
+            </div>
+
+            <div class="terminal-box p-4 rounded border-green-900 bg-green-950 bg-opacity-10 font-bold">
+                <h3 class="text-xs font-bold mb-3 text-green-500 uppercase italic">Zen_Protocol</h3>
+                <div class="space-y-3 text-[10px]">
+                    <a href="https://www.espncricinfo.com" target="_blank" class="flex items-center gap-2 hover:text-white"><i class="fa-solid fa-baseball-bat-ball text-cyan-500"></i> LIVE SCORES</a>
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-leaf text-green-500"></i> PLANTS: <span class="text-white">CHECKED</span></div>
+                    <a href="portfolio.html" class="flex items-center gap-2 text-yellow-500 hover:underline"><i class="fa-solid fa-user-tie"></i> VIEW_CLOUD_PORTFOLIO</a>
+                </div>
+            </div>
+
+            <div class="terminal-box p-6 rounded bg-gradient-to-br from-black to-slate-900 min-h-[150px] flex flex-col justify-center">
+                <h3 class="text-[9px] opacity-50 mb-2 uppercase italic tracking-tighter">Cloud_Ops_Wisdom</h3>
+                <p id="quote-display" class="text-[11px] italic font-serif opacity-90 leading-relaxed text-orange-100 italic"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let GEMINI_API_KEY = localStorage.getItem('manav_ai_key') || "";
+        const START_DATE = new Date("2026-04-21");
+
+        const quotes = [
+            "The Cloud is built by those who master the Shell.",
+            "In Cloud Operations, uptime is your only religion.",
+            "Master the terminal, master the future.",
+            "Amazon isn't looking for students; they're looking for Operators.",
+            "Availability is the foundation of the modern internet."
+        ];
+
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById('live-clock').innerText = now.toLocaleTimeString();
+            document.getElementById('current-date-display').innerText = now.toDateString().toUpperCase();
+        }, 1000);
+
+        function loadDailyMission() {
+            const today = new Date();
+            const diffTime = today - START_DATE;
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
+            document.getElementById('quote-display').innerText = `"${quotes[Math.floor(Math.random() * quotes.length)]}"`;
+            
+            const currentXP = localStorage.getItem('manav_linux_xp') || 5;
+            document.getElementById('xp-bar').style.width = currentXP + "%";
+            document.getElementById('xp-val').innerText = currentXP + "%";
+            document.getElementById('streak-display').innerText = "🔥 " + (localStorage.getItem('manav_streak') || 0);
+
+            if (diffDays <= 0) {
+                document.getElementById('mission-id').innerText = "STATUS: PRE-SYNC";
+                document.getElementById('task-title').innerText = "CLOUD_WAIT_SEQUENCE";
+                document.getElementById('mission-body-text').innerText = `T-Minus ${Math.abs(diffDays)} days to official AWS Roadmap launch. Use Zen/Intel links to stay sharp.`;
+                return;
+            }
+            document.getElementById('mission-id').innerText = `AWS_MISSION_DAY_${diffDays}`;
+            if (GEMINI_API_KEY) { getAiMission(diffDays); }
+        }
+
+        async function getAiMission(day) {
+            const body = document.getElementById('mission-body-text');
+            const title = document.getElementById('task-title');
+            if(!GEMINI_API_KEY) return;
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ contents: [{ parts: [{ text: `I am Manav, training for AWS CloudOps Associate. Today is Day ${day}. Generate a specific Cloud Infrastructure mission for me to do in WSL2 or AWS Console. No security stuff, just pure Ops/Networking/Cost optimization. Title and 2 tasks.` }] }] })
+                });
+                const data = await response.json();
+                body.innerText = data.candidates[0].content.parts[0].text;
+            } catch (e) { body.innerText = "Check API Key."; }
+        }
+
+        async function submitToGemini() {
+            const input = document.getElementById('lab-input').value;
+            const resBox = document.getElementById('ai-response-box');
+            const msg = document.getElementById('ai-msg');
+            if(!input || !GEMINI_API_KEY) return alert("System Check: Input and Key required.");
+            resBox.classList.remove('hidden');
+            msg.innerHTML = "Auditing Infrastructure Logs... <i class='fa-solid fa-cog fa-spin ml-1'></i>";
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ contents: [{ parts: [{ text: `You are a Senior AWS SysOps Engineer. Review Manav's Linux output: "${input}". 1. Is it valid for Cloud Ops? 2. Explain technical impact. 3. Award 10 XP if professional. Focus 100% on Cloud Infrastructure/Ops.` }] }] })
+                });
+                const data = await response.json();
+                msg.innerText = data.candidates[0].content.parts[0].text;
+                let currentXP = parseInt(localStorage.getItem('manav_linux_xp') || 5) + 5;
+                let currentStreak = parseInt(localStorage.getItem('manav_streak') || 0) + 1;
+                localStorage.setItem('manav_linux_xp', currentXP);
+                localStorage.setItem('manav_streak', currentStreak);
+                document.getElementById('xp-bar').style.width = currentXP + "%";
+                document.getElementById('xp-val').innerText = currentXP + "%";
+                document.getElementById('streak-display').innerText = "🔥 " + currentStreak;
+            } catch (e) { msg.innerText = "API Error."; }
+        }
+
+        function activateAI() {
+            const key = prompt("PASTE GEMINI AWS-KEY (AIza...):");
+            if(key && key.startsWith("AIza")) { localStorage.setItem('manav_ai_key', key); location.reload(); }
+        }
+
+        const news = ["[INFO] AWS Certified CloudOps Engineer - Associate (SOA-C03) registration opens Sept 9, 2025.", "[INFO] 2026 AWS roadmap emphasizes Infrastructure as Code (Terraform) and Serverless.", "[TIPS] Practice Linux disk management; AWS EBS volumes use the same logic."];
+        document.getElementById('news-feed').innerHTML = news.map(n => `<p class='border-b border-cyan-900 pb-2'>${n}</p>`).join('');
+
+        if(GEMINI_API_KEY) { 
+            document.getElementById('ai-status').innerText = "Node: Synchronized";
+            document.getElementById('ai-status').classList.replace('text-red-500', 'text-green-400');
+        }
+        window.onload = loadDailyMission;
+    </script>
+</body>
+</html>
