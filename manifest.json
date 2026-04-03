@@ -1,15 +1,16 @@
 {
-  "name": "Manav Cloud-OS",
+  "name": "Manav Cloud Den",
   "short_name": "ManavDen",
-  "start_url": "index.html",
+  "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#0F172A",
+  "background_color": "#0D1117",
   "theme_color": "#D4AF37",
   "icons": [
     {
       "src": "manavm.jpg",
       "sizes": "512x512",
-      "type": "image/jpeg"
+      "type": "image/jpeg",
+      "purpose": "any maskable"
     }
   ]
 }
