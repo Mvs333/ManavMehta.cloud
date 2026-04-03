@@ -3,198 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MANAV | SECURE CLOUD-OS</title>
+    <title>MANAV | THE CLOUD DEN</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --gold: #D4AF37; --slate: #0F172A; --white: #F8FAFC; }
-        body { background-color: var(--slate); color: var(--white); font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        
-        /* LOCK SCREEN STYLES */
-        #lock-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--slate); z-index: 9999; display: flex;
-            flex-direction: column; align-items: center; justify-content: center;
-            backdrop-filter: blur(20px); transition: 0.5s ease;
+        :root { --gold: #D4AF37; --slate: #0F172A; }
+        body { background-color: var(--slate); color: #F8FAFC; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+        /* 5D FIREY TEXT EFFECT */
+        .fiery-text {
+            font-size: 4rem; font-weight: 900; text-transform: uppercase;
+            background: linear-gradient(to bottom, #ff4500 20%, #ff8c00 50%, #b22222 80%);
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+            filter: drop-shadow(0 0 10px #ff4500) drop-shadow(0 15px 15px rgba(0,0,0,0.8));
+            transform: perspective(500px) rotateX(20deg);
+            animation: flicker 2s infinite alternate;
         }
-        .lock-input {
-            background: rgba(255,255,255,0.05); border: 1px solid var(--gold);
-            padding: 15px 25px; border-radius: 50px; color: white;
-            text-align: center; width: 300px; outline: none; margin-bottom: 20px;
-        }
-        .unlock-btn {
-            background: var(--gold); color: black; font-weight: 900;
-            padding: 12px 40px; border-radius: 50px; text-transform: uppercase;
-            letter-spacing: 2px; cursor: pointer; transition: 0.3s;
+        @keyframes flicker {
+            0% { opacity: 0.9; filter: drop-shadow(0 0 10px #ff4500); }
+            100% { opacity: 1; filter: drop-shadow(0 0 25px #ff8c00); }
         }
 
-        /* MAIN CONTENT STYLES */
-        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px; }
-        .cmd-box { border-left: 4px solid var(--gold); background: rgba(212, 175, 55, 0.05); padding: 15px; margin-bottom: 15px; border-radius: 0 12px 12px 0; }
-        .quiz-btn { width: 100%; text-align: left; padding: 15px; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; margin-bottom: 10px; transition: 0.3s; cursor: pointer;}
-        .quiz-btn:hover { background: rgba(212, 175, 55, 0.2); border-color: var(--gold); }
-        .progress-inner { height: 100%; background: var(--gold); transition: 1s ease-in-out; }
+        /* SECURITY OVERLAY */
+        #lock-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, #1e293b 0%, #020617 100%);
+            z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: 0.8s ease-in-out;
+        }
+        .den-photo {
+            width: 180px; height: 180px; border-radius: 50%;
+            border: 4px solid var(--gold); box-shadow: 0 0 40px rgba(212, 175, 55, 0.4);
+            object-fit: cover; margin-bottom: 20px;
+        }
+
+        /* MASTERY GRID STYLES */
+        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px; }
+        .cmd-unit { border-left: 4px solid var(--gold); background: rgba(212, 175, 55, 0.05); padding: 20px; margin-bottom: 20px; border-radius: 0 16px 16px 0; }
+        .quiz-option { width: 100%; text-align: left; padding: 18px; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; margin-bottom: 12px; transition: 0.3s; cursor: pointer; font-size: 14px; }
+        .quiz-option:hover { background: rgba(212, 175, 55, 0.15); border-color: var(--gold); }
     </style>
 </head>
 <body class="p-4 md:p-12 min-h-screen">
 
     <div id="lock-screen">
-        <i class="fa-solid fa-shield-halved text-5xl text-[#D4AF37] mb-8 animate-pulse"></i>
-        <h2 class="text-xl font-black mb-6 tracking-widest uppercase">Vault_Access_Required</h2>
-        <input type="password" id="pass-field" class="lock-input" placeholder="ENTER ACCESS KEY">
-        <button onclick="unlockVault()" class="unlock-btn">Authorize</button>
-        <p id="lock-msg" class="text-red-500 text-[10px] mt-4 uppercase font-bold hidden">Invalid Authentication Key</p>
-    </div>
-
-    <div id="main-vault" style="visibility: hidden; opacity: 0; transition: 1s;">
-        <header class="max-w-6xl mx-auto flex justify-between items-end mb-12">
-            <div>
-                <h1 class="text-4xl font-black tracking-tighter uppercase italic">Mastery <span class="text-[#D4AF37]">730</span></h1>
-                <div class="flex gap-4 mt-2">
-                    <span class="text-[10px] font-bold uppercase tracking-widest opacity-60">Step: <span id="lvl-curr">1</span> / 730</span>
-                </div>
-            </div>
-            <p id="live-clock" class="text-4xl font-mono font-bold tracking-tighter">00:00:00</p>
-        </header>
-
-        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
-            <div class="lg:col-span-4 space-y-6">
-                <div class="glass-card p-6">
-                    <h3 class="text-xs font-black uppercase tracking-widest mb-4 opacity-50 italic text-[#D4AF37]">Career_Velocity</h3>
-                    <div class="h-1.5 bg-white/10 rounded-full mb-2 overflow-hidden"><div id="prog-bar" class="progress-inner" style="width: 0%"></div></div>
-                    <p class="text-[10px] font-bold uppercase">Target: Cloud Ops Architect</p>
-                </div>
-                <div class="flex gap-4">
-                    <button onclick="prevStep()" class="flex-1 py-3 border border-white/10 rounded-xl text-[10px] font-black uppercase">Back</button>
-                    <button onclick="resetData()" class="flex-1 py-3 border border-red-900/30 text-red-500 rounded-xl text-[10px] font-black uppercase">Reset</button>
-                </div>
-            </div>
-
-            <div class="lg:col-span-8">
-                <div class="glass-card p-8 md:p-12 min-h-[800px]">
-                    <div class="flex justify-between items-center mb-10 border-b border-white/10 pb-6">
-                        <span id="step-id" class="text-[#D4AF37] text-xs font-black uppercase tracking-widest">Step_001</span>
-                    </div>
-
-                    <div id="content-area">
-                        <h2 id="step-title" class="text-4xl font-black mb-10 uppercase italic">Initializing...</h2>
-                        <div id="command-container" class="space-y-6"></div>
-
-                        <div class="mt-12 pt-10 border-t border-white/10">
-                            <h4 class="text-[#D4AF37] font-black uppercase text-xs mb-6 italic tracking-widest">Knowledge Check:</h4>
-                            <p id="quiz-q" class="text-lg font-bold mb-6 italic leading-snug"></p>
-                            <div id="quiz-options" class="space-y-3"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <img src="image_f9a828.jpg" class="den-photo animate-pulse" alt="Manav">
+        <h1 class="fiery-text text-center leading-none">This Is<br>Manav's Den</h1>
+        <div class="mt-12 flex flex-col items-center">
+            <input type="password" id="pass-key" class="bg-black/40 border border-[#D4AF37] px-6 py-3 rounded-full text-center outline-none w-64 mb-4 tracking-[0.5em]" placeholder="PASSWORD">
+            <button onclick="unlock()" class="bg-[#D4AF37] text-black font-black px-10 py-3 rounded-full uppercase tracking-widest text-xs hover:scale-105 transition-all">Authorize_Access</button>
+            <p id="err-msg" class="text-red-500 text-[10px] mt-4 font-bold uppercase hidden tracking-widest italic">Intruder Alert: Invalid Key</p>
         </div>
     </div>
 
+    <div id="vault-content" class="invisible opacity-0 transition-opacity duration-1000">
+        <header class="max-w-6xl mx-auto flex justify-between items-end mb-12 border-b border-white/10 pb-8">
+            <div>
+                <h1 class="text-3xl font-black uppercase italic tracking-tighter">Vault <span class="text-[#D4AF37]">730</span></h1>
+                <p class="text-[10px] font-bold opacity-40 uppercase tracking-[0.4em] mt-1">Status: Level <span id="lvl-stat">1</span> / 730 | Mode: Cloud Support Associate</p>
+            </div>
+            <div class="text-right">
+                <p id="clock" class="text-4xl font-mono font-bold tracking-tighter text-white">00:00:00</p>
+            </div>
+        </header>
+
+        <main class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <aside class="lg:col-span-4 space-y-6">
+                <div class="glass-card p-6 border-t-4 border-[#D4AF37]">
+                    <h3 class="text-xs font-black uppercase text-[#D4AF37] mb-4">Mastery_Level</h3>
+                    <div class="h-1.5 bg-white/10 rounded-full overflow-hidden mb-2"><div id="p-bar" class="h-full bg-[#D4AF37] transition-all duration-1000" style="width: 0%"></div></div>
+                    <p class="text-[10px] font-bold opacity-60 uppercase">Completion: <span id="p-text">0</span>%</p>
+                </div>
+                <div class="flex gap-4">
+                    <button onclick="back()" class="flex-1 py-3 glass-card text-[10px] font-black uppercase hover:border-[#D4AF37]">Back</button>
+                    <button onclick="reset()" class="flex-1 py-3 border border-red-900/30 text-red-500 text-[10px] font-black uppercase rounded-2xl hover:bg-red-500/10">Reset</button>
+                </div>
+            </aside>
+
+            <section class="lg:col-span-8">
+                <div class="glass-card p-8 md:p-12 min-h-[800px] relative overflow-hidden">
+                    <div class="flex justify-between items-center mb-10 pb-4 border-b border-white/5">
+                        <span id="step-tag" class="text-[#D4AF37] text-xs font-black uppercase tracking-[0.5em]">STEP_001</span>
+                        <span class="text-[10px] font-bold opacity-30 italic uppercase">Module: Core_Infrastructure</span>
+                    </div>
+
+                    <h2 id="title" class="text-4xl font-black mb-10 tracking-tight uppercase italic text-white leading-none">Initializing...</h2>
+                    
+                    <div id="commands" class="space-y-6">
+                        </div>
+
+                    <div class="mt-12 pt-10 border-t border-white/10">
+                        <h4 class="text-[#D4AF37] font-black uppercase text-xs mb-6 italic tracking-widest">Integrity Check (Quiz):</h4>
+                        <p id="question" class="text-lg font-bold mb-8 italic leading-snug"></p>
+                        <div id="options" class="space-y-4">
+                            </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
     <script>
-        const MASTER_PASS = "Manav@730";
+        const PASS = "Manav@730";
         
-        // --- 1. LOCK LOGIC ---
-        function unlockVault() {
-            const input = document.getElementById('pass-field').value;
-            if(input === MASTER_PASS) {
+        // UNLOCK FUNCTION
+        function unlock() {
+            if(document.getElementById('pass-key').value === PASS) {
                 document.getElementById('lock-screen').style.opacity = "0";
                 setTimeout(() => {
                     document.getElementById('lock-screen').style.display = "none";
-                    document.getElementById('main-vault').style.visibility = "visible";
-                    document.getElementById('main-vault').style.opacity = "1";
-                }, 500);
+                    document.getElementById('vault-content').classList.remove('invisible');
+                    document.getElementById('vault-content').style.opacity = "1";
+                    render();
+                }, 800);
             } else {
-                document.getElementById('lock-msg').classList.remove('hidden');
-                document.getElementById('pass-field').value = "";
+                document.getElementById('err-msg').classList.remove('hidden');
+                document.getElementById('pass-key').value = "";
             }
         }
 
-        // --- 2. DATA ---
+        // 730-LEVEL DATABASE (Starts with Day 1)
         const database = [
             {
-                id: 1, mod: "Kernel_Fundamentals", title: "Security Protocols (Sudo)",
-                commands: [
-                    { name: "whoami", def: "Displays active username.", usage: "Verify current session level.", importance: "Amazon AWS audit requirement." },
-                    { name: "sudo", def: "SuperUser Do.", usage: "Borrow root privileges temporarily.", importance: "Security rule #1: Prevent accidental system deletion." }
+                lvl: 1, title: "The Power of Root (Sudo)",
+                cmds: [
+                    { name: "sudo", def: "SuperUser Do.", usage: "Gain temporary administrator power.", importance: "Amazon AWS engineers use this to maintain security while performing maintenance." },
+                    { name: "whoami", def: "Check active user identity.", usage: "Confirms if you are 'root' or 'manav'.", importance: "Essential for audit logs; prevents running risky commands on the wrong account." }
                 ],
-                quiz: "What is the primary professional reason for using 'sudo' instead of 'root'?",
-                options: ["A) Root is slower", "B) Sudo logs every command for auditing", "C) Sudo is free on AWS"],
+                quiz: "Why is 'sudo' safer for a Cloud Engineer than using 'root' directly?",
+                opts: ["A) Root is slower", "B) Sudo logs every command, creating a professional audit trail", "C) Sudo is cheaper for AWS bills"],
                 correct: 1
             },
             {
-                id: 2, mod: "Navigation", title: "Path Mastering",
-                commands: [
-                    { name: "pwd", def: "Print Working Directory.", usage: "Identify exact system location.", importance: "Essential to avoid running scripts in the wrong folder." }
+                lvl: 2, title: "System Diagnostics (Navigation)",
+                cmds: [
+                    { name: "cd /var/log", def: "Move to system log folder.", usage: "Where all error messages are stored.", importance: "The first destination for a Site Reliability Engineer (SRE) when a server crashes." },
+                    { name: "pwd", def: "Print Working Directory.", usage: "Shows full absolute path.", importance: "Critical to ensure you don't delete files in the wrong location." }
                 ],
-                quiz: "Where do you check system logs if an AWS server crashes?",
-                options: ["A) /home/manav", "B) /root", "C) /var/log"],
-                correct: 2
+                quiz: "If a company website goes down, where should you go FIRST to find the error?",
+                opts: ["A) /home/manav", "B) /var/log", "C) /root"],
+                correct: 1
             }
         ];
 
-        let currIdx = parseInt(localStorage.getItem('manav_step_idx')) || 0;
+        let idx = parseInt(localStorage.getItem('manav_vault_idx')) || 0;
 
         function render() {
-            const data = database[currIdx] || database[database.length - 1];
-            document.getElementById('lvl-curr').innerText = currIdx + 1;
-            document.getElementById('step-id').innerText = `Step_${String(data.id).padStart(3, '0')}`;
-            document.getElementById('step-title').innerText = data.title;
+            const data = database[idx] || database[database.length -1];
+            document.getElementById('lvl-stat').innerText = idx + 1;
+            document.getElementById('step-tag').innerText = `STEP_${String(data.lvl).padStart(3, '0')}`;
+            document.getElementById('title').innerText = data.title;
             
             let cmdHtml = '';
-            data.commands.forEach(c => {
-                cmdHtml += `<div class="cmd-box">
-                    <p class="text-[#D4AF37] font-black text-lg font-mono mb-2"># ${c.name}</p>
-                    <p class="text-sm opacity-90"><strong>Definition:</strong> ${c.def}</p>
-                    <p class="text-sm opacity-90 italic"><strong>Usage:</strong> ${c.usage}</p>
-                    <p class="text-[11px] text-blue-400 font-bold uppercase mt-2">Importance: ${c.importance}</p>
-                </div>`;
+            data.cmds.forEach(c => {
+                cmdHtml += `
+                    <div class="cmd-unit">
+                        <p class="text-[#D4AF37] font-black text-xl mb-2 font-mono"># ${c.name}</p>
+                        <p class="text-sm opacity-90 mb-1"><strong>Definition:</strong> ${c.def}</p>
+                        <p class="text-sm opacity-90 italic mb-2"><strong>Practical Usage:</strong> ${c.usage}</p>
+                        <p class="text-[10px] text-blue-400 font-black uppercase tracking-widest">Importance: ${c.importance}</p>
+                    </div>`;
             });
-            document.getElementById('command-container').innerHTML = cmdHtml;
+            document.getElementById('commands').innerHTML = cmdHtml;
 
-            document.getElementById('quiz-q').innerText = data.quiz;
+            document.getElementById('question').innerText = data.quiz;
             let optHtml = '';
-            data.options.forEach((opt, index) => {
-                optHtml += `<button onclick="checkAns(${index})" class="quiz-btn">${opt}</button>`;
+            data.opts.forEach((o, i) => {
+                optHtml += `<button onclick="check(${i})" class="quiz-option">${o}</button>`;
             });
-            document.getElementById('quiz-options').innerHTML = optHtml;
+            document.getElementById('options').innerHTML = optHtml;
 
-            const perc = (((currIdx + 1) / 730) * 100).toFixed(2);
-            document.getElementById('prog-bar').style.width = perc + "%";
+            const perc = (((idx + 1) / 730) * 100).toFixed(2);
+            document.getElementById('p-bar').style.width = perc + "%";
+            document.getElementById('p-text').innerText = perc;
         }
 
-        function checkAns(idx) {
-            if(idx === database[currIdx].correct) {
-                alert("✓ AUTHORIZED: Proceeding to Next Step.");
-                currIdx++;
-                localStorage.setItem('manav_step_idx', currIdx);
+        function check(i) {
+            if(i === database[idx].correct) {
+                alert("✓ CORRECT: Knowledge Verified. Syncing Level " + (idx + 2));
+                idx++;
+                localStorage.setItem('manav_vault_idx', idx);
                 render();
                 window.scrollTo(0,0);
             } else {
-                alert("✘ FAILED: Review the Command Importance.");
+                alert("✘ FAILED: Review the Command Importance and try again.");
             }
         }
 
-        function prevStep() {
-            if(currIdx > 0) {
-                currIdx--;
-                localStorage.setItem('manav_step_idx', currIdx);
-                render();
-            }
-        }
-
-        function resetData() {
-            if(confirm("Confirm Master Reset?")) {
-                localStorage.setItem('manav_step_idx', 0);
-                location.reload();
-            }
-        }
+        function back() { if(idx > 0) { idx--; localStorage.setItem('manav_vault_idx', idx); render(); } }
+        function reset() { if(confirm("Confirm Master Reset?")) { localStorage.setItem('manav_vault_idx', 0); location.reload(); } }
 
         setInterval(() => {
-            document.getElementById('live-clock').innerText = new Date().toLocaleTimeString('en-US', { hour12: false });
+            document.getElementById('clock').innerText = new Date().toLocaleTimeString('en-US', { hour12: false });
         }, 1000);
-
-        window.onload = render;
     </script>
 </body>
 </html>
