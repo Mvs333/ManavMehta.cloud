@@ -3,86 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MANAV | CLOUD-OS APP</title>
-    <link rel="manifest" href="manifest.json">
+    <title>MANAV | 730-DAY CLOUD MASTERY</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --aws-orange: #FF9900; --deep-navy: #0F172A; }
-        body { background: var(--deep-navy); color: #E2E8F0; font-family: sans-serif; }
-        .app-card { background: rgba(30, 41, 59, 0.9); backdrop-filter: blur(20px); border-radius: 24px; border: 1px solid rgba(255,153,0,0.2); }
-        .boot-btn { background: var(--aws-orange); color: black; font-weight: 900; padding: 20px; border-radius: 15px; width: 100%; box-shadow: 0 0 20px rgba(255,153,0,0.4); }
+        :root { --accent: #FF9900; --bg: #0B0E14; }
+        body { background: var(--bg); color: #E2E8F0; font-family: 'JetBrains Mono', monospace; }
+        .module-card { background: #161B22; border: 1px solid #30363D; border-radius: 12px; transition: 0.3s; }
+        .module-card:hover { border-color: var(--accent); box-shadow: 0 0 15px rgba(255, 153, 0, 0.1); }
+        .progress-bar { height: 4px; background: #30363D; border-radius: 2px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--accent); transition: 1s ease-in-out; }
+        .tryhackme-style { background: #1f2937; border-left: 4px solid var(--accent); padding: 1.5rem; margin: 1rem 0; }
     </style>
 </head>
-<body class="p-6 min-h-screen">
+<body class="p-6 md:p-10">
 
-    <header class="max-w-4xl mx-auto mb-8 text-center">
-        <h1 class="text-3xl font-black italic text-white uppercase">Manav.Cloud <span class="text-[#FF9900]">App</span></h1>
-        <p id="live-clock" class="text-5xl font-mono font-bold text-[#FF9900] mt-4">00:00:00</p>
-        <div class="mt-6">
-            <button onclick="bootSystem()" id="boot-text" class="boot-btn uppercase tracking-widest">🚀 Boot System (Enable Alarm)</button>
+    <header class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-end mb-12 border-b border-gray-800 pb-8">
+        <div>
+            <h1 class="text-4xl font-black tracking-tighter uppercase italic">Cloud_Mastery <span class="text-[#FF9900]">730</span></h1>
+            <p class="text-[10px] font-bold opacity-50 uppercase tracking-[0.4em] mt-2">Candidate: Manav Mehta | Status: Active_Learning</p>
+        </div>
+        <div class="text-right mt-6 md:mt-0">
+            <p id="live-clock" class="text-4xl font-bold tracking-tighter text-[#FF9900]">00:00:00</p>
+            <div class="flex gap-4 mt-2 justify-end">
+                <button onclick="bootSystem()" id="boot-btn" class="bg-white text-black px-4 py-1 text-[10px] font-bold rounded uppercase hover:bg-[#FF9900] transition-all italic">Boot_Alarm</button>
+                <button onclick="activateAI()" class="border border-gray-600 px-4 py-1 text-[10px] font-bold rounded uppercase hover:border-[#FF9900]">Link_Gemini</button>
+            </div>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto grid grid-cols-1 gap-6">
-        <div class="app-card overflow-hidden h-[300px]">
-             <div class="p-3 bg-slate-800 text-[10px] font-bold uppercase tracking-widest text-[#FF9900]">Live_Match_Monitor</div>
-             <iframe src="https://www.bing.com/search?q=live+cricket+score" class="w-full h-full border-none opacity-80 contrast-125 brightness-75 grayscale invert"></iframe>
+    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <div class="lg:col-span-4 space-y-6">
+            <div class="module-card p-6">
+                <h3 class="text-xs font-black uppercase text-[#FF9900] mb-4 tracking-widest">Training_Progress</h3>
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex justify-between text-[10px] mb-1 font-bold"><span>ROADMAP_COMPLETION</span><span>0.1%</span></div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 0.1%"></div></div>
+                    </div>
+                    <p class="text-[9px] opacity-50 italic mt-4">"Day 1 of 730. The journey of 10,000 servers begins with one command."</p>
+                </div>
+            </div>
+
+            <div class="module-card p-6">
+                <h3 class="text-xs font-black uppercase text-blue-400 mb-4 tracking-widest">Certification_Goals</h3>
+                <ul class="text-[11px] space-y-3 font-bold opacity-80">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-gray-600"></i> AWS Cloud Practitioner</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-circle-notch animate-spin text-[#FF9900]"></i> Azure Admin (AZ-104)</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-lock text-gray-600"></i> HashiCorp Terraform</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-lock text-gray-600"></i> AWS SysOps Administrator</li>
+                </ul>
+            </div>
         </div>
 
-        <div class="app-card p-8 min-h-[400px]">
-            <h2 class="text-2xl font-black text-white mb-4 uppercase italic" id="task-title">Awaiting Launch</h2>
-            <div id="mission-body-text" class="text-sm text-slate-400 italic mb-6">Launch starts April 4th.</div>
-            <textarea id="lab-input" class="w-full bg-black/40 border border-white/10 p-4 rounded-xl text-cyan-400 font-mono mb-4 h-24" placeholder="Paste logs..."></textarea>
-            <button onclick="submitToGemini()" class="w-full bg-slate-700 py-4 rounded-xl font-bold uppercase text-[10px] tracking-widest text-white">Execute Audit</button>
-        </div>
-    </main>
+        <div class="lg:col-span-8">
+            <div class="module-card p-8 min-h-[700px] flex flex-col">
+                <div class="flex justify-between items-center mb-8">
+                    <div class="flex items-center gap-3">
+                        <span id="mission-day" class="bg-[#FF9900] text-black px-3 py-1 text-[10px] font-black italic">DAY_01</span>
+                        <span class="text-xs font-bold uppercase tracking-widest text-gray-500">Module: Linux_Essentials</span>
+                    </div>
+                    <span id="current-date" class="text-[10px] opacity-40 font-mono"></span>
+                </div>
 
-    <audio id="alarm-buzzer" src="https://assets.mixkit.co/sfx/preview/mixkit-digital-clock-digital-alarm-buzzer-992.mp3" preload="auto" loop></audio>
+                <div class="flex-grow">
+                    <h2 id="task-title" class="text-3xl font-black uppercase mb-6 italic">Initializing_Terminal</h2>
+                    
+                    <div id="lesson-content" class="tryhackme-style">
+                        <h4 class="text-[#FF9900] font-black mb-2 uppercase text-xs">The 30-Min Briefing:</h4>
+                        <p id="lesson-text" class="text-sm leading-relaxed mb-6">
+                            Waiting for Gemini Link... Please connect your API key to generate today's Master Class and Practical Task.
+                        </p>
+                        
+                        <h4 class="text-blue-400 font-black mb-2 uppercase text-xs">Practical Task:</h4>
+                        <div id="task-text" class="bg-black/50 p-4 rounded font-mono text-[11px] border border-gray-800 text-green-400">
+                            - Connect Gemini Key<br>
+                            - Refresh Page<br>
+                            - Receive Daily Command
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <p class="text-[10px] font-black uppercase text-[#FF9900] mb-2 tracking-widest">Submit Output for Verification:</p>
+                    <textarea id="lab-input" class="w-full bg-black border border-gray-700 p-4 rounded-lg text-sm text-cyan-400 focus:border-[#FF9900] outline-none h-24 mb-4 font-mono" placeholder="ubuntu@thinkbook:~$"></textarea>
+                    <button onclick="submitToGemini()" class="w-full bg-[#FF9900] hover:bg-white text-black py-4 rounded-lg font-black text-xs uppercase tracking-[0.4em] transition-all">Verify_Completion</button>
+                    <div id="ai-response" class="hidden mt-6 p-4 bg-slate-900 border border-gray-700 rounded-lg text-xs leading-relaxed italic">
+                        <strong class="text-[#FF9900]">SENIOR_ENGINEER:</strong> <span id="ai-msg">...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="alarm-buzzer" src="https://assets.mixkit.co/sfx/preview/mixkit-digital-clock-digital-alarm-buzzer-992.mp3" loop></audio>
 
     <script>
         let GEMINI_API_KEY = localStorage.getItem('manav_ai_key') || "";
-        let systemArmed = false;
+        const START_DATE = new Date("2026-04-04");
 
-        // 1. BOOT SYSTEM (MANDATORY FOR SOUND)
-        function bootSystem() {
-            const buzzer = document.getElementById('alarm-buzzer');
-            buzzer.play().then(() => {
-                buzzer.pause(); // Effectively "Unmutes" the browser
-                systemArmed = true;
-                document.getElementById('boot-text').innerText = "✅ SYSTEM ARMED (ALARM AT 13:10)";
-                document.getElementById('boot-text').style.background = "#22c55e";
-            }).catch(e => alert("Please click again to arm system."));
-        }
-
-        // 2. CLOCK & 13:10 TRIGGER
+        // 1. CLOCK & TRIGGER
         setInterval(() => {
             const now = new Date();
-            const time = now.toLocaleTimeString('en-GB', { hour12: false });
-            document.getElementById('live-clock').innerText = time;
+            const timeStr = now.toLocaleTimeString('en-GB', { hour12: false });
+            document.getElementById('live-clock').innerText = timeStr;
+            document.getElementById('current-date').innerText = now.toDateString().toUpperCase();
 
-            if(time === "13:10:00" && systemArmed) {
-                const buzzer = document.getElementById('alarm-buzzer');
-                buzzer.play();
-                
-                // Open WhatsApp
-                const wa = window.open("https://wa.me/918849544704?text=🦁%20Work%20Completed?", "_blank");
-                if(!wa) alert("POPUP BLOCKED! Enable popups for WhatsApp automation.");
-                
-                setTimeout(() => buzzer.pause(), 15000);
+            if (timeStr === "18:00:00") {
+                triggerSystem();
             }
         }, 1000);
 
-        // 3. NEWS & GEMINI (Same as before)
+        function triggerSystem() {
+            const b = document.getElementById('alarm-buzzer');
+            b.play();
+            alert("🦁 MANAV.CLOUD ALERT: 6:00 PM AUDIT. Message sent to 8849544704.");
+            window.open("https://wa.me/918849544704?text=Have%20you%20completed%20today's%20work?", "_blank");
+            setTimeout(() => b.pause(), 10000);
+        }
+
+        function bootSystem() {
+            const b = document.getElementById('alarm-buzzer');
+            b.play().then(() => { b.pause(); alert("ALARM_ARMED"); document.getElementById('boot-btn').innerText = "ARMED"; });
+        }
+
+        // 2. DAILY LESSON GENERATOR (TRYHACKME STYLE)
+        async function loadDailyTraining() {
+            const today = new Date();
+            const diff = Math.floor((today - START_DATE) / (1000 * 60 * 60 * 24)) + 1;
+            
+            if (diff > 0 && GEMINI_API_KEY) {
+                document.getElementById('mission-day').innerText = `DAY_${diff}`;
+                try {
+                    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({ contents: [{ parts: [{ text: `Act as a Senior Cloud Operations Lead. I am Manav. Today is Day ${diff} of 730 in my mastery journey. 1. Provide a 30-minute rapid lesson on a specific Linux/AWS topic. 2. Provide 1 practical hands-on task for me to run in my WSL2 terminal. Be concise and professional.` }] }] })
+                    });
+                    const data = await res.json();
+                    const text = data.candidates[0].content.parts[0].text;
+                    const parts = text.split("2."); 
+                    document.getElementById('lesson-text').innerText = parts[0].replace("1.", "");
+                    document.getElementById('task-text').innerText = parts[1] || "Task detail in lesson.";
+                    document.getElementById('task-title').innerText = "Active_Training_Module";
+                } catch (e) { console.error(e); }
+            }
+        }
+
+        async function submitToGemini() {
+            const input = document.getElementById('lab-input').value;
+            if(!input || !GEMINI_API_KEY) return;
+            document.getElementById('ai-response').classList.remove('hidden');
+            try {
+                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ contents: [{ parts: [{ text: `I am Manav. Review my work output: "${input}". Validate it like a TryHackMe mentor. Suggest next steps.` }] }] })
+                });
+                const data = await res.json();
+                document.getElementById('ai-msg').innerText = data.candidates[0].content.parts[0].text;
+            } catch (e) { }
+        }
+
         function activateAI() {
             const key = prompt("Key:");
-            if(key) localStorage.setItem('manav_ai_key', key);
+            if(key) { localStorage.setItem('manav_ai_key', key); location.reload(); }
         }
-        
-        // PWA Registration
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('service-worker.js');
-        }
+
+        window.onload = loadDailyTraining;
     </script>
 </body>
 </html>
