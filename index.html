@@ -75,6 +75,7 @@ body{
     border:1px solid rgba(255,255,255,0.15);
     background:rgba(255,255,255,0.04);
     cursor:pointer;
+    color:white;
 }
 
 .option:hover{
@@ -91,11 +92,19 @@ input, textarea{
     color:white;
 }
 
-pre{
+.command-card{
     background:#020617;
     padding:18px;
-    border-radius:14px;
-    overflow-x:auto;
+    border-radius:16px;
+    border:1px solid rgba(255,255,255,0.12);
+    margin-bottom:14px;
+}
+
+.command-code{
+    color:#D4AF37;
+    font-weight:900;
+    font-family:monospace;
+    font-size:18px;
 }
 </style>
 </head>
@@ -195,8 +204,8 @@ pre{
     </div>
 
     <div class="section">
-        <h3 class="gold font-black">💻 Command Practice</h3>
-        <pre id="commands"></pre>
+        <h3 class="gold font-black">💻 Command Practice With Definition</h3>
+        <div id="commands"></div>
     </div>
 
     <div class="section">
@@ -247,7 +256,28 @@ const baseLevels = [
     concept:"Linux controls security using users, groups, permissions, and sudo. Sudo allows temporary admin access without logging in as root.",
     realuse:"DevOps and cloud engineers use sudo while managing AWS EC2 servers, Docker hosts, Linux machines, and production systems.",
     lab:"Open terminal or GitHub Codespaces. Run identity commands and save the output in a GitHub notes file.",
-    commands:"whoami\nid\ngroups\nsudo -l",
+    commands:[
+        {
+            cmd:"whoami",
+            definition:"Shows the current logged-in username.",
+            use:"Used to confirm which user is running commands on a server."
+        },
+        {
+            cmd:"id",
+            definition:"Shows user ID, group ID, and group memberships of the current user.",
+            use:"Used to check permission level and user group access."
+        },
+        {
+            cmd:"groups",
+            definition:"Shows all groups assigned to the current user.",
+            use:"Used to verify whether the user has sudo, docker, admin, or other group access."
+        },
+        {
+            cmd:"sudo -l",
+            definition:"Lists commands the current user is allowed to run with sudo.",
+            use:"Used to audit admin privileges safely before performing sensitive tasks."
+        }
+    ],
     project:"Create a GitHub folder named level-001-linux-identity and upload your notes.",
     question:"Why is sudo important in professional systems?",
     options:["It makes internet faster","It gives controlled admin access with audit trail","It installs games"],
@@ -257,10 +287,31 @@ const baseLevels = [
 {
     title:"Linux Filesystem Navigation",
     mission:"A production server is down. Your task is to safely move through Linux folders and find important system files.",
-    concept:"Linux has important directories like /home, /etc, /var/log, /bin, /usr, and /tmp.",
-    realuse:"SRE and DevOps teams check /var/log when websites, apps, or databases fail.",
+    concept:"Linux has important directories like /home, /etc, /var/log, /bin, /usr, and /tmp. Each directory has a specific purpose.",
+    realuse:"SRE and DevOps teams check /var/log when websites, apps, servers, or databases fail.",
     lab:"Navigate through important folders and create your own DevSecOps practice directory.",
-    commands:"pwd\nls\ncd /var/log\nls\ncd ~\nmkdir devsecops720",
+    commands:[
+        {
+            cmd:"pwd",
+            definition:"Prints the current working directory.",
+            use:"Used to confirm your exact location before running commands."
+        },
+        {
+            cmd:"ls",
+            definition:"Lists files and folders in the current directory.",
+            use:"Used to inspect available files before editing, deleting, or deploying."
+        },
+        {
+            cmd:"cd /var/log",
+            definition:"Moves into the /var/log directory.",
+            use:"Used to access system and application log files."
+        },
+        {
+            cmd:"mkdir devsecops720",
+            definition:"Creates a new directory named devsecops720.",
+            use:"Used to organize your project files and daily labs."
+        }
+    ],
     project:"Upload a Linux folder map to GitHub.",
     question:"Where are many Linux logs commonly stored?",
     options:["/var/log","/games","/photos"],
@@ -271,9 +322,30 @@ const baseLevels = [
     title:"DNS & Domain Basics",
     mission:"Your domain manavmehta.cloud must point to your website. Understand how DNS works.",
     concept:"DNS converts human-readable domain names into IP addresses using records like A, CNAME, MX, and TXT.",
-    realuse:"Companies use DNS to connect apps, email, CDN, cloud hosting, and security verification.",
-    lab:"Check your domain using nslookup or an online DNS checker.",
-    commands:"nslookup manavmehta.cloud\nping manavmehta.cloud",
+    realuse:"Companies use DNS to connect apps, email, CDN, cloud hosting, verification, and security services.",
+    lab:"Check your domain using nslookup, ping, or an online DNS checker.",
+    commands:[
+        {
+            cmd:"nslookup manavmehta.cloud",
+            definition:"Queries DNS records for your domain.",
+            use:"Used to check whether your domain is pointing to the correct server."
+        },
+        {
+            cmd:"ping manavmehta.cloud",
+            definition:"Tests if the domain resolves and responds over the network.",
+            use:"Used for basic connectivity checking."
+        },
+        {
+            cmd:"dig manavmehta.cloud",
+            definition:"Displays detailed DNS information for a domain.",
+            use:"Used by cloud and security engineers for DNS troubleshooting."
+        },
+        {
+            cmd:"whois manavmehta.cloud",
+            definition:"Shows public registration information about a domain.",
+            use:"Used to check domain ownership and registration details."
+        }
+    ],
     project:"Write a short note explaining A record vs CNAME.",
     question:"What does DNS mainly do?",
     options:["Converts domain name to IP","Creates passwords","Formats laptop"],
@@ -284,9 +356,30 @@ const baseLevels = [
     title:"Git Version Control",
     mission:"You must track every change in your DevSecOps 720 app like a real engineer.",
     concept:"Git stores code history, supports rollback, branching, collaboration, and proof of work.",
-    realuse:"Every software company uses GitHub, GitLab, or Bitbucket for code collaboration.",
+    realuse:"Every software company uses GitHub, GitLab, or Bitbucket for code collaboration and deployment workflows.",
     lab:"Create a repo and commit today’s work.",
-    commands:"git init\ngit status\ngit add .\ngit commit -m \"Level completed\"",
+    commands:[
+        {
+            cmd:"git init",
+            definition:"Initializes a new Git repository.",
+            use:"Used to start version control in a project folder."
+        },
+        {
+            cmd:"git status",
+            definition:"Shows changed, staged, and untracked files.",
+            use:"Used before every commit to check project status."
+        },
+        {
+            cmd:"git add .",
+            definition:"Stages all changed files for commit.",
+            use:"Used to prepare files before saving a version."
+        },
+        {
+            cmd:"git commit -m \"Level completed\"",
+            definition:"Creates a snapshot of staged changes with a message.",
+            use:"Used to save proof of progress and project history."
+        }
+    ],
     project:"Push your DevSecOps 720 app to GitHub.",
     question:"Why is Git important?",
     options:["For editing photos","For tracking code changes","For charging laptop"],
@@ -296,10 +389,31 @@ const baseLevels = [
 {
     title:"CI/CD Introduction",
     mission:"Your code should automatically check and deploy when updated.",
-    concept:"CI/CD means Continuous Integration and Continuous Delivery or Deployment.",
-    realuse:"Companies use CI/CD pipelines to test and deploy faster with fewer mistakes.",
+    concept:"CI/CD means Continuous Integration and Continuous Delivery or Deployment. It helps teams test and release code automatically.",
+    realuse:"Companies use CI/CD pipelines to test, scan, build, and deploy applications faster with fewer mistakes.",
     lab:"Create a simple GitHub Actions workflow file.",
-    commands:"mkdir -p .github/workflows\ncd .github/workflows\nnano main.yml",
+    commands:[
+        {
+            cmd:"mkdir -p .github/workflows",
+            definition:"Creates the GitHub Actions workflow folder structure.",
+            use:"Used to store automation pipeline files."
+        },
+        {
+            cmd:"cd .github/workflows",
+            definition:"Moves into the workflow directory.",
+            use:"Used before creating or editing pipeline files."
+        },
+        {
+            cmd:"touch main.yml",
+            definition:"Creates an empty workflow file.",
+            use:"Used to start writing a GitHub Actions pipeline."
+        },
+        {
+            cmd:"git add . && git commit -m \"Add CI workflow\"",
+            definition:"Stages and commits the workflow file.",
+            use:"Used to save pipeline changes in Git history."
+        }
+    ],
     project:"Add a GitHub Actions badge to your README.",
     question:"CI/CD mainly helps with what?",
     options:["Faster secure delivery","Playing games","Buying domains"],
@@ -352,9 +466,19 @@ function render(){
     document.getElementById("concept").innerText = data.concept;
     document.getElementById("realuse").innerText = data.realuse;
     document.getElementById("lab").innerText = data.lab;
-    document.getElementById("commands").innerText = data.commands;
     document.getElementById("project").innerText = data.project;
     document.getElementById("question").innerText = data.question;
+
+    let commandHTML = "";
+    data.commands.forEach(item => {
+        commandHTML += `
+        <div class="command-card">
+            <p class="command-code">$ ${item.cmd}</p>
+            <p class="text-sm mt-2"><b>Definition:</b> ${item.definition}</p>
+            <p class="text-sm opacity-80 mt-1"><b>Practical Use:</b> ${item.use}</p>
+        </div>`;
+    });
+    document.getElementById("commands").innerHTML = commandHTML;
 
     let optionHTML = "";
     data.options.forEach((option, index)=>{
@@ -374,6 +498,7 @@ function render(){
 
     document.getElementById("reflection").value = localStorage.getItem("reflection_" + current) || "";
     document.getElementById("savedProof").innerText = localStorage.getItem("proof_" + current) || "No proof saved for this level.";
+    document.getElementById("githubLink").value = localStorage.getItem("proof_" + current) || "";
 }
 
 function checkQuiz(index){
