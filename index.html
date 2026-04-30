@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>DevSecOps 720 | ManavMehta.cloud</title>
 
 <link rel="manifest" href="./manifest.json">
@@ -11,591 +10,558 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
-:root{
-    --gold:#D4AF37;
-    --dark:#020617;
-}
+:root{--gold:#D4AF37;--dark:#020617;--card:#0f172a;--green:#22c55e;--red:#ef4444}
 *{box-sizing:border-box}
-body{
-    margin:0;
-    background:radial-gradient(circle at top,#1e293b,#020617 70%);
-    color:white;
-    font-family:Arial,sans-serif;
-    min-height:100vh;
-}
+body{margin:0;background:radial-gradient(circle at top,#1e293b,#020617 70%);color:white;font-family:Arial,sans-serif;min-height:100vh}
 .gold{color:var(--gold)}
-.glass{
-    background:rgba(255,255,255,0.06);
-    border:1px solid rgba(255,255,255,0.12);
-    backdrop-filter:blur(14px);
-    border-radius:24px;
-}
-.section{
-    background:#0f172a;
-    border-left:5px solid var(--gold);
-    padding:22px;
-    border-radius:18px;
-    margin-bottom:20px;
-}
-.btn{
-    background:var(--gold);
-    color:black;
-    padding:14px 20px;
-    border-radius:16px;
-    font-weight:900;
-    border:none;
-    cursor:pointer;
-}
-.btn:hover{transform:scale(1.03)}
-.option{
-    width:100%;
-    text-align:left;
-    padding:15px;
-    margin:10px 0;
-    border-radius:14px;
-    border:1px solid rgba(255,255,255,.15);
-    background:rgba(255,255,255,.05);
-}
-.option:hover{
-    border-color:var(--gold);
-    background:rgba(212,175,55,.15);
-}
-input,textarea{
-    width:100%;
-    padding:14px;
-    border-radius:14px;
-    border:1px solid rgba(255,255,255,.2);
-    background:#020617;
-    color:white;
-}
-.command-card{
-    background:#020617;
-    border:1px solid rgba(212,175,55,.35);
-    border-radius:18px;
-    padding:18px;
-    margin-bottom:16px;
-}
-.command-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:10px;
-}
-.command-code{
-    color:#D4AF37;
-    font-weight:900;
-    font-family:monospace;
-    font-size:20px;
-}
-.copy-btn{
-    background:rgba(212,175,55,.18);
-    border:1px solid var(--gold);
-    color:var(--gold);
-    padding:8px 12px;
-    border-radius:12px;
-    font-size:12px;
-    font-weight:900;
-}
-.terminal{
-    background:#000;
-    border-radius:16px;
-    padding:16px;
-    font-family:monospace;
-    margin-top:12px;
-    color:#22c55e;
-}
-.badge{
-    background:rgba(212,175,55,.15);
-    color:var(--gold);
-    padding:6px 10px;
-    border-radius:999px;
-    font-size:12px;
-    font-weight:900;
-}
+.glass{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(14px);border-radius:24px}
+.section{background:#0f172a;border-left:5px solid var(--gold);padding:22px;border-radius:18px;margin-bottom:20px}
+.btn{background:var(--gold);color:black;padding:14px 20px;border-radius:16px;font-weight:900;border:none;cursor:pointer}
+.btn2{background:#111827;color:white;padding:12px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.15);font-weight:800;cursor:pointer}
+.btn:hover,.btn2:hover{transform:scale(1.02)}
+.option{width:100%;text-align:left;padding:15px;margin:10px 0;border-radius:14px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05)}
+.option:hover{border-color:var(--gold);background:rgba(212,175,55,.15)}
+input,textarea,select{width:100%;padding:14px;border-radius:14px;border:1px solid rgba(255,255,255,.2);background:#020617;color:white}
+.command-card{background:#020617;border:1px solid rgba(212,175,55,.35);border-radius:18px;padding:18px;margin-bottom:16px}
+.command-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.command-code{color:#D4AF37;font-weight:900;font-family:monospace;font-size:20px}
+.copy-btn{background:rgba(212,175,55,.18);border:1px solid var(--gold);color:var(--gold);padding:8px 12px;border-radius:12px;font-size:12px;font-weight:900}
+.terminal{background:#000;border-radius:16px;padding:16px;font-family:monospace;margin-top:12px;color:#22c55e}
+.badge{background:rgba(212,175,55,.15);color:var(--gold);padding:6px 10px;border-radius:999px;font-size:12px;font-weight:900}
+.tab{padding:12px 16px;border-radius:14px;background:#111827;border:1px solid rgba(255,255,255,.12);cursor:pointer;font-weight:900}
+.tab.active{background:var(--gold);color:black}
+.skillbar{height:10px;background:rgba(255,255,255,.1);border-radius:999px;overflow:hidden}
+.skillfill{height:100%;background:var(--gold)}
+.checkrow{display:flex;gap:10px;align-items:center;margin:10px 0}
+.hiddenBox{display:none}
+@media print{.no-print{display:none!important}body{background:white;color:black}.glass,.section{border:1px solid #ddd;background:white;color:black}}
 </style>
 </head>
 
 <body class="p-4 md:p-8">
 
 <header class="max-w-7xl mx-auto glass p-6 mb-6 flex flex-col md:flex-row justify-between gap-4">
-    <div>
-        <h1 class="text-3xl md:text-5xl font-black uppercase">🔥 DevSecOps 720</h1>
-        <p class="gold font-bold mt-2">Manav’s 2-Year Mission: DevOps + Cybersecurity + Cloud + Kubernetes</p>
-        <p class="text-sm opacity-70 mt-2">Domain: manavmehta.cloud | Target: 8–10 LPA Fresher Level Skill</p>
-    </div>
-    <div class="text-left md:text-right">
-        <p class="text-sm opacity-70">Daily Rule</p>
-        <p class="text-2xl font-black">1 Level / Day</p>
-        <p class="text-xs opacity-60">720 days = advanced DevSecOps journey</p>
-    </div>
+  <div>
+    <h1 class="text-3xl md:text-5xl font-black uppercase">🔥 DevSecOps 720</h1>
+    <p class="gold font-bold mt-2">Manav’s 2-Year Mission: DevOps + Cybersecurity + Cloud + Kubernetes</p>
+    <p class="text-sm opacity-70 mt-2">Domain: manavmehta.cloud | Target: 8–10 LPA Fresher Level Skill</p>
+  </div>
+  <div class="text-left md:text-right">
+    <p class="text-sm opacity-70">Daily Rule</p>
+    <p class="text-2xl font-black">1 Level / Day</p>
+    <p id="todayTarget" class="text-xs opacity-80 mt-1"></p>
+  </div>
 </header>
 
 <main class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-<aside class="lg:col-span-4 space-y-6">
-
-    <div class="glass p-6">
-        <h2 class="gold font-black uppercase mb-4">📊 Progress</h2>
-        <p>Current Level: <b id="levelNo">1</b> / 720</p>
-        <p>Total XP: <b id="xp">0</b></p>
-        <p>Streak: <b id="streak">0</b> days</p>
-
-        <div class="h-3 bg-white/10 rounded-full mt-4 overflow-hidden">
-            <div id="bar" class="h-full bg-[#D4AF37]" style="width:0%"></div>
-        </div>
-        <p class="text-xs opacity-70 mt-2">Completion: <span id="percent">0</span>%</p>
+<aside class="lg:col-span-4 space-y-6 no-print">
+  <div class="glass p-6">
+    <h2 class="gold font-black uppercase mb-4">📊 Progress</h2>
+    <p>Current Level: <b id="levelNo">1</b> / 720</p>
+    <p>Total XP: <b id="xp">0</b></p>
+    <p>Streak: <b id="streak">0</b> days</p>
+    <p>Rank: <b id="rank">Rookie</b></p>
+    <div class="h-3 bg-white/10 rounded-full mt-4 overflow-hidden">
+      <div id="bar" class="h-full bg-[#D4AF37]" style="width:0%"></div>
     </div>
+    <p class="text-xs opacity-70 mt-2">Completion: <span id="percent">0</span>%</p>
+  </div>
 
-    <div class="glass p-6">
-        <h2 class="gold font-black uppercase mb-4">🎓 Certification Roadmap</h2>
-        <div id="certBox" class="space-y-3 text-sm"></div>
-    </div>
+  <div class="glass p-6">
+    <h2 class="gold font-black uppercase mb-4">🧠 Skill Radar</h2>
+    <div id="skillBox" class="space-y-4"></div>
+  </div>
 
-    <div class="glass p-6">
-        <h2 class="gold font-black uppercase mb-4">🔗 GitHub Proof Upload</h2>
-        <input id="githubLink" placeholder="Paste GitHub proof link">
-        <button onclick="saveProof()" class="btn mt-3 w-full">Save Proof</button>
-        <p id="savedProof" class="text-xs mt-3 opacity-70 break-all"></p>
-    </div>
+  <div class="glass p-6">
+    <h2 class="gold font-black uppercase mb-4">🎓 Certification Tracker</h2>
+    <div id="certBox" class="space-y-3 text-sm"></div>
+  </div>
 
-    <div class="glass p-6">
-        <h2 class="gold font-black uppercase mb-4">⚡ Quick Actions</h2>
-        <button onclick="prevLevel()" class="w-full p-4 rounded-2xl glass font-black mb-3">
-            Previous Level
-        </button>
-        <button onclick="resetAll()" class="w-full p-4 rounded-2xl border border-red-500 text-red-400 font-black">
-            Reset Progress
-        </button>
-    </div>
+  <div class="glass p-6">
+    <h2 class="gold font-black uppercase mb-4">🔗 GitHub Proof Upload</h2>
+    <input id="githubLink" placeholder="Paste GitHub proof link">
+    <button onclick="saveProof()" class="btn mt-3 w-full">Save Proof</button>
+    <p id="savedProof" class="text-xs mt-3 opacity-70 break-all"></p>
+  </div>
 
+  <div class="glass p-6">
+    <h2 class="gold font-black uppercase mb-4">⚡ Quick Actions</h2>
+    <button onclick="prevLevel()" class="w-full p-4 rounded-2xl glass font-black mb-3">Previous Level</button>
+    <button onclick="resetAll()" class="w-full p-4 rounded-2xl border border-red-500 text-red-400 font-black">Reset Progress</button>
+  </div>
 </aside>
 
 <section class="lg:col-span-8 glass p-6 md:p-8">
 
+  <div class="flex flex-wrap gap-2 mb-6 no-print">
+    <button class="tab active" onclick="showTab('learn',this)">Learn</button>
+    <button class="tab" onclick="showTab('project',this)">Projects</button>
+    <button class="tab" onclick="showTab('interview',this)">Interview</button>
+    <button class="tab" onclick="showTab('security',this)">Security Challenge</button>
+    <button class="tab" onclick="showTab('resume',this)">Resume</button>
+    <button class="tab" onclick="showTab('profile',this)">Public Profile</button>
+    <button class="tab" onclick="showTab('report',this)">Weekly Report</button>
+    <button class="tab" onclick="showTab('store',this)">XP Store</button>
+  </div>
+
+  <div id="learn">
     <p id="phase" class="gold font-black uppercase tracking-widest text-xs mb-3"></p>
     <h2 id="title" class="text-3xl md:text-5xl font-black uppercase mb-6"></h2>
 
+    <div id="secretBox" class="section hiddenBox">
+      <h3 class="gold font-black">🔐 Secret Level Unlocked</h3>
+      <p id="secretText"></p>
+    </div>
+
+    <div class="section"><h3 class="gold font-black">🎯 Story / Mission</h3><p id="mission"></p></div>
+    <div class="section"><h3 class="gold font-black">📘 Concept Explanation</h3><p id="concept"></p></div>
+    <div class="section"><h3 class="gold font-black">🌍 Real-World Use</h3><p id="realuse"></p></div>
+    <div class="section"><h3 class="gold font-black">🧪 Hands-On Practical Lab</h3><p id="lab"></p></div>
+
     <div class="section">
-        <h3 class="gold font-black">🎯 Story / Mission</h3>
-        <p id="mission"></p>
+      <h3 class="gold font-black">✅ Lab Tracker</h3>
+      <div id="checklist"></div>
+      <p class="text-sm opacity-70 mt-3">Level Completion: <b id="levelCompletePercent">0%</b></p>
     </div>
 
     <div class="section">
-        <h3 class="gold font-black">📘 Concept Explanation</h3>
-        <p id="concept"></p>
+      <h3 class="gold font-black">💻 Command Practice With Definition</h3>
+      <p class="text-sm opacity-70 mb-4">Each command includes meaning, real use, and terminal practice.</p>
+      <div id="commands"></div>
     </div>
 
     <div class="section">
-        <h3 class="gold font-black">🌍 Real-World Use</h3>
-        <p id="realuse"></p>
+      <h3 class="gold font-black">🖥️ Terminal Simulator</h3>
+      <p class="text-sm opacity-70 mb-3">Type one command from today’s level and press Run.</p>
+      <input id="terminalInput" placeholder="Example: whoami">
+      <button onclick="runTerminal()" class="btn mt-3">Run Command</button>
+      <div id="terminalOutput" class="terminal">manav@devsecops:~$ waiting...</div>
+    </div>
+
+    <div class="section"><h3 class="gold font-black">🚀 Mini Project Task</h3><p id="miniProject"></p></div>
+
+    <div class="section">
+      <h3 class="gold font-black">🧠 Quiz</h3>
+      <p id="question" class="font-bold mt-2"></p>
+      <div id="options"></div>
+      <p id="quizStatus" class="text-sm mt-2 opacity-80"></p>
     </div>
 
     <div class="section">
-        <h3 class="gold font-black">🧪 Hands-On Practical Lab</h3>
-        <p id="lab"></p>
+      <h3 class="gold font-black">📝 Reflection Note</h3>
+      <textarea id="reflection" rows="4" placeholder="Write what you learned today..."></textarea>
+      <button onclick="saveReflection()" class="btn mt-3">Save Reflection</button>
     </div>
 
+    <button onclick="completeLevel()" class="btn w-full text-xl mt-4">Complete Today’s Level ✅</button>
+  </div>
+
+  <div id="project" class="hiddenBox">
+    <h2 class="text-4xl font-black mb-5">🚀 Project Builder</h2>
+    <div id="projectBox" class="space-y-4"></div>
+  </div>
+
+  <div id="interview" class="hiddenBox">
+    <h2 class="text-4xl font-black mb-5">🎤 Interview Mode</h2>
     <div class="section">
-        <h3 class="gold font-black">💻 Command Practice With Definition</h3>
-        <p class="text-sm opacity-70 mb-4">Each command includes meaning, real use, and terminal practice.</p>
-        <div id="commands"></div>
+      <p id="interviewQ" class="text-xl font-bold"></p>
+      <button onclick="showAnswer()" class="btn mt-4">Show Ideal Answer</button>
+      <p id="interviewA" class="mt-4 opacity-80"></p>
+      <button onclick="nextInterview()" class="btn2 mt-4">Next Question</button>
     </div>
+  </div>
 
+  <div id="security" class="hiddenBox">
+    <h2 class="text-4xl font-black mb-5">🛡️ Security Challenge Mode</h2>
     <div class="section">
-        <h3 class="gold font-black">🚀 Mini Project Task</h3>
-        <p id="project"></p>
+      <p id="challengeText" class="font-bold"></p>
+      <textarea id="challengeAnswer" rows="4" placeholder="Write your fix/answer..."></textarea>
+      <button onclick="checkChallenge()" class="btn mt-4">Submit Challenge</button>
+      <p id="challengeResult" class="mt-3"></p>
     </div>
+  </div>
 
-    <div class="section">
-        <h3 class="gold font-black">🧠 Quiz</h3>
-        <p id="question" class="font-bold mt-2"></p>
-        <div id="options"></div>
-    </div>
+  <div id="resume" class="hiddenBox">
+    <h2 class="text-4xl font-black mb-5">📄 Resume Generator</h2>
+    <div id="resumeContent" class="section"></div>
+    <button onclick="window.print()" class="btn no-print">Print / Save as PDF</button>
+  </div>
 
-    <div class="section">
-        <h3 class="gold font-black">📝 Reflection Note</h3>
-        <textarea id="reflection" rows="4" placeholder="Write what you learned today..."></textarea>
-        <button onclick="saveReflection()" class="btn mt-3">Save Reflection</button>
-    </div>
+  <div id="profile" class="hiddenBox">
+    <h2 class="text-4xl font-black mb-5">🌐 Public Profile Preview</h2>
+    <div id="profileContent" class="section"></div>
+  </div>
 
-    <button onclick="completeLevel()" class="btn w-full text-xl mt-4">
-        Complete Today’s Level ✅
-    </button>
+  <div id="report" class="hiddenBox">
+    <h2 class="text-4xl font-black mb-5">📅 Weekly Report</h2>
+    <div id="weeklyReport" class="section"></div>
+  </div>
+
+  <div id="store" class="hiddenBox">
+    <h2 class="text-4xl font-black mb-5">🛒 XP Store</h2>
+    <div id="storeBox" class="space-y-4"></div>
+  </div>
 
 </section>
-
 </main>
 
 <script>
-const certifications = [
-    {level:30, name:"Cisco Cybersecurity Essentials", type:"Beginner Cybersecurity"},
-    {level:60, name:"Google Cybersecurity Certificate", type:"Beginner Cybersecurity"},
-    {level:120, name:"CompTIA Security+", type:"International Security"},
-    {level:210, name:"AWS Cloud Practitioner", type:"Cloud Beginner"},
-    {level:300, name:"AWS Solutions Architect Associate", type:"Cloud Associate"},
-    {level:390, name:"Certified Ethical Hacker", type:"Security / Ethical Hacking"},
-    {level:480, name:"CKA", type:"Kubernetes Administrator"},
-    {level:540, name:"CKAD", type:"Kubernetes Developer"},
-    {level:600, name:"CompTIA CySA+", type:"Security Analyst"},
-    {level:660, name:"CompTIA PenTest+", type:"Penetration Testing"},
-    {level:690, name:"AWS Certified Security Specialty", type:"Cloud Security"},
-    {level:720, name:"CKS", type:"Kubernetes Security"}
+const certifications=[
+{level:30,name:"Cisco Cybersecurity Essentials",type:"Beginner Cybersecurity"},
+{level:60,name:"Google Cybersecurity Certificate",type:"Beginner Cybersecurity"},
+{level:120,name:"CompTIA Security+",type:"International Security"},
+{level:210,name:"AWS Cloud Practitioner",type:"Cloud Beginner"},
+{level:300,name:"AWS Solutions Architect Associate",type:"Cloud Associate"},
+{level:390,name:"Certified Ethical Hacker",type:"Security / Ethical Hacking"},
+{level:480,name:"CKA",type:"Kubernetes Administrator"},
+{level:540,name:"CKAD",type:"Kubernetes Developer"},
+{level:600,name:"CompTIA CySA+",type:"Security Analyst"},
+{level:660,name:"CompTIA PenTest+",type:"Penetration Testing"},
+{level:690,name:"AWS Certified Security Specialty",type:"Cloud Security"},
+{level:720,name:"CKS",type:"Kubernetes Security"}
 ];
 
-const baseLevels = [
+const baseLevels=[
 {
-    title:"Linux Identity & Sudo Power",
-    mission:"You are a junior cloud security trainee. Your first mission is to understand user identity and admin permissions on a Linux server.",
-    concept:"Linux controls security using users, groups, permissions, and sudo. Sudo allows temporary admin access without logging in as root.",
-    realuse:"DevOps and cloud engineers use sudo while managing AWS EC2 servers, Docker hosts, Linux machines, and production systems.",
-    lab:"Open terminal or GitHub Codespaces. Run each command below. Save output in a GitHub notes file.",
-    commands:[
-        {
-            cmd:"whoami",
-            definition:"Shows the current logged-in username.",
-            use:"Used to verify which user is executing commands on a server.",
-            example:"whoami"
-        },
-        {
-            cmd:"id",
-            definition:"Displays user ID, group ID, and group memberships.",
-            use:"Used to check permission level and access groups.",
-            example:"id"
-        },
-        {
-            cmd:"groups",
-            definition:"Lists all groups assigned to the current user.",
-            use:"Used to check sudo, docker, admin, or developer group access.",
-            example:"groups"
-        },
-        {
-            cmd:"sudo -l",
-            definition:"Lists commands the current user can run with sudo.",
-            use:"Used to audit admin privileges before sensitive tasks.",
-            example:"sudo -l"
-        }
-    ],
-    project:"Create GitHub folder: level-001-linux-identity. Upload screenshots or command output.",
-    question:"Why is sudo important in professional systems?",
-    options:["It makes internet faster","It gives controlled admin access with audit trail","It installs games"],
-    correct:1,
-    xp:100
+title:"Linux Identity & Sudo Power",
+skill:"Linux",
+mission:"You are a junior cloud security trainee. Your first mission is to understand user identity and admin permissions on a Linux server.",
+concept:"Linux controls security using users, groups, permissions, and sudo. Sudo allows temporary admin access without logging in as root.",
+realuse:"DevOps and cloud engineers use sudo while managing AWS EC2 servers, Docker hosts, Linux machines, and production systems.",
+lab:"Open terminal or GitHub Codespaces. Run each command below. Save output in a GitHub notes file.",
+commands:[
+{cmd:"whoami",definition:"Shows the current logged-in username.",use:"Used to verify which user is executing commands on a server.",example:"whoami",output:"manav"},
+{cmd:"id",definition:"Displays user ID, group ID, and group memberships.",use:"Used to check permission level and access groups.",example:"id",output:"uid=1000(manav) gid=1000(manav) groups=1000(manav),27(sudo)"},
+{cmd:"groups",definition:"Lists all groups assigned to the current user.",use:"Used to check sudo, docker, admin, or developer group access.",example:"groups",output:"manav sudo docker"},
+{cmd:"sudo -l",definition:"Lists commands the current user can run with sudo.",use:"Used to audit admin privileges before sensitive tasks.",example:"sudo -l",output:"User manav may run the following commands: ALL"}
+],
+project:"Create GitHub folder: level-001-linux-identity. Upload screenshots or command output.",
+question:"Why is sudo important in professional systems?",
+options:["It makes internet faster","It gives controlled admin access with audit trail","It installs games"],
+correct:1,xp:100
 },
 {
-    title:"Linux Filesystem Navigation",
-    mission:"A production server is down. Your task is to safely move through Linux folders and find important system files.",
-    concept:"Linux has important directories like /home, /etc, /var/log, /bin, /usr, and /tmp. Each directory has a specific purpose.",
-    realuse:"SRE and DevOps teams check /var/log when websites, apps, servers, or databases fail.",
-    lab:"Navigate through important folders and create your own DevSecOps practice directory.",
-    commands:[
-        {
-            cmd:"pwd",
-            definition:"Prints the current working directory.",
-            use:"Used to confirm your exact location before running commands.",
-            example:"pwd"
-        },
-        {
-            cmd:"ls",
-            definition:"Lists files and folders in the current directory.",
-            use:"Used to inspect files before editing, deleting, or deploying.",
-            example:"ls"
-        },
-        {
-            cmd:"cd /var/log",
-            definition:"Changes directory to /var/log.",
-            use:"Used to access system and application log files.",
-            example:"cd /var/log"
-        },
-        {
-            cmd:"mkdir devsecops720",
-            definition:"Creates a new directory named devsecops720.",
-            use:"Used to organize your project files and daily labs.",
-            example:"mkdir devsecops720"
-        }
-    ],
-    project:"Upload a Linux folder map to GitHub.",
-    question:"Where are many Linux logs commonly stored?",
-    options:["/var/log","/games","/photos"],
-    correct:0,
-    xp:100
+title:"Linux Filesystem Navigation",skill:"Linux",
+mission:"A production server is down. Your task is to safely move through Linux folders and find important system files.",
+concept:"Linux has important directories like /home, /etc, /var/log, /bin, /usr, and /tmp. Each directory has a specific purpose.",
+realuse:"SRE and DevOps teams check /var/log when websites, apps, servers, or databases fail.",
+lab:"Navigate through important folders and create your own DevSecOps practice directory.",
+commands:[
+{cmd:"pwd",definition:"Prints the current working directory.",use:"Used to confirm your exact location before running commands.",example:"pwd",output:"/home/manav"},
+{cmd:"ls",definition:"Lists files and folders in the current directory.",use:"Used to inspect files before editing, deleting, or deploying.",example:"ls",output:"Desktop Documents Downloads devsecops720"},
+{cmd:"cd /var/log",definition:"Changes directory to /var/log.",use:"Used to access system and application log files.",example:"cd /var/log",output:"Moved to /var/log"},
+{cmd:"mkdir devsecops720",definition:"Creates a new directory named devsecops720.",use:"Used to organize your project files and daily labs.",example:"mkdir devsecops720",output:"Directory created"}
+],
+project:"Upload a Linux folder map to GitHub.",
+question:"Where are many Linux logs commonly stored?",
+options:["/var/log","/games","/photos"],correct:0,xp:100
 },
 {
-    title:"DNS & Domain Basics",
-    mission:"Your domain manavmehta.cloud must point to your website. Understand how DNS works.",
-    concept:"DNS converts human-readable domain names into IP addresses using records like A, CNAME, MX, and TXT.",
-    realuse:"Companies use DNS to connect apps, email, CDN, cloud hosting, verification, and security services.",
-    lab:"Check your domain using terminal commands or an online DNS checker.",
-    commands:[
-        {
-            cmd:"nslookup manavmehta.cloud",
-            definition:"Queries DNS records for your domain.",
-            use:"Used to check whether your domain points correctly.",
-            example:"nslookup manavmehta.cloud"
-        },
-        {
-            cmd:"ping manavmehta.cloud",
-            definition:"Tests whether a domain resolves and responds.",
-            use:"Used for basic connectivity testing.",
-            example:"ping manavmehta.cloud"
-        },
-        {
-            cmd:"dig manavmehta.cloud",
-            definition:"Shows detailed DNS information.",
-            use:"Used by cloud engineers for DNS troubleshooting.",
-            example:"dig manavmehta.cloud"
-        },
-        {
-            cmd:"whois manavmehta.cloud",
-            definition:"Shows public domain registration details.",
-            use:"Used to check domain ownership and registration data.",
-            example:"whois manavmehta.cloud"
-        }
-    ],
-    project:"Write a short note explaining A record vs CNAME.",
-    question:"What does DNS mainly do?",
-    options:["Converts domain name to IP","Creates passwords","Formats laptop"],
-    correct:0,
-    xp:120
+title:"DNS & Domain Basics",skill:"Networking",
+mission:"Your domain manavmehta.cloud must point to your website. Understand how DNS works.",
+concept:"DNS converts human-readable domain names into IP addresses using records like A, CNAME, MX, and TXT.",
+realuse:"Companies use DNS to connect apps, email, CDN, cloud hosting, verification, and security services.",
+lab:"Check your domain using terminal commands or an online DNS checker.",
+commands:[
+{cmd:"nslookup manavmehta.cloud",definition:"Queries DNS records for your domain.",use:"Used to check whether your domain points correctly.",example:"nslookup manavmehta.cloud",output:"Name: manavmehta.cloud Address: example-ip"},
+{cmd:"ping manavmehta.cloud",definition:"Tests whether a domain resolves and responds.",use:"Used for basic connectivity testing.",example:"ping manavmehta.cloud",output:"Reply from server"},
+{cmd:"dig manavmehta.cloud",definition:"Shows detailed DNS information.",use:"Used by cloud engineers for DNS troubleshooting.",example:"dig manavmehta.cloud",output:"A record found"},
+{cmd:"whois manavmehta.cloud",definition:"Shows public domain registration details.",use:"Used to check domain ownership and registration data.",example:"whois manavmehta.cloud",output:"Domain registered"}
+],
+project:"Write a short note explaining A record vs CNAME.",
+question:"What does DNS mainly do?",
+options:["Converts domain name to IP","Creates passwords","Formats laptop"],correct:0,xp:120
 },
 {
-    title:"Git Version Control",
-    mission:"You must track every change in your DevSecOps 720 app like a real engineer.",
-    concept:"Git stores code history, supports rollback, branching, collaboration, and proof of work.",
-    realuse:"Every software company uses GitHub, GitLab, or Bitbucket for code collaboration and deployment workflows.",
-    lab:"Create a repo and commit today’s work.",
-    commands:[
-        {
-            cmd:"git init",
-            definition:"Initializes a new Git repository.",
-            use:"Used to start version control in a project folder.",
-            example:"git init"
-        },
-        {
-            cmd:"git status",
-            definition:"Shows changed, staged, and untracked files.",
-            use:"Used before every commit to check project status.",
-            example:"git status"
-        },
-        {
-            cmd:"git add .",
-            definition:"Stages all changed files for commit.",
-            use:"Used to prepare files before saving a version.",
-            example:"git add ."
-        },
-        {
-            cmd:"git commit -m \"Level completed\"",
-            definition:"Creates a snapshot of staged changes with a message.",
-            use:"Used to save proof of progress and project history.",
-            example:"git commit -m \"Level completed\""
-        }
-    ],
-    project:"Push your DevSecOps 720 app to GitHub.",
-    question:"Why is Git important?",
-    options:["For editing photos","For tracking code changes","For charging laptop"],
-    correct:1,
-    xp:120
+title:"Git Version Control",skill:"DevOps",
+mission:"You must track every change in your DevSecOps 720 app like a real engineer.",
+concept:"Git stores code history, supports rollback, branching, collaboration, and proof of work.",
+realuse:"Every software company uses GitHub, GitLab, or Bitbucket for code collaboration and deployment workflows.",
+lab:"Create a repo and commit today’s work.",
+commands:[
+{cmd:"git init",definition:"Initializes a new Git repository.",use:"Used to start version control in a project folder.",example:"git init",output:"Initialized empty Git repository"},
+{cmd:"git status",definition:"Shows changed, staged, and untracked files.",use:"Used before every commit to check project status.",example:"git status",output:"On branch main"},
+{cmd:"git add .",definition:"Stages all changed files for commit.",use:"Used to prepare files before saving a version.",example:"git add .",output:"Files staged"},
+{cmd:"git commit -m \"Level completed\"",definition:"Creates a snapshot of staged changes with a message.",use:"Used to save proof of progress and project history.",example:"git commit -m \"Level completed\"",output:"Commit created"}
+],
+project:"Push your DevSecOps 720 app to GitHub.",
+question:"Why is Git important?",
+options:["For editing photos","For tracking code changes","For charging laptop"],correct:1,xp:120
 },
 {
-    title:"CI/CD Introduction",
-    mission:"Your code should automatically check and deploy when updated.",
-    concept:"CI/CD means Continuous Integration and Continuous Delivery or Deployment. It helps teams test and release code automatically.",
-    realuse:"Companies use CI/CD pipelines to test, scan, build, and deploy applications faster with fewer mistakes.",
-    lab:"Create a simple GitHub Actions workflow file.",
-    commands:[
-        {
-            cmd:"mkdir -p .github/workflows",
-            definition:"Creates the GitHub Actions workflow folder structure.",
-            use:"Used to store automation pipeline files.",
-            example:"mkdir -p .github/workflows"
-        },
-        {
-            cmd:"cd .github/workflows",
-            definition:"Moves into the workflow directory.",
-            use:"Used before creating or editing pipeline files.",
-            example:"cd .github/workflows"
-        },
-        {
-            cmd:"touch main.yml",
-            definition:"Creates an empty workflow file.",
-            use:"Used to start writing a GitHub Actions pipeline.",
-            example:"touch main.yml"
-        },
-        {
-            cmd:"git add . && git commit -m \"Add CI workflow\"",
-            definition:"Stages and commits the workflow file.",
-            use:"Used to save pipeline changes in Git history.",
-            example:"git add . && git commit -m \"Add CI workflow\""
-        }
-    ],
-    project:"Add a GitHub Actions badge to your README.",
-    question:"CI/CD mainly helps with what?",
-    options:["Faster secure delivery","Playing games","Buying domains"],
-    correct:0,
-    xp:150
+title:"CI/CD Introduction",skill:"DevOps",
+mission:"Your code should automatically check and deploy when updated.",
+concept:"CI/CD means Continuous Integration and Continuous Delivery or Deployment. It helps teams test and release code automatically.",
+realuse:"Companies use CI/CD pipelines to test, scan, build, and deploy applications faster with fewer mistakes.",
+lab:"Create a simple GitHub Actions workflow file.",
+commands:[
+{cmd:"mkdir -p .github/workflows",definition:"Creates the GitHub Actions workflow folder structure.",use:"Used to store automation pipeline files.",example:"mkdir -p .github/workflows",output:"Workflow folder created"},
+{cmd:"cd .github/workflows",definition:"Moves into the workflow directory.",use:"Used before creating or editing pipeline files.",example:"cd .github/workflows",output:"Moved into workflows"},
+{cmd:"touch main.yml",definition:"Creates an empty workflow file.",use:"Used to start writing a GitHub Actions pipeline.",example:"touch main.yml",output:"main.yml created"},
+{cmd:"git add . && git commit -m \"Add CI workflow\"",definition:"Stages and commits the workflow file.",use:"Used to save pipeline changes in Git history.",example:"git add . && git commit -m \"Add CI workflow\"",output:"CI workflow committed"}
+],
+project:"Add a GitHub Actions badge to your README.",
+question:"CI/CD mainly helps with what?",
+options:["Faster secure delivery","Playing games","Buying domains"],correct:0,xp:150
 }
 ];
 
+const interview=[
+{q:"What is DevSecOps?",a:"DevSecOps means integrating security into every stage of DevOps: planning, coding, building, testing, deployment, and monitoring."},
+{q:"Difference between Docker and VM?",a:"Docker containers share the host OS kernel and are lightweight. VMs include a full guest OS and are heavier."},
+{q:"What is CI/CD?",a:"CI/CD automates code integration, testing, building, scanning, and deployment."},
+{q:"What is least privilege?",a:"Least privilege means giving users or services only the minimum permissions required to perform their task."}
+];
+
+const challenges=[
+{text:"A developer committed API_KEY=12345 in code. What should you do?",answer:"remove secret, rotate key, add secret scanning"},
+{text:"Dockerfile uses root user. What is the secure fix?",answer:"create non-root user"},
+{text:"S3 bucket is public. What should be checked?",answer:"bucket policy, block public access, iam"}
+];
+
+const storeItems=[
+{name:"Unlock Secret Linux Boss Lab",cost:500},
+{name:"Unlock Resume Pro Badge",cost:1000},
+{name:"Unlock Interview Hard Mode",cost:1500},
+{name:"Unlock Cloud Warrior Title",cost:2500}
+];
+
+let current=parseInt(localStorage.getItem("dso_level"))||1;
+let xp=parseInt(localStorage.getItem("dso_xp"))||0;
+let streak=parseInt(localStorage.getItem("dso_streak"))||0;
+let interviewIndex=0;
+let challengeIndex=0;
+
 function getPhase(level){
-    if(level<=90) return "Phase 1: Foundation";
-    if(level<=180) return "Phase 2: Cybersecurity Basics";
-    if(level<=270) return "Phase 3: DevOps Core";
-    if(level<=360) return "Phase 4: Cloud";
-    if(level<=480) return "Phase 5: DevSecOps";
-    if(level<=570) return "Phase 6: Kubernetes Security";
-    if(level<=660) return "Phase 7: Advanced Security";
-    return "Phase 8: Job-Ready Mastery";
+ if(level<=90)return"Phase 1: Foundation";
+ if(level<=180)return"Phase 2: Cybersecurity Basics";
+ if(level<=270)return"Phase 3: DevOps Core";
+ if(level<=360)return"Phase 4: Cloud";
+ if(level<=480)return"Phase 5: DevSecOps";
+ if(level<=570)return"Phase 6: Kubernetes Security";
+ if(level<=660)return"Phase 7: Advanced Security";
+ return"Phase 8: Job-Ready Mastery";
 }
 
 function generateLevel(level){
-    const template = baseLevels[(level-1) % baseLevels.length];
-    return {
-        ...template,
-        title:"Level " + level + ": " + template.title,
-        phase:getPhase(level) + " | Day " + level + "/720",
-        mission:template.mission + " Complete this at Level " + level + " depth and upload proof.",
-        xp:template.xp + Math.floor(level/10)*10
-    };
+ const t=baseLevels[(level-1)%baseLevels.length];
+ return{...t,title:"Level "+level+": "+t.title,phase:getPhase(level)+" | Day "+level+"/720",mission:t.mission+" Complete this at Level "+level+" depth and upload proof.",xp:t.xp+Math.floor(level/10)*10};
 }
 
-let current = parseInt(localStorage.getItem("dso_level")) || 1;
-let xp = parseInt(localStorage.getItem("dso_xp")) || 0;
-let streak = parseInt(localStorage.getItem("dso_streak")) || 0;
+function rankName(){
+ if(xp>=20000)return"DevSecOps Warrior";
+ if(xp>=10000)return"Cloud Security Engineer";
+ if(xp>=5000)return"DevOps Defender";
+ if(xp>=2000)return"Linux Operator";
+ return"Rookie";
+}
+
+function showTab(id,btn){
+ ["learn","project","interview","security","resume","profile","report","store"].forEach(x=>document.getElementById(x).style.display="none");
+ document.getElementById(id).style.display="block";
+ document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+ btn.classList.add("active");
+ renderExtras();
+}
 
 function render(){
-    const data = generateLevel(current);
+ const data=generateLevel(current);
+ document.getElementById("levelNo").innerText=current;
+ document.getElementById("xp").innerText=xp;
+ document.getElementById("streak").innerText=streak;
+ document.getElementById("rank").innerText=rankName();
+ let percent=((current/720)*100).toFixed(2);
+ document.getElementById("bar").style.width=percent+"%";
+ document.getElementById("percent").innerText=percent;
+ document.getElementById("todayTarget").innerText="Today: "+data.title;
+ document.getElementById("phase").innerText=data.phase;
+ document.getElementById("title").innerText=data.title;
+ document.getElementById("mission").innerText=data.mission;
+ document.getElementById("concept").innerText=data.concept;
+ document.getElementById("realuse").innerText=data.realuse;
+ document.getElementById("lab").innerText=data.lab;
+ document.getElementById("miniProject").innerText=data.project;
+ document.getElementById("question").innerText=data.question;
 
-    document.getElementById("levelNo").innerText = current;
-    document.getElementById("xp").innerText = xp;
-    document.getElementById("streak").innerText = streak;
+ if(current%50===0){
+  document.getElementById("secretBox").style.display="block";
+  document.getElementById("secretText").innerText="Boss mission unlocked: investigate a fake production outage and write an incident report.";
+ }else document.getElementById("secretBox").style.display="none";
 
-    let percent = ((current / 720) * 100).toFixed(2);
-    document.getElementById("bar").style.width = percent + "%";
-    document.getElementById("percent").innerText = percent;
+ let checklist=["Command practiced","Lab completed","Quiz attempted","GitHub proof uploaded","Reflection written"];
+ let ch="";
+ checklist.forEach((c,i)=>{
+  let key="check_"+current+"_"+i;
+  ch+=`<label class="checkrow"><input type="checkbox" style="width:auto" ${localStorage.getItem(key)?"checked":""} onchange="toggleCheck('${key}')"> ${c}</label>`;
+ });
+ document.getElementById("checklist").innerHTML=ch;
+ updateLevelPercent();
 
-    document.getElementById("phase").innerText = data.phase;
-    document.getElementById("title").innerText = data.title;
-    document.getElementById("mission").innerText = data.mission;
-    document.getElementById("concept").innerText = data.concept;
-    document.getElementById("realuse").innerText = data.realuse;
-    document.getElementById("lab").innerText = data.lab;
-    document.getElementById("project").innerText = data.project;
-    document.getElementById("question").innerText = data.question;
+ let commandHTML="";
+ data.commands.forEach(item=>{
+  commandHTML+=`
+  <div class="command-card">
+    <div class="command-top">
+      <p class="command-code">$ ${item.cmd}</p>
+      <button class="copy-btn" onclick="copyCommand('${item.example.replace(/'/g,"\\'")}')">COPY</button>
+    </div>
+    <p class="text-sm mt-3"><b class="gold">Definition:</b> ${item.definition}</p>
+    <p class="text-sm mt-2 opacity-90"><b class="gold">Practical Use:</b> ${item.use}</p>
+    <div class="terminal"><p>manav@devsecops:~$ ${item.example}</p></div>
+  </div>`;
+ });
+ document.getElementById("commands").innerHTML=commandHTML;
 
-    let commandHTML = "";
-    data.commands.forEach((item, index) => {
-        commandHTML += `
-        <div class="command-card">
-            <div class="command-top">
-                <p class="command-code">$ ${item.cmd}</p>
-                <button class="copy-btn" onclick="copyCommand('${item.example.replace(/'/g,"\\'")}')">COPY</button>
-            </div>
+ let optionHTML="";
+ data.options.forEach((o,i)=>optionHTML+=`<button class="option" onclick="checkQuiz(${i})">${o}</button>`);
+ document.getElementById("options").innerHTML=optionHTML;
 
-            <p class="text-sm mt-3">
-                <b class="gold">Definition:</b> ${item.definition}
-            </p>
+ let certHTML="";
+ certifications.forEach(cert=>{
+  let status=localStorage.getItem("cert_"+cert.level)||"Not Started";
+  certHTML+=`<div class="p-3 rounded-xl ${current>=cert.level?'bg-green-500/20 border border-green-400/30':'bg-white/5'}">
+  <b>Level ${cert.level}</b>: ${cert.name}<br>
+  <span class="text-xs opacity-70">${cert.type}</span>
+  <select class="mt-2" onchange="saveCert(${cert.level},this.value)">
+    <option ${status==="Not Started"?"selected":""}>Not Started</option>
+    <option ${status==="In Progress"?"selected":""}>In Progress</option>
+    <option ${status==="Completed"?"selected":""}>Completed</option>
+  </select></div>`;
+ });
+ document.getElementById("certBox").innerHTML=certHTML;
 
-            <p class="text-sm mt-2 opacity-90">
-                <b class="gold">Practical Use:</b> ${item.use}
-            </p>
-
-            <div class="terminal">
-                <p>manav@devsecops:~$ ${item.example}</p>
-            </div>
-        </div>`;
-    });
-
-    document.getElementById("commands").innerHTML = commandHTML;
-
-    let optionHTML = "";
-    data.options.forEach((option, index)=>{
-        optionHTML += `<button class="option" onclick="checkQuiz(${index})">${option}</button>`;
-    });
-    document.getElementById("options").innerHTML = optionHTML;
-
-    let certHTML = "";
-    certifications.forEach(cert=>{
-        certHTML += `
-        <div class="p-3 rounded-xl ${current >= cert.level ? 'bg-green-500/20 border border-green-400/30' : 'bg-white/5'}">
-            <b>Level ${cert.level}</b>: ${cert.name}<br>
-            <span class="text-xs opacity-70">${cert.type}</span>
-        </div>`;
-    });
-    document.getElementById("certBox").innerHTML = certHTML;
-
-    document.getElementById("reflection").value = localStorage.getItem("reflection_" + current) || "";
-    document.getElementById("savedProof").innerText = localStorage.getItem("proof_" + current) || "No proof saved for this level.";
-    document.getElementById("githubLink").value = localStorage.getItem("proof_" + current) || "";
+ document.getElementById("reflection").value=localStorage.getItem("reflection_"+current)||"";
+ document.getElementById("savedProof").innerText=localStorage.getItem("proof_"+current)||"No proof saved for this level.";
+ document.getElementById("githubLink").value=localStorage.getItem("proof_"+current)||"";
+ renderSkills();
+ renderExtras();
 }
 
-function copyCommand(command){
-    navigator.clipboard.writeText(command);
-    alert("Command copied ✅");
+function renderSkills(){
+ const skills=["Linux","Networking","DevOps","Cloud","Security","Kubernetes"];
+ let html="";
+ skills.forEach((s,i)=>{
+  let val=Math.min(100,Math.floor((current/(120+i*20))*100));
+  html+=`<div><div class="flex justify-between text-sm"><b>${s}</b><span>${val}%</span></div><div class="skillbar"><div class="skillfill" style="width:${val}%"></div></div></div>`;
+ });
+ document.getElementById("skillBox").innerHTML=html;
 }
 
-function checkQuiz(index){
-    const data = generateLevel(current);
-    if(index === data.correct){
-        alert("Correct ✅");
-    }else{
-        alert("Wrong ❌ Read the concept again.");
-    }
+function renderExtras(){
+ renderProjects(); renderResume(); renderProfile(); renderWeekly(); renderStore(); renderInterview(); renderChallenge();
 }
 
+function renderProjects(){
+ const projects=[
+ {level:30,title:"Linux Security Hardening Notes"},
+ {level:90,title:"Networking + DNS Portfolio Lab"},
+ {level:180,title:"OWASP Security Audit Report"},
+ {level:270,title:"Secure CI/CD Pipeline"},
+ {level:360,title:"AWS Deployment Project"},
+ {level:480,title:"DevSecOps Scanner Pipeline"},
+ {level:570,title:"Kubernetes Security Lab"},
+ {level:720,title:"Final DevSecOps Capstone"}
+ ];
+ let html="";
+ projects.forEach(p=>html+=`<div class="section"><h3 class="gold font-black">Level ${p.level}: ${p.title}</h3><p>Status: ${current>=p.level?"Unlocked ✅":"Locked 🔒"}</p><button class="btn2" onclick="alert('Add this project to GitHub and portfolio')">Add to Portfolio</button></div>`);
+ document.getElementById("projectBox").innerHTML=html;
+}
+
+function renderResume(){
+ document.getElementById("resumeContent").innerHTML=`
+ <h3 class="text-2xl font-black">Manav Mehta</h3>
+ <p>DevSecOps Learner | Cloud Security | GitHub: Add your link</p>
+ <hr class="my-4 opacity-20">
+ <p><b>Progress:</b> Level ${current}/720 | XP ${xp} | Rank ${rankName()}</p>
+ <p><b>Skills:</b> Linux, Git, Networking, CI/CD, Cloud, Security, Kubernetes</p>
+ <p><b>Projects:</b> Secure CI/CD Pipeline, Linux Security Lab, DNS Domain Project</p>
+ <p><b>Certifications:</b> Google Cybersecurity, Cisco Cybersecurity, Security+, AWS, CKA/CKS Roadmap</p>`;
+}
+
+function renderProfile(){
+ document.getElementById("profileContent").innerHTML=`
+ <h3 class="text-3xl font-black gold">ManavMehta.cloud</h3>
+ <p class="mt-2">DevSecOps 720 public proof profile</p>
+ <p class="mt-4"><b>Level:</b> ${current}/720</p>
+ <p><b>XP:</b> ${xp}</p>
+ <p><b>Rank:</b> ${rankName()}</p>
+ <p><b>Current Mission:</b> ${generateLevel(current).title}</p>`;
+}
+
+function renderWeekly(){
+ let completed=Math.max(0,current-1);
+ document.getElementById("weeklyReport").innerHTML=`
+ <p><b>Levels completed:</b> ${completed}</p>
+ <p><b>This week target:</b> Complete 7 levels, 7 GitHub proofs, 7 reflections.</p>
+ <p><b>Current weak area:</b> ${current<90?"Linux basics":current<180?"Security basics":"Advanced implementation"}</p>
+ <p><b>Next action:</b> Finish today’s lab and upload proof.</p>`;
+}
+
+function renderStore(){
+ let html="";
+ storeItems.forEach(item=>html+=`<div class="section"><h3 class="gold font-black">${item.name}</h3><p>Cost: ${item.cost} XP</p><button class="btn" onclick="buyItem('${item.name}',${item.cost})">Unlock</button></div>`);
+ document.getElementById("storeBox").innerHTML=html;
+}
+
+function renderInterview(){
+ document.getElementById("interviewQ").innerText=interview[interviewIndex].q;
+ document.getElementById("interviewA").innerText="";
+}
+
+function renderChallenge(){
+ document.getElementById("challengeText").innerText=challenges[challengeIndex].text;
+ document.getElementById("challengeResult").innerText="";
+}
+
+function toggleCheck(key){
+ localStorage.getItem(key)?localStorage.removeItem(key):localStorage.setItem(key,"yes");
+ updateLevelPercent();
+}
+function updateLevelPercent(){
+ let count=0;
+ for(let i=0;i<5;i++) if(localStorage.getItem("check_"+current+"_"+i)) count++;
+ document.getElementById("levelCompletePercent").innerText=(count*20)+"%";
+}
+function copyCommand(c){navigator.clipboard.writeText(c);alert("Command copied ✅")}
+function runTerminal(){
+ const cmd=document.getElementById("terminalInput").value.trim();
+ const data=generateLevel(current);
+ const found=data.commands.find(x=>x.example===cmd||x.cmd===cmd);
+ document.getElementById("terminalOutput").innerHTML=`manav@devsecops:~$ ${cmd}<br>${found?found.output:"Command not in today’s level. Try exact command."}`;
+}
+function checkQuiz(i){
+ const data=generateLevel(current);
+ if(i===data.correct){localStorage.setItem("check_"+current+"_2","yes");document.getElementById("quizStatus").innerText="Correct ✅";updateLevelPercent();}
+ else document.getElementById("quizStatus").innerText="Wrong ❌ Read concept again.";
+}
 function completeLevel(){
-    const data = generateLevel(current);
-
-    xp += data.xp;
-    streak += 1;
-    current += 1;
-
-    if(current > 720){
-        current = 720;
-        alert("Congratulations Manav! You completed DevSecOps 720 🎉");
-    }
-
-    localStorage.setItem("dso_level", current);
-    localStorage.setItem("dso_xp", xp);
-    localStorage.setItem("dso_streak", streak);
-
-    render();
-    window.scrollTo(0,0);
+ const data=generateLevel(current);
+ xp+=data.xp; streak+=1; current+=1;
+ if(current>720){current=720;alert("Congratulations Manav! You completed DevSecOps 720 🎉")}
+ localStorage.setItem("dso_level",current);localStorage.setItem("dso_xp",xp);localStorage.setItem("dso_streak",streak);
+ render();scrollTo(0,0);
 }
-
-function prevLevel(){
-    if(current > 1){
-        current -= 1;
-        localStorage.setItem("dso_level", current);
-        render();
-        window.scrollTo(0,0);
-    }
+function prevLevel(){if(current>1){current--;localStorage.setItem("dso_level",current);render();scrollTo(0,0)}}
+function saveProof(){localStorage.setItem("proof_"+current,document.getElementById("githubLink").value);localStorage.setItem("check_"+current+"_3","yes");render();alert("GitHub proof saved ✅")}
+function saveReflection(){localStorage.setItem("reflection_"+current,document.getElementById("reflection").value);localStorage.setItem("check_"+current+"_4","yes");updateLevelPercent();alert("Reflection saved ✅")}
+function saveCert(level,val){localStorage.setItem("cert_"+level,val)}
+function showAnswer(){document.getElementById("interviewA").innerText=interview[interviewIndex].a}
+function nextInterview(){interviewIndex=(interviewIndex+1)%interview.length;renderInterview()}
+function checkChallenge(){
+ const ans=document.getElementById("challengeAnswer").value.toLowerCase();
+ const need=challenges[challengeIndex].answer.toLowerCase().split(",");
+ let ok=need.some(x=>ans.includes(x.trim()));
+ document.getElementById("challengeResult").innerText=ok?"Good security thinking ✅":"Improve answer: think about root cause, fix, and prevention.";
+ if(ok) challengeIndex=(challengeIndex+1)%challenges.length;
 }
-
-function saveProof(){
-    const link = document.getElementById("githubLink").value;
-    localStorage.setItem("proof_" + current, link);
-    render();
-    alert("GitHub proof saved ✅");
+function buyItem(name,cost){
+ if(xp>=cost){xp-=cost;localStorage.setItem("dso_xp",xp);localStorage.setItem("store_"+name,"unlocked");alert(name+" unlocked ✅");render();}
+ else alert("Not enough XP ❌");
 }
-
-function saveReflection(){
-    const note = document.getElementById("reflection").value;
-    localStorage.setItem("reflection_" + current, note);
-    alert("Reflection saved ✅");
-}
-
-function resetAll(){
-    if(confirm("Are you sure you want to reset all progress?")){
-        localStorage.clear();
-        location.reload();
-    }
-}
-
+function resetAll(){if(confirm("Reset all progress?")){localStorage.clear();location.reload()}}
 render();
-
-if("serviceWorker" in navigator){
-    navigator.serviceWorker.register("./sw.js");
-}
+if("serviceWorker"in navigator){navigator.serviceWorker.register("./sw.js")}
 </script>
-
 </body>
 </html>
