@@ -1,229 +1,316 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MANAV | THE CLOUD DEN</title>
-    
-    <link rel="manifest" href="./manifest.json">
-    <meta name="theme-color" content="#D4AF37">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevSecOps 720 | Manav's Cloud Den</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        :root { --gold: #D4AF37; --slate: #0D1117; }
-        body { background-color: var(--slate); color: #F8FAFC; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#D4AF37">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-        /* ADVANCED 5D FIREY TEXT EFFECT */
-        .fiery-text {
-            font-size: 4.5rem; font-weight: 900; text-transform: uppercase;
-            background: linear-gradient(to bottom, #ff0000 0%, #ff8c00 50%, #8b0000 100%);
-            -webkit-background-clip: text; background-clip: text; color: transparent;
-            filter: drop-shadow(0 0 15px #ff4500) drop-shadow(0 20px 30px rgba(0,0,0,1));
-            transform: perspective(1000px) rotateX(25deg) skew(-5deg);
-            position: relative; animation: flare 3s infinite alternate;
-        }
-        @keyframes flare {
-            0% { filter: drop-shadow(0 0 10px #ff4500) brightness(1); }
-            100% { filter: drop-shadow(0 0 40px #ffcc00) brightness(1.3); }
-        }
-
-        /* SECURITY OVERLAY */
-        #lock-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, #1e293b 0%, #020617 100%);
-            z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            transition: 0.8s ease-in-out;
-        }
-        .den-photo {
-            width: 200px; height: 200px; border-radius: 50%;
-            border: 5px solid var(--gold); box-shadow: 0 0 50px rgba(212, 175, 55, 0.6);
-            object-fit: cover; margin-bottom: 30px;
-        }
-
-        /* VAULT UI STYLES */
-        .glass-card { background: rgba(255, 255, 255, 0.04); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px; }
-        .cmd-unit { border-left: 5px solid var(--gold); background: rgba(212, 175, 55, 0.06); padding: 25px; margin-bottom: 20px; border-radius: 0 20px 20px 0; }
-        .quiz-option { width: 100%; text-align: left; padding: 20px; border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; margin-bottom: 15px; transition: 0.3s; cursor: pointer; }
-        .quiz-option:hover { background: rgba(212, 175, 55, 0.2); border-color: var(--gold); transform: translateX(10px); }
-    </style>
+<style>
+:root{--gold:#D4AF37;--bg:#020617;--card:#0f172a}
+body{background:radial-gradient(circle at top,#1e293b,#020617 60%);color:white;font-family:Inter,Arial,sans-serif}
+.glass{background:rgba(255,255,255,.06);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.12);border-radius:24px}
+.gold{color:var(--gold)}
+.btn{background:var(--gold);color:#000;font-weight:900;border-radius:16px;padding:14px 20px}
+.section{background:rgba(15,23,42,.85);border-left:5px solid var(--gold);padding:20px;border-radius:16px;margin-bottom:18px}
+.option{display:block;width:100%;padding:16px;border:1px solid rgba(255,255,255,.15);border-radius:14px;margin:10px 0;text-align:left}
+.option:hover{border-color:var(--gold);background:rgba(212,175,55,.15)}
+input,textarea{background:#020617;border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:14px;width:100%;color:white}
+</style>
 </head>
-<body class="p-6 md:p-12 min-h-screen">
 
-    <div id="lock-screen">
-        <img src="manavm.jpg" class="den-photo" alt="Manav's Photo" onerror="this.src='https://via.placeholder.com/200?text=Photo+Missing'">
-        <h1 class="fiery-text text-center leading-none">This Is<br>Manav's Den</h1>
-        <div class="mt-16 flex flex-col items-center">
-            <input type="password" id="pass-key" class="bg-black/60 border border-[#D4AF37] px-8 py-4 rounded-full text-center outline-none w-72 mb-6 tracking-[0.5em] text-white" placeholder="ACCESS KEY">
-            <button onclick="unlock()" class="bg-[#D4AF37] text-black font-black px-12 py-4 rounded-full uppercase tracking-widest text-sm hover:bg-white hover:scale-110 transition-all shadow-[0_0_20px_rgba(212,175,55,0.5)]">Authorize_Access</button>
-            <p id="err-msg" class="text-red-500 text-xs mt-6 font-bold uppercase hidden tracking-widest italic animate-bounce">Access Denied: Entry Logged</p>
-        </div>
+<body class="p-4 md:p-8">
+
+<header class="max-w-7xl mx-auto glass p-6 mb-6 flex flex-col md:flex-row justify-between gap-4">
+  <div>
+    <h1 class="text-3xl md:text-5xl font-black uppercase">🔥 DevSecOps 720</h1>
+    <p class="gold font-bold mt-2">Manav’s 2-Year Mission: Cloud + DevOps + Security + Certifications</p>
+  </div>
+  <div class="text-right">
+    <p class="text-sm opacity-70">Daily Target</p>
+    <p class="text-2xl font-black">1 Level / Day</p>
+  </div>
+</header>
+
+<main class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+<aside class="lg:col-span-4 space-y-6">
+
+  <div class="glass p-6">
+    <h2 class="gold font-black uppercase mb-4">Progress</h2>
+    <p>Level: <b id="levelNo">1</b> / 720</p>
+    <p>XP: <b id="xp">0</b></p>
+    <p>Streak: <b id="streak">0</b> days</p>
+    <div class="h-3 bg-white/10 rounded-full mt-4 overflow-hidden">
+      <div id="bar" class="h-full bg-[#D4AF37]" style="width:0%"></div>
     </div>
+  </div>
 
-    <div id="vault-content" class="invisible opacity-0 transition-opacity duration-1000">
-        <header class="max-w-6xl mx-auto flex justify-between items-end mb-12 border-b border-white/10 pb-8">
-            <div>
-                <h1 class="text-3xl font-black uppercase italic tracking-tighter">Vault_Engine <span class="text-[#D4AF37]">730</span></h1>
-                <p class="text-[10px] font-bold opacity-50 uppercase tracking-[0.4em] mt-2 italic">Target Role: Cloud Support Associate (₹10 LPA)</p>
-            </div>
-            <div class="text-right">
-                <p id="clock" class="text-4xl font-mono font-bold tracking-tighter text-white">00:00:00</p>
-            </div>
-        </header>
+  <div class="glass p-6">
+    <h2 class="gold font-black uppercase mb-4">Certification Roadmap</h2>
+    <div id="certBox" class="space-y-3 text-sm"></div>
+  </div>
 
-        <main class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10">
-            <aside class="lg:col-span-4 space-y-6">
-                <div class="glass-card p-8 border-t-4 border-[#D4AF37]">
-                    <h3 class="text-xs font-black uppercase text-[#D4AF37] mb-6 italic">Mastery_Level</h3>
-                    <div class="h-2 bg-white/10 rounded-full overflow-hidden mb-3"><div id="p-bar" class="h-full bg-[#D4AF37] transition-all duration-1000" style="width: 0%"></div></div>
-                    <div class="flex justify-between text-[11px] font-black uppercase">
-                        <span>Lvl <span id="lvl-stat">1</span></span>
-                        <span><span id="p-text">0</span>% Complete</span>
-                    </div>
-                </div>
-                <div class="flex gap-4">
-                    <button onclick="back()" class="flex-1 py-4 glass-card text-[11px] font-black uppercase hover:border-[#D4AF37]">Prev_Step</button>
-                    <button onclick="reset()" class="flex-1 py-4 border border-red-900/30 text-red-500 text-[11px] font-black uppercase rounded-2xl">Reset_Data</button>
-                </div>
-            </aside>
+  <div class="glass p-6">
+    <h2 class="gold font-black uppercase mb-4">GitHub Proof Upload</h2>
+    <input id="githubLink" placeholder="Paste GitHub proof link here">
+    <button onclick="saveProof()" class="btn mt-3 w-full">Save Proof</button>
+    <p id="savedProof" class="text-xs mt-3 opacity-70 break-all"></p>
+  </div>
 
-            <section class="lg:col-span-8">
-                <div class="glass-card p-10 min-h-[850px] relative border-t-4 border-white/5">
-                    <div class="flex justify-between items-center mb-12 border-b border-white/5 pb-6">
-                        <span id="step-tag" class="text-[#D4AF37] text-xs font-black uppercase tracking-[0.6em]">STEP_001</span>
-                        <span class="text-[10px] font-bold opacity-30 italic uppercase">System_Engineering_Track</span>
-                    </div>
+  <button onclick="resetAll()" class="w-full border border-red-500 text-red-400 rounded-2xl p-4 font-black">
+    Reset Progress
+  </button>
 
-                    <h2 id="title" class="text-5xl font-black mb-12 tracking-tight uppercase italic text-white leading-none">Initializing...</h2>
-                    <div id="commands" class="space-y-8"></div>
+</aside>
 
-                    <div class="mt-16 pt-12 border-t border-white/10">
-                        <h4 class="text-[#D4AF37] font-black uppercase text-xs mb-8 italic tracking-widest">Integrity Check (Multi-Choice Quiz):</h4>
-                        <p id="question" class="text-xl font-bold mb-10 italic leading-snug"></p>
-                        <div id="options" class="space-y-4"></div>
-                    </div>
-                </div>
-            </section>
-        </main>
-    </div>
+<section class="lg:col-span-8 glass p-6 md:p-8">
 
-    <script>
-        const PASS = "Manav@730";
+  <p id="phase" class="gold font-black uppercase tracking-widest text-xs mb-3"></p>
+  <h2 id="title" class="text-3xl md:text-5xl font-black uppercase mb-6"></h2>
 
-        // UNLOCK LOGIC
-        function unlock() {
-            if(document.getElementById('pass-key').value === PASS) {
-                document.getElementById('lock-screen').style.opacity = "0";
-                setTimeout(() => {
-                    document.getElementById('lock-screen').style.display = "none";
-                    document.getElementById('vault-content').classList.remove('invisible');
-                    document.getElementById('vault-content').style.opacity = "1";
-                    render();
-                }, 800);
-            } else {
-                document.getElementById('err-msg').classList.remove('hidden');
-                document.getElementById('pass-key').value = "";
-            }
-        }
+  <div class="section">
+    <h3 class="gold font-black">🎯 Story / Mission</h3>
+    <p id="mission"></p>
+  </div>
 
-        // LEVEL DATA
-        const database = [
-            {
-                lvl: 1, title: "The Security Core (Sudo)",
-                cmds: [
-                    { name: "sudo", def: "SuperUser Do.", usage: "Gain temporary root permissions.", importance: "Amazon engineers use this to maintain an audit trail." },
-                    { name: "whoami", def: "Checks current identity.", usage: "Verify root vs user.", importance: "Prevents accidental production mistakes." }
-                ],
-                quiz: "In professional AWS cloud environments, why is 'sudo' the golden standard?",
-                opts: ["A) Makes terminal faster", "B) Creates an audit trail for every action", "C) Only way to log in"],
-                correct: 1
-            },
-            {
-                lvl: 2, title: "Infrastructure Diagnostics",
-                cmds: [
-                    { name: "cd /var/log", def: "Moves to system logs.", usage: "Location for errors.", importance: "First place an SRE looks when a site crashes." },
-                    { name: "pwd", def: "Print working directory.", usage: "Identify exact location.", importance: "Essential to prevent wiping the wrong folder." }
-                ],
-                quiz: "A database stopped responding. Where is the first place you check for error logs?",
-                opts: ["A) /home/manav", "B) /var/log", "C) /bin/bash"],
-                correct: 1
-            }
-        ];
+  <div class="section">
+    <h3 class="gold font-black">📘 Concept Explanation</h3>
+    <p id="concept"></p>
+  </div>
 
-        let idx = parseInt(localStorage.getItem('manav_vault_idx')) || 0;
+  <div class="section">
+    <h3 class="gold font-black">🌍 Real-World Use</h3>
+    <p id="realuse"></p>
+  </div>
 
-        function render() {
-            const data = database[idx] || database[database.length - 1];
-            document.getElementById('lvl-stat').innerText = idx + 1;
-            document.getElementById('step-tag').innerText = `STEP_${String(data.lvl).padStart(3, '0')}`;
-            document.getElementById('title').innerText = data.title;
-            
-            let cmdHtml = '';
-            data.cmds.forEach(c => {
-                cmdHtml += `
-                    <div class="cmd-unit">
-                        <p class="text-[#D4AF37] font-black text-2xl mb-3 font-mono"># ${c.name}</p>
-                        <p class="text-sm opacity-90 mb-2"><strong>Definition:</strong> ${c.def}</p>
-                        <p class="text-sm opacity-90 italic mb-3"><strong>Real-Life Usage:</strong> ${c.usage}</p>
-                        <p class="text-[10px] text-blue-400 font-black uppercase tracking-widest border border-blue-900/30 px-3 py-1 inline-block rounded">Importance: ${c.importance}</p>
-                    </div>`;
-            });
-            document.getElementById('commands').innerHTML = cmdHtml;
+  <div class="section">
+    <h3 class="gold font-black">🧪 Hands-On Lab</h3>
+    <p id="lab"></p>
+  </div>
 
-            document.getElementById('question').innerText = data.quiz;
-            let optHtml = '';
-            data.opts.forEach((o, i) => {
-                optHtml += `<button onclick="check(${i})" class="quiz-option font-bold uppercase">${o}</button>`;
-            });
-            document.getElementById('options').innerHTML = optHtml;
+  <div class="section">
+    <h3 class="gold font-black">💻 Command Practice</h3>
+    <pre id="commands" class="bg-black/60 p-4 rounded-xl overflow-x-auto mt-3"></pre>
+  </div>
 
-            const perc = (((idx + 1) / 730) * 100).toFixed(2);
-            document.getElementById('p-bar').style.width = perc + "%";
-            document.getElementById('p-text').innerText = perc;
-        }
+  <div class="section">
+    <h3 class="gold font-black">🚀 Mini Project Task</h3>
+    <p id="project"></p>
+  </div>
 
-        function check(i) {
-            if(i === database[idx].correct) {
-                alert("✓ LEVEL AUTHORIZED.");
-                idx++;
-                localStorage.setItem('manav_vault_idx', idx);
-                render();
-                window.scrollTo(0,0);
-            } else {
-                alert("✘ FAILED: Review lesson and try again.");
-            }
-        }
+  <div class="section">
+    <h3 class="gold font-black">🧠 Quiz</h3>
+    <p id="question" class="font-bold mt-2"></p>
+    <div id="options"></div>
+  </div>
 
-        function back() { 
-            if(idx > 0) { 
-                idx--; 
-                localStorage.setItem('manav_vault_idx', idx); 
-                render(); 
-            } 
-        }
+  <div class="section">
+    <h3 class="gold font-black">📝 Reflection Note</h3>
+    <textarea id="reflection" rows="4" placeholder="Write what you learned today..."></textarea>
+    <button onclick="saveReflection()" class="btn mt-3">Save Reflection</button>
+  </div>
 
-        function reset() { 
-            if(confirm("Master Reset?")) { 
-                localStorage.setItem('manav_vault_idx', 0); 
-                location.reload(); 
-            } 
-        }
+  <div class="flex gap-3 mt-6">
+    <button onclick="prevLevel()" class="glass p-4 flex-1 font-black">Previous</button>
+    <button onclick="completeLevel()" class="btn flex-1">Complete Level</button>
+  </div>
 
-        setInterval(() => {
-            document.getElementById('clock').innerText = new Date().toLocaleTimeString('en-US', { hour12: false });
-        }, 1000);
+</section>
+</main>
 
-        // SERVICE WORKER REGISTRATION
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js')
-                    .then(() => console.log("SW Registered"))
-                    .catch(err => console.log("SW Error", err));
-            });
-        }
-    </script>
+<script>
+const certifications = [
+  {level:30,name:"Cisco Cybersecurity Essentials",type:"Beginner"},
+  {level:60,name:"Google Cybersecurity Certificate",type:"Beginner"},
+  {level:120,name:"CompTIA Security+",type:"Beginner Security"},
+  {level:210,name:"AWS Cloud Practitioner",type:"Cloud"},
+  {level:300,name:"AWS Solutions Architect Associate",type:"Cloud"},
+  {level:390,name:"Certified Ethical Hacker",type:"Security"},
+  {level:480,name:"CKA",type:"Kubernetes"},
+  {level:540,name:"CKAD",type:"Kubernetes"},
+  {level:600,name:"CompTIA CySA+",type:"Security Analyst"},
+  {level:660,name:"CompTIA PenTest+",type:"Security Testing"},
+  {level:690,name:"AWS Certified Security Specialty",type:"Cloud Security"},
+  {level:720,name:"CKS",type:"Kubernetes Security"}
+];
+
+const baseLevels = [
+{
+phase:"Phase 1: Linux + Security Foundation",
+title:"Level 1: Linux Identity & Sudo Power",
+mission:"You are hired as a junior cloud security trainee. Your first mission is to understand who you are inside a Linux server and how admin power works.",
+concept:"Linux uses users, groups, permissions, and sudo to control who can perform sensitive actions.",
+realuse:"Cloud engineers use sudo carefully while managing AWS EC2, servers, Docker hosts, and production systems.",
+lab:"Open terminal or GitHub Codespaces and run identity commands. Take screenshot or save output in GitHub notes.",
+commands:"whoami\nid\ngroups\nsudo -l",
+project:"Create a GitHub folder named level-001-linux-identity and upload your command notes.",
+question:"Why is sudo important in professional environments?",
+options:["It makes internet faster","It gives controlled admin access with audit trail","It deletes viruses automatically"],
+correct:1,
+xp:100
+},
+{
+phase:"Phase 1: Linux + Security Foundation",
+title:"Level 2: Filesystem Navigation",
+mission:"A production server has crashed. Your task is to move safely inside directories and find logs.",
+concept:"Linux filesystem has important paths like /home, /etc, /var/log, /bin, /usr, and /tmp.",
+realuse:"DevOps and SRE teams check /var/log when applications fail.",
+lab:"Navigate through important directories and create a notes file.",
+commands:"pwd\nls\ncd /var/log\nls\ncd ~\nmkdir devsecops720",
+project:"Upload a Linux folder map in GitHub.",
+question:"Where are many Linux logs commonly stored?",
+options:["/var/log","/games","/photos"],
+correct:0,
+xp:100
+},
+{
+phase:"Phase 1: Networking Basics",
+title:"Level 3: DNS & Domain Basics",
+mission:"Your domain manavmehta.cloud must point to the correct website. Understand DNS.",
+concept:"DNS converts domain names into IP addresses using records like A, CNAME, MX, and TXT.",
+realuse:"Companies use DNS to connect apps, email, CDN, and cloud servers.",
+lab:"Check your domain DNS using online DNS checker or terminal.",
+commands:"nslookup manavmehta.cloud\nping manavmehta.cloud",
+project:"Write one page explaining A record vs CNAME.",
+question:"What does DNS mainly do?",
+options:["Converts domain name to IP","Creates passwords","Formats laptops"],
+correct:0,
+xp:120
+},
+{
+phase:"Phase 2: Git + DevOps",
+title:"Level 4: Git Version Control",
+mission:"You must track every change in your DevSecOps app like a real engineer.",
+concept:"Git stores code history, supports rollback, branches, collaboration, and proof of work.",
+realuse:"Every software company uses GitHub/GitLab/Bitbucket for code collaboration.",
+lab:"Create a repo and commit today’s work.",
+commands:"git init\ngit status\ngit add .\ngit commit -m \"Level 4 Git basics\"",
+project:"Push your DevSecOps 720 app to GitHub.",
+question:"Why is Git important?",
+options:["For editing photos","For tracking code changes","For charging laptop"],
+correct:1,
+xp:120
+},
+{
+phase:"Phase 2: DevOps",
+title:"Level 5: CI/CD Introduction",
+mission:"Your code should automatically check and deploy when updated.",
+concept:"CI/CD means Continuous Integration and Continuous Delivery/Deployment.",
+realuse:"Companies use CI/CD to test and deploy faster with fewer mistakes.",
+lab:"Create a simple GitHub Actions workflow file.",
+commands:"mkdir -p .github/workflows\nnano .github/workflows/main.yml",
+project:"Add a GitHub Actions badge to README.",
+question:"CI/CD helps teams mainly with what?",
+options:["Faster secure delivery","Playing games","Buying domains"],
+correct:0,
+xp:150
+}
+];
+
+function generateLevel(n){
+  let template = baseLevels[(n-1)%baseLevels.length];
+  let phaseName =
+    n<=90?"Foundation":
+    n<=180?"Cybersecurity Basics":
+    n<=270?"DevOps Core":
+    n<=360?"Cloud":
+    n<=480?"DevSecOps":
+    n<=570?"Kubernetes Security":
+    n<=660?"Advanced Security":
+    "Job-Ready Mastery";
+
+  return {
+    ...template,
+    title:`Level ${n}: ${template.title.split(": ")[1]} Advanced Drill`,
+    phase:`${phaseName} | Day ${n}/720`,
+    mission:`${template.mission} Today you must complete it at Level ${n} depth.`,
+    xp:100 + Math.floor(n/10)*10
+  };
+}
+
+let current = parseInt(localStorage.getItem("dso_level")) || 1;
+let xp = parseInt(localStorage.getItem("dso_xp")) || 0;
+let streak = parseInt(localStorage.getItem("dso_streak")) || 0;
+
+function render(){
+  const data = generateLevel(current);
+  document.getElementById("levelNo").innerText=current;
+  document.getElementById("xp").innerText=xp;
+  document.getElementById("streak").innerText=streak;
+  document.getElementById("bar").style.width=((current/720)*100)+"%";
+
+  ["phase","title","mission","concept","realuse","lab","commands","project","question"].forEach(id=>{
+    document.getElementById(id).innerText=data[id];
+  });
+
+  let opt="";
+  data.options.forEach((o,i)=>{
+    opt+=`<button class="option" onclick="checkQuiz(${i})">${o}</button>`;
+  });
+  document.getElementById("options").innerHTML=opt;
+
+  let certHTML="";
+  certifications.forEach(c=>{
+    certHTML+=`<div class="p-3 rounded-xl ${current>=c.level?'bg-green-500/20':'bg-white/5'}">
+      <b>Level ${c.level}</b>: ${c.name}<br>
+      <span class="text-xs opacity-70">${c.type}</span>
+    </div>`;
+  });
+  document.getElementById("certBox").innerHTML=certHTML;
+
+  document.getElementById("reflection").value=localStorage.getItem("reflection_"+current)||"";
+  document.getElementById("savedProof").innerText=localStorage.getItem("proof_"+current)||"No proof saved for this level.";
+}
+
+function checkQuiz(i){
+  const data = generateLevel(current);
+  alert(i===data.correct ? "Correct ✅" : "Wrong ❌ Review and try again.");
+}
+
+function completeLevel(){
+  const data=generateLevel(current);
+  xp+=data.xp;
+  streak+=1;
+  current++;
+  if(current>720) current=720;
+  localStorage.setItem("dso_level",current);
+  localStorage.setItem("dso_xp",xp);
+  localStorage.setItem("dso_streak",streak);
+  render();
+  scrollTo(0,0);
+}
+
+function prevLevel(){
+  if(current>1){current--;localStorage.setItem("dso_level",current);render();}
+}
+
+function saveProof(){
+  localStorage.setItem("proof_"+current,document.getElementById("githubLink").value);
+  render();
+}
+
+function saveReflection(){
+  localStorage.setItem("reflection_"+current,document.getElementById("reflection").value);
+  alert("Reflection saved ✅");
+}
+
+function resetAll(){
+  if(confirm("Reset all progress?")){
+    localStorage.clear();
+    location.reload();
+  }
+}
+
+render();
+
+if("serviceWorker" in navigator){
+  navigator.serviceWorker.register("./sw.js");
+}
+</script>
 </body>
 </html>
