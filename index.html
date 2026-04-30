@@ -8,41 +8,35 @@
 
 <link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#D4AF37">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
 :root{
     --gold:#D4AF37;
     --dark:#020617;
-    --card:#0f172a;
 }
-
-*{
-    box-sizing:border-box;
-}
-
+*{box-sizing:border-box}
 body{
     margin:0;
-    background:radial-gradient(circle at top,#1e293b,#020617 65%);
+    background:radial-gradient(circle at top,#1e293b,#020617 70%);
     color:white;
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
     min-height:100vh;
 }
-
-.gold{
-    color:var(--gold);
-}
-
+.gold{color:var(--gold)}
 .glass{
     background:rgba(255,255,255,0.06);
     border:1px solid rgba(255,255,255,0.12);
-    backdrop-filter:blur(15px);
+    backdrop-filter:blur(14px);
     border-radius:24px;
 }
-
+.section{
+    background:#0f172a;
+    border-left:5px solid var(--gold);
+    padding:22px;
+    border-radius:18px;
+    margin-bottom:20px;
+}
 .btn{
     background:var(--gold);
     color:black;
@@ -52,59 +46,71 @@ body{
     border:none;
     cursor:pointer;
 }
-
-.btn:hover{
-    transform:scale(1.03);
-}
-
-.section{
-    background:rgba(15,23,42,0.9);
-    border-left:5px solid var(--gold);
-    padding:20px;
-    border-radius:18px;
-    margin-bottom:18px;
-}
-
+.btn:hover{transform:scale(1.03)}
 .option{
-    display:block;
     width:100%;
     text-align:left;
     padding:15px;
     margin:10px 0;
     border-radius:14px;
-    border:1px solid rgba(255,255,255,0.15);
-    background:rgba(255,255,255,0.04);
-    cursor:pointer;
-    color:white;
+    border:1px solid rgba(255,255,255,.15);
+    background:rgba(255,255,255,.05);
 }
-
 .option:hover{
     border-color:var(--gold);
-    background:rgba(212,175,55,0.15);
+    background:rgba(212,175,55,.15);
 }
-
-input, textarea{
+input,textarea{
     width:100%;
     padding:14px;
     border-radius:14px;
-    border:1px solid rgba(255,255,255,0.2);
+    border:1px solid rgba(255,255,255,.2);
     background:#020617;
     color:white;
 }
-
 .command-card{
     background:#020617;
+    border:1px solid rgba(212,175,55,.35);
+    border-radius:18px;
     padding:18px;
-    border-radius:16px;
-    border:1px solid rgba(255,255,255,0.12);
-    margin-bottom:14px;
+    margin-bottom:16px;
 }
-
+.command-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+}
 .command-code{
     color:#D4AF37;
     font-weight:900;
     font-family:monospace;
-    font-size:18px;
+    font-size:20px;
+}
+.copy-btn{
+    background:rgba(212,175,55,.18);
+    border:1px solid var(--gold);
+    color:var(--gold);
+    padding:8px 12px;
+    border-radius:12px;
+    font-size:12px;
+    font-weight:900;
+}
+.terminal{
+    background:#000;
+    border-radius:16px;
+    padding:16px;
+    font-family:monospace;
+    margin-top:12px;
+    color:#22c55e;
+}
+.badge{
+    background:rgba(212,175,55,.15);
+    color:var(--gold);
+    padding:6px 10px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:900;
 }
 </style>
 </head>
@@ -112,25 +118,16 @@ input, textarea{
 <body class="p-4 md:p-8">
 
 <header class="max-w-7xl mx-auto glass p-6 mb-6 flex flex-col md:flex-row justify-between gap-4">
-
     <div>
-        <h1 class="text-3xl md:text-5xl font-black uppercase">
-            🔥 DevSecOps 720
-        </h1>
-        <p class="gold font-bold mt-2">
-            Manav’s 2-Year Mission: DevOps + Cybersecurity + Cloud + Kubernetes
-        </p>
-        <p class="text-sm opacity-70 mt-2">
-            Domain: manavmehta.cloud | Target: 8–10 LPA Fresher Level Skill
-        </p>
+        <h1 class="text-3xl md:text-5xl font-black uppercase">🔥 DevSecOps 720</h1>
+        <p class="gold font-bold mt-2">Manav’s 2-Year Mission: DevOps + Cybersecurity + Cloud + Kubernetes</p>
+        <p class="text-sm opacity-70 mt-2">Domain: manavmehta.cloud | Target: 8–10 LPA Fresher Level Skill</p>
     </div>
-
     <div class="text-left md:text-right">
         <p class="text-sm opacity-70">Daily Rule</p>
         <p class="text-2xl font-black">1 Level / Day</p>
         <p class="text-xs opacity-60">720 days = advanced DevSecOps journey</p>
     </div>
-
 </header>
 
 <main class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -139,7 +136,6 @@ input, textarea{
 
     <div class="glass p-6">
         <h2 class="gold font-black uppercase mb-4">📊 Progress</h2>
-
         <p>Current Level: <b id="levelNo">1</b> / 720</p>
         <p>Total XP: <b id="xp">0</b></p>
         <p>Streak: <b id="streak">0</b> days</p>
@@ -147,10 +143,7 @@ input, textarea{
         <div class="h-3 bg-white/10 rounded-full mt-4 overflow-hidden">
             <div id="bar" class="h-full bg-[#D4AF37]" style="width:0%"></div>
         </div>
-
-        <p class="text-xs opacity-70 mt-2">
-            Completion: <span id="percent">0</span>%
-        </p>
+        <p class="text-xs opacity-70 mt-2">Completion: <span id="percent">0</span>%</p>
     </div>
 
     <div class="glass p-6">
@@ -180,7 +173,6 @@ input, textarea{
 <section class="lg:col-span-8 glass p-6 md:p-8">
 
     <p id="phase" class="gold font-black uppercase tracking-widest text-xs mb-3"></p>
-
     <h2 id="title" class="text-3xl md:text-5xl font-black uppercase mb-6"></h2>
 
     <div class="section">
@@ -205,6 +197,7 @@ input, textarea{
 
     <div class="section">
         <h3 class="gold font-black">💻 Command Practice With Definition</h3>
+        <p class="text-sm opacity-70 mb-4">Each command includes meaning, real use, and terminal practice.</p>
         <div id="commands"></div>
     </div>
 
@@ -255,30 +248,34 @@ const baseLevels = [
     mission:"You are a junior cloud security trainee. Your first mission is to understand user identity and admin permissions on a Linux server.",
     concept:"Linux controls security using users, groups, permissions, and sudo. Sudo allows temporary admin access without logging in as root.",
     realuse:"DevOps and cloud engineers use sudo while managing AWS EC2 servers, Docker hosts, Linux machines, and production systems.",
-    lab:"Open terminal or GitHub Codespaces. Run identity commands and save the output in a GitHub notes file.",
+    lab:"Open terminal or GitHub Codespaces. Run each command below. Save output in a GitHub notes file.",
     commands:[
         {
             cmd:"whoami",
             definition:"Shows the current logged-in username.",
-            use:"Used to confirm which user is running commands on a server."
+            use:"Used to verify which user is executing commands on a server.",
+            example:"whoami"
         },
         {
             cmd:"id",
-            definition:"Shows user ID, group ID, and group memberships of the current user.",
-            use:"Used to check permission level and user group access."
+            definition:"Displays user ID, group ID, and group memberships.",
+            use:"Used to check permission level and access groups.",
+            example:"id"
         },
         {
             cmd:"groups",
-            definition:"Shows all groups assigned to the current user.",
-            use:"Used to verify whether the user has sudo, docker, admin, or other group access."
+            definition:"Lists all groups assigned to the current user.",
+            use:"Used to check sudo, docker, admin, or developer group access.",
+            example:"groups"
         },
         {
             cmd:"sudo -l",
-            definition:"Lists commands the current user is allowed to run with sudo.",
-            use:"Used to audit admin privileges safely before performing sensitive tasks."
+            definition:"Lists commands the current user can run with sudo.",
+            use:"Used to audit admin privileges before sensitive tasks.",
+            example:"sudo -l"
         }
     ],
-    project:"Create a GitHub folder named level-001-linux-identity and upload your notes.",
+    project:"Create GitHub folder: level-001-linux-identity. Upload screenshots or command output.",
     question:"Why is sudo important in professional systems?",
     options:["It makes internet faster","It gives controlled admin access with audit trail","It installs games"],
     correct:1,
@@ -294,22 +291,26 @@ const baseLevels = [
         {
             cmd:"pwd",
             definition:"Prints the current working directory.",
-            use:"Used to confirm your exact location before running commands."
+            use:"Used to confirm your exact location before running commands.",
+            example:"pwd"
         },
         {
             cmd:"ls",
             definition:"Lists files and folders in the current directory.",
-            use:"Used to inspect available files before editing, deleting, or deploying."
+            use:"Used to inspect files before editing, deleting, or deploying.",
+            example:"ls"
         },
         {
             cmd:"cd /var/log",
-            definition:"Moves into the /var/log directory.",
-            use:"Used to access system and application log files."
+            definition:"Changes directory to /var/log.",
+            use:"Used to access system and application log files.",
+            example:"cd /var/log"
         },
         {
             cmd:"mkdir devsecops720",
             definition:"Creates a new directory named devsecops720.",
-            use:"Used to organize your project files and daily labs."
+            use:"Used to organize your project files and daily labs.",
+            example:"mkdir devsecops720"
         }
     ],
     project:"Upload a Linux folder map to GitHub.",
@@ -323,27 +324,31 @@ const baseLevels = [
     mission:"Your domain manavmehta.cloud must point to your website. Understand how DNS works.",
     concept:"DNS converts human-readable domain names into IP addresses using records like A, CNAME, MX, and TXT.",
     realuse:"Companies use DNS to connect apps, email, CDN, cloud hosting, verification, and security services.",
-    lab:"Check your domain using nslookup, ping, or an online DNS checker.",
+    lab:"Check your domain using terminal commands or an online DNS checker.",
     commands:[
         {
             cmd:"nslookup manavmehta.cloud",
             definition:"Queries DNS records for your domain.",
-            use:"Used to check whether your domain is pointing to the correct server."
+            use:"Used to check whether your domain points correctly.",
+            example:"nslookup manavmehta.cloud"
         },
         {
             cmd:"ping manavmehta.cloud",
-            definition:"Tests if the domain resolves and responds over the network.",
-            use:"Used for basic connectivity checking."
+            definition:"Tests whether a domain resolves and responds.",
+            use:"Used for basic connectivity testing.",
+            example:"ping manavmehta.cloud"
         },
         {
             cmd:"dig manavmehta.cloud",
-            definition:"Displays detailed DNS information for a domain.",
-            use:"Used by cloud and security engineers for DNS troubleshooting."
+            definition:"Shows detailed DNS information.",
+            use:"Used by cloud engineers for DNS troubleshooting.",
+            example:"dig manavmehta.cloud"
         },
         {
             cmd:"whois manavmehta.cloud",
-            definition:"Shows public registration information about a domain.",
-            use:"Used to check domain ownership and registration details."
+            definition:"Shows public domain registration details.",
+            use:"Used to check domain ownership and registration data.",
+            example:"whois manavmehta.cloud"
         }
     ],
     project:"Write a short note explaining A record vs CNAME.",
@@ -362,22 +367,26 @@ const baseLevels = [
         {
             cmd:"git init",
             definition:"Initializes a new Git repository.",
-            use:"Used to start version control in a project folder."
+            use:"Used to start version control in a project folder.",
+            example:"git init"
         },
         {
             cmd:"git status",
             definition:"Shows changed, staged, and untracked files.",
-            use:"Used before every commit to check project status."
+            use:"Used before every commit to check project status.",
+            example:"git status"
         },
         {
             cmd:"git add .",
             definition:"Stages all changed files for commit.",
-            use:"Used to prepare files before saving a version."
+            use:"Used to prepare files before saving a version.",
+            example:"git add ."
         },
         {
             cmd:"git commit -m \"Level completed\"",
             definition:"Creates a snapshot of staged changes with a message.",
-            use:"Used to save proof of progress and project history."
+            use:"Used to save proof of progress and project history.",
+            example:"git commit -m \"Level completed\""
         }
     ],
     project:"Push your DevSecOps 720 app to GitHub.",
@@ -396,22 +405,26 @@ const baseLevels = [
         {
             cmd:"mkdir -p .github/workflows",
             definition:"Creates the GitHub Actions workflow folder structure.",
-            use:"Used to store automation pipeline files."
+            use:"Used to store automation pipeline files.",
+            example:"mkdir -p .github/workflows"
         },
         {
             cmd:"cd .github/workflows",
             definition:"Moves into the workflow directory.",
-            use:"Used before creating or editing pipeline files."
+            use:"Used before creating or editing pipeline files.",
+            example:"cd .github/workflows"
         },
         {
             cmd:"touch main.yml",
             definition:"Creates an empty workflow file.",
-            use:"Used to start writing a GitHub Actions pipeline."
+            use:"Used to start writing a GitHub Actions pipeline.",
+            example:"touch main.yml"
         },
         {
             cmd:"git add . && git commit -m \"Add CI workflow\"",
             definition:"Stages and commits the workflow file.",
-            use:"Used to save pipeline changes in Git history."
+            use:"Used to save pipeline changes in Git history.",
+            example:"git add . && git commit -m \"Add CI workflow\""
         }
     ],
     project:"Add a GitHub Actions badge to your README.",
@@ -435,7 +448,6 @@ function getPhase(level){
 
 function generateLevel(level){
     const template = baseLevels[(level-1) % baseLevels.length];
-
     return {
         ...template,
         title:"Level " + level + ": " + template.title,
@@ -470,14 +482,28 @@ function render(){
     document.getElementById("question").innerText = data.question;
 
     let commandHTML = "";
-    data.commands.forEach(item => {
+    data.commands.forEach((item, index) => {
         commandHTML += `
         <div class="command-card">
-            <p class="command-code">$ ${item.cmd}</p>
-            <p class="text-sm mt-2"><b>Definition:</b> ${item.definition}</p>
-            <p class="text-sm opacity-80 mt-1"><b>Practical Use:</b> ${item.use}</p>
+            <div class="command-top">
+                <p class="command-code">$ ${item.cmd}</p>
+                <button class="copy-btn" onclick="copyCommand('${item.example.replace(/'/g,"\\'")}')">COPY</button>
+            </div>
+
+            <p class="text-sm mt-3">
+                <b class="gold">Definition:</b> ${item.definition}
+            </p>
+
+            <p class="text-sm mt-2 opacity-90">
+                <b class="gold">Practical Use:</b> ${item.use}
+            </p>
+
+            <div class="terminal">
+                <p>manav@devsecops:~$ ${item.example}</p>
+            </div>
         </div>`;
     });
+
     document.getElementById("commands").innerHTML = commandHTML;
 
     let optionHTML = "";
@@ -489,7 +515,7 @@ function render(){
     let certHTML = "";
     certifications.forEach(cert=>{
         certHTML += `
-        <div class="p-3 rounded-xl ${current >= cert.level ? 'bg-green-500/20' : 'bg-white/5'}">
+        <div class="p-3 rounded-xl ${current >= cert.level ? 'bg-green-500/20 border border-green-400/30' : 'bg-white/5'}">
             <b>Level ${cert.level}</b>: ${cert.name}<br>
             <span class="text-xs opacity-70">${cert.type}</span>
         </div>`;
@@ -501,9 +527,13 @@ function render(){
     document.getElementById("githubLink").value = localStorage.getItem("proof_" + current) || "";
 }
 
+function copyCommand(command){
+    navigator.clipboard.writeText(command);
+    alert("Command copied ✅");
+}
+
 function checkQuiz(index){
     const data = generateLevel(current);
-
     if(index === data.correct){
         alert("Correct ✅");
     }else{
